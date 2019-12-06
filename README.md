@@ -1,4 +1,4 @@
-#Tactical battles :video_game:
+# Tactical battles :video_game:
 
 ## Članovi tima:
 
