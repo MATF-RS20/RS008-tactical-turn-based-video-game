@@ -1,21 +1,26 @@
 #ifndef GRID_H
 #define GRID_H
-#include<iostream>
+
+#include "field.h"
+#include <iostream>
+#include <vector>
 
 
 class Grid
 {
 public:
-    Grid(int col_number, int row_number);
+    Grid(int row_number, int col_number);
 
     //getters
-    int col_number() const;
     int row_number() const;
+    int col_number() const;
+    std::vector<std::vector<Field>> matrix() const;
 
 
 private:
-    int _col_number,
-        _row_number;
+    int _row_number,
+        _col_number;
+    std::vector<std::vector<Field>> _matrix;
 };
 
 std::ostream& operator<<(std::ostream& out, const Grid& value);
