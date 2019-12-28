@@ -44,10 +44,23 @@ public:
 
 private:
 
-
 };
 
 std::ostream& operator<<(std::ostream& out, const Warrior& value);
+
+class Healer: public Unit
+{
+public:
+    Healer(int HP, int AP, int initiative, int row, int col);
+
+    ~Healer();
+
+
+private:
+
+};
+
+std::ostream& operator<<(std::ostream& out, const Healer& value);
 
 
 

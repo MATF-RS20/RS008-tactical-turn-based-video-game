@@ -18,18 +18,37 @@ std::ostream& operator<<(std::ostream& out, const Unit& value)
     return out << "Unit says hello!!" << std::endl;
 }
 
+std::ostream& operator<<(std::ostream& out, const Warrior& value)
+{
+    return out<< "warrior says hello!!"<< std::endl;
+}
+
+
 Warrior::Warrior(int HP, int AP, int initiative, int row, int col)
     :Unit( HP, AP, initiative, row, col)
 {
     std::cerr<< "warrior constructor called"<< std::endl;
 }
 
-std::ostream& operator<<(std::ostream& out, const Warrior& value)
-{
-    return out<< "warrior says hello!!"<< std::endl;
-}
 
 Warrior::~Warrior()
 {
     std::cerr<< "warrior destructor called"<< std::endl;
+}
+
+Healer::Healer(int HP, int AP, int initiative, int row, int col)
+    :Unit( HP, AP, initiative, row, col)
+{
+    std::cerr<< "healer constructor called"<< std::endl;
+}
+
+
+Healer::~Healer()
+{
+    std::cerr<< "healer destructor called"<< std::endl;
+}
+
+std::ostream& operator<<(std::ostream& out, const Healer& value)
+{
+    return out<< "healer says hello!!"<< std::endl;
 }

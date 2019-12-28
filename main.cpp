@@ -18,6 +18,9 @@ int main(int argc, char *argv[])
     Warrior w1(300,10,5,10,10);
     std::cout << w1 << "\n Uspeh!" << std::endl;
 
+    Healer h1(300,10,5,10,10);
+    std::cout << h1 << "\n Uspeh!" << std::endl;
+
     /*Field our_field(1,2);
     std::cout << our_field << "\n Uspeh!" << std::endl;*/
 
