@@ -10,21 +10,18 @@ public:
 
     //virtual Unit * Copy() const = 0;
 
-    //getters
-    /*
-    int HP() const;
-    int AP() const;
-    int initiative() const;
-    int row() const;
-    int col() const;
-    */
+    std::pair<int,int> position() const;
+    std::pair<int, int> health() const;
+    void updateHealth(int change);
 
 protected:
     Unit(int HP, int AP, int initiative, int row, int col);
 
     //HealthPoints, ActionPoints
-    int _HP,
-        _AP,
+    int _max_HP,
+        _remaining_HP,
+        _max_AP,
+        _remaining_AP,
         _initiative;
     //TODO action class
     //std::vector<> _actions;
@@ -34,6 +31,14 @@ protected:
 
 std::ostream& operator<<(std::ostream& out, const Unit& value);
 
+
+
+
+
+
+
+
+
 class Warrior: public Unit
 {
 public:
@@ -41,12 +46,16 @@ public:
 
     ~Warrior();
 
-
 private:
 
 };
 
 std::ostream& operator<<(std::ostream& out, const Warrior& value);
+
+
+
+
+
 
 class Healer: public Unit
 {
@@ -54,7 +63,6 @@ public:
     Healer(int HP, int AP, int initiative, int row, int col);
 
     ~Healer();
-
 
 private:
 
