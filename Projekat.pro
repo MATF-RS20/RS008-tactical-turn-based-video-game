@@ -20,13 +20,13 @@ SOURCES += \
     grid.cpp \
     main.cpp \
     mainwindow.cpp \
-    unit.cpp
+    Units/unit.cpp
 
 HEADERS += \
     field.h \
     grid.h \
     mainwindow.h \
-    unit.h
+    Units/unit.h
 
 FORMS += \
     mainwindow.ui

@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "grid.h"
 #include "field.h"
-#include "unit.h"
+#include "Units/unit.h"
 
 #include <QApplication>
 #include <iostream>
