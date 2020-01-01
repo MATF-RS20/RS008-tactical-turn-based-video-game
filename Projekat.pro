@@ -21,14 +21,16 @@ SOURCES += \
     grid.cpp \
     main.cpp \
     mainwindow.cpp \
-    Units/unit.cpp
+    Units/unit.cpp \
+    player.cpp
 
 HEADERS += \
     Actions/action.h \
     field.h \
     grid.h \
     mainwindow.h \
-    Units/unit.h
+    Units/unit.h \
+    player.h
 
 FORMS += \
     mainwindow.ui

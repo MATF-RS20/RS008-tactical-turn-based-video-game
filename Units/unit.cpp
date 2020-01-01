@@ -1,34 +1,34 @@
 #include "unit.h"
 
 Unit::Unit(int HP,int AP,int initiative,int row,int col)
-    : _max_HP(HP), _max_AP(AP), _initiative(initiative), _row(row), _col(col)
+    : m_max_HP(HP), m_max_AP(AP), m_initiative(initiative), m_row(row), m_col(col)
 {
-    _remaining_HP = _max_HP;
-    _remaining_AP = _max_AP;
+    m_remaining_HP = m_max_HP;
+    m_remaining_AP = m_max_AP;
 }
 
 std::pair<int, int> Unit::position() const
 {
-    return std::pair(_row, _col);
+    return std::pair(m_row, m_col);
 }
 
 std::pair<int, int> Unit::health() const
 {
-    return std::pair(_remaining_HP,_max_HP);
+    return std::pair(m_remaining_HP, m_max_HP);
 }
 
 
 void Unit::updateHealth(int change)
 {
-    int new_HP = _remaining_HP + change;
-    if(new_HP > _max_HP) {
-        new_HP = _max_HP;
+    int new_HP = m_remaining_HP + change;
+    if(new_HP > m_max_HP) {
+        new_HP = m_max_HP;
     }
     else if(new_HP < 0) {
         //TODO: kill unit.
         new_HP = 0;
     }
-    _remaining_HP = new_HP;
+    m_remaining_HP = new_HP;
 }
 
 

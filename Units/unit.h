@@ -1,7 +1,11 @@
 #ifndef UNIT_H
 #define UNIT_H
 
+#include "Actions/action.h"
+#include "player.h"
+
 #include <iostream>
+#include <vector>
 
 class Unit
 {
@@ -18,15 +22,15 @@ protected:
     Unit(int HP, int AP, int initiative, int row, int col);
 
     //HealthPoints, ActionPoints
-    int _max_HP,
-        _remaining_HP,
-        _max_AP,
-        _remaining_AP,
-        _initiative;
-    //TODO action class
-    //std::vector<> _actions;
-    int _row,
-        _col;
+    int m_max_HP,
+        m_remaining_HP,
+        m_max_AP,
+        m_remaining_AP,
+        m_initiative,
+        m_row,
+        m_col;
+    std::vector<Action> m_actions;
+    Player* m_player;
 };
 
 std::ostream& operator<<(std::ostream& out, const Unit& value);
