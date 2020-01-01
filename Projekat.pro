@@ -18,6 +18,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     Actions/action.cpp \
     field.cpp \
+    gamecontroller.cpp \
     grid.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -27,6 +28,7 @@ SOURCES += \
 HEADERS += \
     Actions/action.h \
     field.h \
+    gamecontroller.h \
     grid.h \
     mainwindow.h \
     Units/unit.h \
