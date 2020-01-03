@@ -17,9 +17,11 @@ public:
     std::pair<int,int> position() const;
     std::pair<int, int> health() const;
     void updateHealth(int change);
+    unsigned getId() const;
 
 protected:
     Unit(int HP, int AP, int initiative, int row, int col);
+    void setId();
 
     //HealthPoints, ActionPoints
     int m_max_HP,
@@ -29,7 +31,9 @@ protected:
         m_initiative,
         m_row,
         m_col;
-    std::vector<Action> m_actions;
+    unsigned m_id;
+    static unsigned next_id;
+    std::vector<Action>* m_actions;
     Player* m_player;
 };
 

@@ -35,7 +35,9 @@ class UnitQueue
 {
 public:
     UnitQueue()
-{}
+    {
+        m_index = 0;
+    }
 
     void push_back(Unit u)
     {

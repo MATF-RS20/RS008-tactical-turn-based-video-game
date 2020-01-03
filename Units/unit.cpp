@@ -3,14 +3,32 @@
 Unit::Unit(int HP,int AP,int initiative,int row,int col)
     : m_max_HP(HP), m_max_AP(AP), m_initiative(initiative), m_row(row), m_col(col)
 {
+    setId();
     m_remaining_HP = m_max_HP;
     m_remaining_AP = m_max_AP;
 }
+
+
+unsigned Unit::next_id = 0;
+
+
+void Unit::setId()
+{
+    m_id = Unit::next_id++;
+}
+
+
+unsigned Unit::getId() const
+{
+    return m_id;
+}
+
 
 std::pair<int, int> Unit::position() const
 {
     return std::pair(m_row, m_col);
 }
+
 
 std::pair<int, int> Unit::health() const
 {
@@ -32,9 +50,12 @@ void Unit::updateHealth(int change)
 }
 
 
-std::ostream& operator<<(std::ostream& out, const Unit& value)
+std::ostream& operator<<(std::ostream& out, const Unit& u)
 {
-    return out << "Unit says hello! It's health is: " << value.health().first << '/' << value.health().second << std::endl;
+    return out << "Unit says hello!\n"
+               << "Id: " << u.getId() << "; "
+               << "Health: " << u.health().first << '/' << u.health().second << ";";
+
 }
 
 
@@ -55,9 +76,9 @@ Warrior::~Warrior()
     std::cerr<< "warrior destructor called"<< std::endl;
 }
 
-std::ostream& operator<<(std::ostream& out, const Warrior& value)
+std::ostream& operator<<(std::ostream& out, const Warrior& w)
 {
-    return out<< "warrior says hello!!"<< std::endl;
+    return out<< "warrior id=" << w.getId() <<" says hello!!"<< std::endl;
 }
 
 
@@ -75,6 +96,7 @@ Healer::~Healer()
 {
     std::cerr<< "healer destructor called"<< std::endl;
 }
+
 
 std::ostream& operator<<(std::ostream& out, const Healer& value)
 {
