@@ -13,3 +13,8 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+void MainWindow::on_pb_endTurn_clicked()
+{
+    //TODO: gamecontroller.endTurn()
+}

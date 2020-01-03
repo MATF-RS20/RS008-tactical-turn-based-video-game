@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "gamecontroller.h"
 #include "grid.h"
 #include "field.h"
 #include "Units/unit.h"
@@ -12,7 +13,7 @@ int main(int argc, char *argv[])
     MainWindow w;
 
     //logic
-    Grid our_grid(2,3);
+    /*Grid our_grid(2,3);
     std::cout << our_grid << "\n Success!" << std::endl;
 
     Warrior w1(300,10,5,10,10);
@@ -32,7 +33,14 @@ int main(int argc, char *argv[])
     std::cout << w1 << std::endl;
     std::cout << u1 << std::endl;
     u1.updateHealth(-250);
-    std::cout << u1 << std::endl;
+    std::cout << u1 << std::endl;*/
+
+    GameController gController;
+    gController.setGrid(new Grid(4, 4));
+    gController.addUnit(Warrior(300,10,5,10,10));
+    gController.addUnit(Healer (300,10,5,10,10));
+    //TODO: activeUnit makes an error.
+    //std::cout << gController.activeUnit();
 
 
 

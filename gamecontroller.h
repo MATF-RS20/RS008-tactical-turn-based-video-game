@@ -2,6 +2,7 @@
 #define GAMECONTROLLER_H
 
 #include "Units/unit.h"
+#include "grid.h"
 
 #include <vector>
 #include <optional>
@@ -15,8 +16,15 @@ public:
     //TODO: singleton maybe?
 
     ~GameController();
+
+    void setGrid(Grid* g);
+    void addUnit(Unit u);
+    Unit activeUnit();
+    void endTurn();
 private:
     UnitQueue* m_queue;
+    Unit* m_active_unit;
+    Grid* m_grid;
 };
 
 
@@ -26,7 +34,8 @@ private:
 class UnitQueue
 {
 public:
-    UnitQueue(){}
+    UnitQueue()
+{}
 
     void push_back(Unit u)
     {
@@ -35,7 +44,8 @@ public:
 
     void pop_at(int i)
     {
-        if (m_vector.size() > i) {
+        if (m_vector.size() > i || i < 0) {
+            std::cerr << "UnitQueue pop_at() bad index" << std::endl;
             return;
         }
 
@@ -55,16 +65,30 @@ public:
     }*/
 
     //TODO: referance return?
-    std::optional<Unit> current()
+    Unit* current()
     {
         if (m_vector.empty())
         {
-            return {};
+            return nullptr;
         }
-        return {m_vector[m_index]};
+        return &(m_vector[m_index]);
     }
     //TODO
-    Unit next();
+    Unit* next()
+    {
+        if (m_vector.empty())
+        {
+            return nullptr;
+        }
+        if (m_index >= m_vector.size())
+        {
+            return &(m_vector[0]);
+        }
+        else {
+            m_index++;
+            return &(m_vector[m_index]);
+        }
+    }
 
 private:
     //TODO: different implementation maybe?
