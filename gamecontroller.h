@@ -40,6 +40,15 @@ public:
         m_index = 0;
     }
 
+    ~UnitQueue()
+    {
+        //TODO: smart pointers?
+        for (Unit* u : m_vector) {
+            delete u;
+        }
+        m_vector.clear();
+    }
+
     void push_back(Unit* u)
     {
         m_vector.push_back(u); //TODO: see emplace?
@@ -83,14 +92,14 @@ public:
         {
             return nullptr;
         }
-        if (m_index >= m_vector.size())
+        if (m_index >= m_vector.size()-1)
         {
-            return m_vector[0];
+            m_index = 0;
         }
         else {
             m_index++;
-            return m_vector[m_index];
         }
+        return m_vector[m_index];
     }
 
 private:
