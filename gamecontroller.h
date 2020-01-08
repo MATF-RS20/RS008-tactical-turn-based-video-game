@@ -18,7 +18,7 @@ public:
     ~GameController();
 
     void setGrid(Grid* g);
-    void addUnit(Unit u);
+    void addUnit(Unit* u);
     Unit* activeUnit();
     void startGame();
     void endTurn();
@@ -40,7 +40,7 @@ public:
         m_index = 0;
     }
 
-    void push_back(Unit u)
+    void push_back(Unit* u)
     {
         m_vector.push_back(u); //TODO: see emplace?
     }
@@ -74,7 +74,7 @@ public:
         {
             return nullptr;
         }
-        return &(m_vector[m_index]);
+        return m_vector[m_index];
     }
     //TODO
     Unit* next()
@@ -85,17 +85,17 @@ public:
         }
         if (m_index >= m_vector.size())
         {
-            return &(m_vector[0]);
+            return m_vector[0];
         }
         else {
             m_index++;
-            return &(m_vector[m_index]);
+            return m_vector[m_index];
         }
     }
 
 private:
     //TODO: different implementation maybe?
-    std::vector<Unit> m_vector;
+    std::vector<Unit*> m_vector;
     int m_index;
 };
 

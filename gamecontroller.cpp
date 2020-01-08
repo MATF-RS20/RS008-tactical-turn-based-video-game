@@ -26,7 +26,7 @@ void GameController::setGrid(Grid* g)
 }
 
 
-void GameController::addUnit(Unit u)
+void GameController::addUnit(Unit* u)
 {
     m_queue->push_back(u);
     //TODO: set position on grid...

@@ -37,8 +37,8 @@ int main(int argc, char *argv[])
 
     GameController gController;
     gController.setGrid(new Grid(4, 4));
-    gController.addUnit(Warrior(300,10,5,10,10));
-    gController.addUnit(Healer (200,10,5,10,10));\
+    gController.addUnit(new Warrior(300,10,5,10,10));
+    gController.addUnit(new Healer (200,10,5,10,10));
     gController.startGame();
     //TODO: cout logs Unit instead of Warrior.
     std::cout << *(gController.activeUnit()) << std::endl;
