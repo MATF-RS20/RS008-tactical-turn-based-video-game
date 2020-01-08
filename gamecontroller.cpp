@@ -1,17 +1,21 @@
 #include "gamecontroller.h"
 
 GameController::GameController()
-{
-    m_queue = new UnitQueue();
-
-}
+    :m_queue(new UnitQueue()),
+      m_active_unit(nullptr),
+      m_grid(nullptr)
+{}
 
 
 GameController::~GameController()
 {
-    if(m_queue)
+    if (m_queue)
     {
         delete m_queue;
+    }
+    if (m_grid)
+    {
+        delete m_grid;
     }
 }
 
@@ -29,9 +33,15 @@ void GameController::addUnit(Unit u)
 }
 
 
-Unit GameController::activeUnit()
+Unit* GameController::activeUnit()
 {
-    return *(m_queue->current());
+    return m_active_unit;
+}
+
+
+void GameController::startGame()
+{
+    m_active_unit = m_queue->current();
 }
 
 

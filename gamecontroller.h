@@ -19,7 +19,8 @@ public:
 
     void setGrid(Grid* g);
     void addUnit(Unit u);
-    Unit activeUnit();
+    Unit* activeUnit();
+    void startGame();
     void endTurn();
 private:
     UnitQueue* m_queue;

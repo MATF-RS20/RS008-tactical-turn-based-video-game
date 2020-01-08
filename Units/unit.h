@@ -18,6 +18,7 @@ public:
     std::pair<int, int> health() const;
     void updateHealth(int change);
     unsigned getId() const;
+    virtual std::string info() const;
 
 protected:
     Unit(int HP, int AP, int initiative, int row, int col);
@@ -54,6 +55,7 @@ public:
 
     ~Warrior();
 
+    std::string info() const;
 private:
 
 };

@@ -50,12 +50,17 @@ void Unit::updateHealth(int change)
 }
 
 
+std::string Unit::info() const
+{
+    return "Unit says hello!\n"
+            "Id: " + std::to_string(getId()) + "; "
+            "Health: (" + std::to_string(health().first) + '/' + std::to_string(health().second) + ");";
+}
+
+
 std::ostream& operator<<(std::ostream& out, const Unit& u)
 {
-    return out << "Unit says hello!\n"
-               << "Id: " << u.getId() << "; "
-               << "Health: " << u.health().first << '/' << u.health().second << ";";
-
+    return out << u.info();
 }
 
 
@@ -71,10 +76,20 @@ Warrior::Warrior(int HP, int AP, int initiative, int row, int col)
     std::cerr<< "warrior constructor called"<< std::endl;
 }
 
+
 Warrior::~Warrior()
 {
     std::cerr<< "warrior destructor called"<< std::endl;
 }
+
+
+std::string Warrior::info() const
+{
+    return "Warrior says hello!\n"
+            "Id: " + std::to_string(getId()) + "; "
+            "Health: " + std::to_string(health().first) + '/' + std::to_string(health().second) + ";";
+}
+
 
 std::ostream& operator<<(std::ostream& out, const Warrior& w)
 {
