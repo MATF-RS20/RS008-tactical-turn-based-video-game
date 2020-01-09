@@ -17,6 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Actions/action.cpp \
+    Levels/levels.cpp \
+    Units/unit.cpp \
     Units/healer.cpp \
     Units/warrior.cpp \
     field.cpp \
@@ -24,16 +26,16 @@ SOURCES += \
     grid.cpp \
     main.cpp \
     mainwindow.cpp \
-    Units/unit.cpp \
     player.cpp
 
 HEADERS += \
     Actions/action.h \
+    Levels/levels.h \
+    Units/unit.h \
     field.h \
     gamecontroller.h \
     grid.h \
     mainwindow.h \
-    Units/unit.h \
     player.h
 
 FORMS += \
