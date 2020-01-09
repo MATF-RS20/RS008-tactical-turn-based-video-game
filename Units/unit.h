@@ -52,15 +52,12 @@ class Warrior: public Unit
 {
 public:
     Warrior(int HP, int AP, int initiative, int row, int col);
-
     ~Warrior();
 
     std::string info() const;
 private:
 
 };
-
-std::ostream& operator<<(std::ostream& out, const Warrior& value);
 
 
 
@@ -71,14 +68,12 @@ class Healer: public Unit
 {
 public:
     Healer(int HP, int AP, int initiative, int row, int col);
-
     ~Healer();
 
+    std::string info() const;
 private:
 
 };
-
-std::ostream& operator<<(std::ostream& out, const Healer& value);
 
 
 

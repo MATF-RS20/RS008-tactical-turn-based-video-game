@@ -17,6 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Actions/action.cpp \
+    Units/healer.cpp \
+    Units/warrior.cpp \
     field.cpp \
     gamecontroller.cpp \
     grid.cpp \
