@@ -2,12 +2,12 @@
 
 #include <QPainter>
 
-Field::Field(int row, int col)
+Field::Field(unsigned row, unsigned col)
     : m_row(row)
     , m_col(col)
-    , m_unit(nullptr)
     , m_width(40)
     , m_height(40)
+    , m_unit(nullptr)
     , m_color(Qt::blue) // (int R, int G, int B)?
 {}
 
@@ -32,17 +32,17 @@ void Field::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 void Field::mousePressEvent(QGraphicsSceneMouseEvent * event)
 {
     Q_UNUSED(event)
-    delete this;
+    std::cerr << "Pressed field: " << m_row << ", " << m_col << ";";
 }
 
 
-int Field::row() const
+unsigned Field::row() const
 {
     return m_row;
 }
 
 
-int Field::col() const
+unsigned Field::col() const
 {
     return m_col;
 }
@@ -65,9 +65,9 @@ bool Field::hasUnit() const
 }
 
 
-void Field::placeUnit(Unit u)
+void Field::placeUnit(Unit* u)
 {
-    m_unit = &u;
+    m_unit = u;
 }
 
 

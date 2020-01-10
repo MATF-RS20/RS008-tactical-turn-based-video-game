@@ -9,7 +9,7 @@
 class Field : public QGraphicsItem
 {
 public:
-    Field(int row, int col);
+    Field(unsigned row, unsigned col);
 
     // Okvir polja, za ponovno isrtavanje.
     QRectF boundingRect() const override;
@@ -23,21 +23,21 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
 
     //getters
-    int row() const;
-    int col() const;
+    unsigned row() const;
+    unsigned col() const;
     std::pair<int, int> position() const;
     Unit* unit() const;
 
     bool hasUnit() const;
-    void placeUnit(Unit u);
+    void placeUnit(Unit* u);
     void removeUnit();
 
 private:
-    const int m_row,
+    const unsigned m_row,
         m_col;
+    int m_width,
+        m_height;
     Unit* m_unit;
-    qreal m_width;
-    qreal m_height;
     QColor m_color;
 };
 
