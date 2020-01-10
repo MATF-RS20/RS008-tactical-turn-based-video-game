@@ -25,7 +25,6 @@ SOURCES += \
     gamecontroller.cpp \
     grid.cpp \
     main.cpp \
-    mainwindow.cpp \
     player.cpp
 
 HEADERS += \
@@ -35,11 +34,9 @@ HEADERS += \
     field.h \
     gamecontroller.h \
     grid.h \
-    mainwindow.h \
     player.h
 
 FORMS += \
-    mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
