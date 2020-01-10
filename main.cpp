@@ -1,4 +1,4 @@
-#include "gamecontroller.h"
+#include "Controller/gamecontroller.h"
 #include "Units/unit.h"
 #include "Levels/levels.h"
 #include "field.h"
@@ -21,9 +21,10 @@ int main(int argc, char *argv[])
     // i ubaci u scenu
 
     //Adding a field to the scene.
-    Field * f = new Field(0, 0);
+    Grid g = Grid(3,2, &scene);
+    /*Field * f = new Field(0, 0, 40);
     f->setPos(0, 0);
-    scene.addItem(f);
+    scene.addItem(f);*/
 
 
     QGraphicsView view(&scene);

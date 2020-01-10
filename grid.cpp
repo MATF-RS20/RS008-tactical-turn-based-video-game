@@ -2,22 +2,41 @@
 #include "field.h"
 
 
-Grid::Grid(unsigned number_of_rows, unsigned number_of_cols)
-    : m_row_size(number_of_rows), m_col_size(number_of_cols)
+Grid::Grid(unsigned number_of_rows, unsigned number_of_cols, QGraphicsScene* scene)
+    : m_row_size(number_of_rows)
+    , m_col_size(number_of_cols)
 {
-    _matrix = std::vector<std::vector<Field*>>();
+    qreal grid_left = 0, grid_top = 0;
+    int field_a = 40;
+    m_matrix = std::vector<std::vector<Field*>>();
     for (unsigned i = 0; i < m_row_size; i++)
     {
         std::vector<Field*> col = std::vector<Field*>();
         for (unsigned j = 0; j < m_col_size; j++)
         {
-            Field* f = new Field(i, j);
-            //f->setPos(0, 0);
-            //TODO! : add fields with respect to position...
+            Field* f = new Field(i, j, field_a);
+            f->setPos(grid_left + j * field_a,
+                      grid_top  + i * field_a);
+            (*scene).addItem(f);
             col.push_back(f);
         }
-        _matrix.push_back(col);
+        m_matrix.push_back(col);
     }
+}
+
+
+Grid::~Grid()
+{
+    //TODO: See if any double deleted.
+    for (auto col : m_matrix)
+    {
+        for(auto field : col)
+        {
+            delete field;
+        }
+        col.clear();
+    }
+    m_matrix.clear();
 }
 
 
@@ -29,7 +48,7 @@ std::pair<unsigned,unsigned> Grid::size() const
 
 std::vector<std::vector<Field*>> Grid::matrix() const
 {
-    return _matrix;
+    return m_matrix;
 }
 
 

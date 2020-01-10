@@ -2,13 +2,13 @@
 
 #include <QPainter>
 
-Field::Field(unsigned row, unsigned col)
+Field::Field(unsigned row, unsigned col, int a)
     : m_row(row)
     , m_col(col)
-    , m_width(40)
-    , m_height(40)
+    , m_width(a)
+    , m_height(a)
     , m_unit(nullptr)
-    , m_color(Qt::blue) // (int R, int G, int B)?
+    , m_color(Qt::white) // (int R, int G, int B)?
 {}
 
 
@@ -23,16 +23,23 @@ void Field::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
     Q_UNUSED(option)
 
     //TODO: Make a nice rectangle.
-    painter->setBrush(m_color);
+    /*painter->setBrush(m_color);
     painter->drawRect(-(m_width/2), -(m_height/2)
-                      , m_width, m_height);
+                      , m_width, m_height);*/
+    QPainterPath path;
+    path.addRect(-(m_width/2), -(m_height/2)
+                 , m_width, m_height);
+    QPen pen(Qt::black, 3);
+    painter->setPen(pen);
+    painter->fillPath(path, m_color);
+    painter->drawPath(path);
 }
 
 
 void Field::mousePressEvent(QGraphicsSceneMouseEvent * event)
 {
     Q_UNUSED(event)
-    std::cerr << "Pressed field: " << m_row << ", " << m_col << ";";
+    std::cerr << "Pressed field: " << m_row << ", " << m_col << ";" << std::endl;
 }
 
 

@@ -1,7 +1,7 @@
 #ifndef LEVELS_H
 #define LEVELS_H
 
-#include "gamecontroller.h"
+#include "Controller/gamecontroller.h"
 
 
 GameController createLevel1();
