@@ -17,22 +17,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Actions/action.cpp \
+    Controller/gamecontroller.cpp \
     Levels/levels.cpp \
     Units/unit.cpp \
     Units/healer.cpp \
     Units/warrior.cpp \
     field.cpp \
-    gamecontroller.cpp \
     grid.cpp \
     main.cpp \
     player.cpp
 
 HEADERS += \
     Actions/action.h \
+    Controller/gamecontroller.h \
     Levels/levels.h \
     Units/unit.h \
     field.h \
-    gamecontroller.h \
     grid.h \
     player.h
 
