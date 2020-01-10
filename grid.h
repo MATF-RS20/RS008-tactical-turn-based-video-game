@@ -14,13 +14,13 @@ public:
     //getters
     int row_number() const;
     int col_number() const;
-    std::vector<std::vector<Field>> matrix() const;
+    std::vector<std::vector<Field*>> matrix() const;
 
 
 private:
     int _row_number,
         _col_number;
-    std::vector<std::vector<Field>> _matrix;
+    std::vector<std::vector<Field*>> _matrix;
 };
 
 std::ostream& operator<<(std::ostream& out, const Grid& value);

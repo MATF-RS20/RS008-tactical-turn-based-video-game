@@ -3,12 +3,24 @@
 
 #include "Units/unit.h"
 
+#include <QGraphicsItem>
 #include <iostream>
 
-class Field
+class Field : public QGraphicsItem
 {
 public:
     Field(int row, int col);
+
+    // Okvir polja, za ponovno isrtavanje.
+    QRectF boundingRect() const override;
+
+    //QPainterPath shape() const override;
+    void paint(QPainter *painter,
+                   const QStyleOptionGraphicsItem *option,
+                   QWidget *widget) override;
+
+    //TODO: Show info on mouse click.
+    void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
 
     //getters
     int row() const;
@@ -24,6 +36,9 @@ private:
     const int m_row,
         m_col;
     Unit* m_unit;
+    qreal m_width;
+    qreal m_height;
+    QColor m_color;
 };
 
 std::ostream& operator<<(std::ostream& out, const Field& value);

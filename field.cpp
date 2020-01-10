@@ -1,9 +1,38 @@
 #include "field.h"
 
+#include <QPainter>
+
 Field::Field(int row, int col)
-    : m_row(row), m_col(col)
+    : m_row(row)
+    , m_col(col)
+    , m_unit(nullptr)
+    , m_width(40)
+    , m_height(40)
+    , m_color(Qt::blue) // (int R, int G, int B)?
+{}
+
+
+QRectF Field::boundingRect() const
 {
-    m_unit = nullptr;
+    return QRectF(-(m_width/2), -(m_height/2)
+                  , m_width, m_height);
+}
+
+void Field::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
+{
+    Q_UNUSED(option)
+
+    //TODO: Make a nice rectangle.
+    painter->setBrush(m_color);
+    painter->drawRect(-(m_width/2), -(m_height/2)
+                      , m_width, m_height);
+}
+
+
+void Field::mousePressEvent(QGraphicsSceneMouseEvent * event)
+{
+    Q_UNUSED(event)
+    delete this;
 }
 
 
