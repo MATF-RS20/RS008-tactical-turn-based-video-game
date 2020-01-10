@@ -1,14 +1,15 @@
 #include "grid.h"
 #include "field.h"
 
-Grid::Grid(int row_number, int col_number)
-    : _row_number(row_number), _col_number(col_number)
+
+Grid::Grid(unsigned number_of_rows, unsigned number_of_cols)
+    : m_row_size(number_of_rows), m_col_size(number_of_cols)
 {
     _matrix = std::vector<std::vector<Field*>>();
-    for (int i = 0; i < _row_number; i++)
+    for (unsigned i = 0; i < m_row_size; i++)
     {
         std::vector<Field*> col = std::vector<Field*>();
-        for (int j = 0; j < _col_number; j++)
+        for (unsigned j = 0; j < m_col_size; j++)
         {
             Field* f = new Field(i, j);
             //f->setPos(0, 0);
@@ -19,31 +20,29 @@ Grid::Grid(int row_number, int col_number)
     }
 }
 
-int Grid::row_number() const
+
+std::pair<unsigned,unsigned> Grid::size() const
 {
-    return _row_number;
+    return {m_row_size, m_col_size};
 }
 
-int Grid::col_number() const
-{
-    return _col_number;
-}
 
 std::vector<std::vector<Field*>> Grid::matrix() const
 {
     return _matrix;
 }
 
+
 std::ostream& operator<<(std::ostream& out, const Grid& g)
 {
-    //return out << "Number of columns is: " << value.col_number() << ";Number of rows is: " << value.row_number();
+    unsigned number_of_rows, number_of_cols;
+    std::tie(number_of_rows, number_of_cols) = g.size();
 
     out << "Grid matrix output start:\n";
-    for (int i = 0; i < g.row_number(); i++)
+    for (unsigned i = 0; i < number_of_rows; i++)
     {
-        //auto row = value.matrix()[i];
         out << "  ";
-        for (int j = 0; j < g.col_number(); j++) {
+        for (unsigned j = 0; j < number_of_cols; j++) {
             auto field = g.matrix()[i][j];
             out << field << ", ";
         }

@@ -9,17 +9,15 @@
 class Grid
 {
 public:
-    Grid(int row_number, int col_number);
+    Grid(unsigned number_of_rows, unsigned number_of_cols);
 
-    //getters
-    int row_number() const;
-    int col_number() const;
+    std::pair<unsigned,unsigned> size() const;
     std::vector<std::vector<Field*>> matrix() const;
 
 
 private:
-    int _row_number,
-        _col_number;
+    unsigned m_row_size,
+             m_col_size;
     std::vector<std::vector<Field*>> _matrix;
 };
 
