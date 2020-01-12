@@ -2,22 +2,21 @@
 #include "field.h"
 
 
-Grid::Grid(unsigned number_of_rows, unsigned number_of_cols, QGraphicsScene* scene)
-    : m_row_size(number_of_rows)
+Grid::Grid(unsigned number_of_rows, unsigned number_of_cols, QGraphicsItem* parent)
+    : QGraphicsItem(parent)
+    , m_row_size(number_of_rows)
     , m_col_size(number_of_cols)
 {
     qreal grid_left = 0, grid_top = 0;
-    int field_a = 40;
     m_matrix = std::vector<std::vector<Field*>>();
     for (unsigned i = 0; i < m_row_size; i++)
     {
         std::vector<Field*> col = std::vector<Field*>();
         for (unsigned j = 0; j < m_col_size; j++)
         {
-            Field* f = new Field(i, j, field_a);
-            f->setPos(grid_left + j * field_a,
-                      grid_top  + i * field_a);
-            (*scene).addItem(f);
+            Field* f = new Field(i, j, m_field_width, m_field_height, this);
+            f->setPos(grid_left + j * m_field_width,
+                      grid_top  + i * m_field_height);
             col.push_back(f);
         }
         m_matrix.push_back(col);
@@ -25,7 +24,23 @@ Grid::Grid(unsigned number_of_rows, unsigned number_of_cols, QGraphicsScene* sce
 }
 
 
-Grid::~Grid()
+QRectF Grid::boundingRect() const
+{
+    unsigned width = m_field_width * m_col_size,
+             height = m_field_height * m_row_size;
+    return QRectF(-(width/2), -(height/2)
+                  , width, height);
+}
+
+
+void Grid::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
+{
+    Q_UNUSED(painter)
+    Q_UNUSED(option)
+    return;
+}
+
+/*Grid::~Grid()
 {
     //TODO: See if any double deleted.
     for (auto col : m_matrix)
@@ -37,7 +52,7 @@ Grid::~Grid()
         col.clear();
     }
     m_matrix.clear();
-}
+}*/
 
 
 std::pair<unsigned,unsigned> Grid::size() const

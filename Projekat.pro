@@ -22,8 +22,9 @@ SOURCES += \
     Units/unit.cpp \
     Units/healer.cpp \
     Units/warrior.cpp \
-    field.cpp \
-    grid.cpp \
+    View/field.cpp \
+    View/grid.cpp \
+    View/ui.cpp \
     main.cpp \
     player.cpp
 
@@ -32,8 +33,9 @@ HEADERS += \
     Controller/gamecontroller.h \
     Levels/levels.h \
     Units/unit.h \
-    field.h \
-    grid.h \
+    View/field.h \
+    View/grid.h \
+    View/ui.h \
     player.h
 
 FORMS += \

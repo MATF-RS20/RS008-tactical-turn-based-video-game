@@ -2,7 +2,7 @@
 #define GAMECONTROLLER_H
 
 #include "Units/unit.h"
-#include "grid.h"
+#include "View/grid.h"
 
 #include <vector>
 #include <optional>

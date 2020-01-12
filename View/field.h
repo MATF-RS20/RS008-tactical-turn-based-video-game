@@ -9,7 +9,7 @@
 class Field : public QGraphicsItem
 {
 public:
-    Field(unsigned row, unsigned col, int a = 40);
+    Field(unsigned row, unsigned col, int w = 40, int h = 40, QGraphicsItem* parent = nullptr);
 
     // Okvir polja, za ponovno isrtavanje.
     QRectF boundingRect() const override;

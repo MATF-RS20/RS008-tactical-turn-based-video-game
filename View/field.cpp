@@ -2,11 +2,12 @@
 
 #include <QPainter>
 
-Field::Field(unsigned row, unsigned col, int a)
-    : m_row(row)
+Field::Field(unsigned row, unsigned col, int w, int h, QGraphicsItem* parent)
+    : QGraphicsItem(parent)
+    , m_row(row)
     , m_col(col)
-    , m_width(a)
-    , m_height(a)
+    , m_width(w)
+    , m_height(h)
     , m_unit(nullptr)
     , m_color(Qt::white) // (int R, int G, int B)?
 {}
@@ -14,6 +15,7 @@ Field::Field(unsigned row, unsigned col, int a)
 
 QRectF Field::boundingRect() const
 {
+    //TODO: qreal penWidth...
     return QRectF(-(m_width/2), -(m_height/2)
                   , m_width, m_height);
 }

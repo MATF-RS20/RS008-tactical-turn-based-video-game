@@ -15,7 +15,8 @@ GameController::~GameController()
     }
     if (m_grid)
     {
-        delete m_grid;
+        //TODO: window deletes grid?
+        //delete m_grid;
     }
 }
 
