@@ -9,8 +9,16 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    QWidget* window;
+    QGraphicsScene* scene;
 
-    makeUI();
+    std::tie(window, scene) = makeUI();
+
+    Grid* g = new Grid(3,2);
+    g->setPos(0, 0);
+    scene->addItem(g);
+
+    window->show();
 
     //TODO: Timer.
 

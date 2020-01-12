@@ -1,7 +1,8 @@
 #include "ui.h"
+#include "QString"
 
 
-QWidget* makeUI()
+std::pair<QWidget*, QGraphicsScene*> makeUI()
 {
     QWidget* window = new QWidget();
 
@@ -11,26 +12,33 @@ QWidget* makeUI()
     QGraphicsView* view = new QGraphicsView(scene);
     view->setRenderHint(QPainter::Antialiasing);
     view->setDragMode(QGraphicsView::ScrollHandDrag);
-    //view.setWindowTitle("Game");
+    //view->setWindowTitle("Game-view");
     view->resize(600, 600);
-    //view.show();
 
-    Grid* g = new Grid(3,2);
-    /*Field * f = new Field(0, 0, 40);
-    f->setPos(0, 0);
-    scene.addItem(f);*/
-    scene->addItem(g);
+    QVBoxLayout* outerLayout = new QVBoxLayout();
+    QHBoxLayout* actionsLayout = new QHBoxLayout();
 
-    QVBoxLayout* outer = new QVBoxLayout(window);
+    //TODO: Implement delete for actionButtons vector (vector only)
+    std::vector<QPushButton*> * actionButtons = new std::vector<QPushButton*>();
+    for (int i = 0; i < 10; i++)
+    {
+        QString actionName = "Action #"; //QString("Action #" + std::to_string(i));
+        QPushButton* pb_tmp = new QPushButton(actionName, window);
+        actionButtons->push_back(pb_tmp);
+        actionsLayout->addWidget(pb_tmp);
+    }
+
     QPushButton* pb_endTurn = new QPushButton("End turn", window);
+    actionsLayout->addWidget(pb_endTurn);
 
+    //actionsLayout->add
 
+    outerLayout->addWidget(view);
+    outerLayout->addLayout(actionsLayout);
 
-    outer->addWidget(view);
-    outer->addWidget(pb_endTurn);
-    window->setLayout(outer);
-    window->show();
+    window->setLayout(outerLayout);
+    window->setWindowTitle("The Game");
+    window->resize(800, 800);
 
-    //TODO: Timer.
-    return window;
+    return {window, scene};
 }

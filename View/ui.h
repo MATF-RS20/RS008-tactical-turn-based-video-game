@@ -11,7 +11,7 @@
 #include <QGraphicsView>
 
 
-QWidget* makeUI();
+std::pair<QWidget*, QGraphicsScene*> makeUI();
 
 
 #endif // UI_H
