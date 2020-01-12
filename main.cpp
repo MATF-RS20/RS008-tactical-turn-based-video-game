@@ -4,6 +4,9 @@
 #include "field.h"
 
 #include <QApplication>
+#include <QWidget>
+#include <QVBoxLayout>
+#include <QPushButton>
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <iostream>
@@ -12,27 +15,32 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
-    QGraphicsScene scene;
-    //x coordinates in range of (-300, 300)
-    //y coordinates in range of (-300, 300)
-    scene.setSceneRect(-300, -300, 600, 600);
+    QWidget* window = new QWidget();
 
-    //TODO: Dodaj vizuelnu repr. polja u grid-u
-    // i ubaci u scenu
+    QGraphicsScene* scene = new QGraphicsScene(window);
+    scene->setSceneRect(-200, -200, 400, 400);
 
-    //Adding a field to the scene.
-    Grid g = Grid(3,2, &scene);
+    QGraphicsView* view = new QGraphicsView(scene);
+    view->setRenderHint(QPainter::Antialiasing);
+    view->setDragMode(QGraphicsView::ScrollHandDrag);
+    //view.setWindowTitle("Game");
+    view->resize(600, 600);
+    //view.show();
+
+    Grid g = Grid(3,2, scene);
     /*Field * f = new Field(0, 0, 40);
     f->setPos(0, 0);
     scene.addItem(f);*/
 
+    QVBoxLayout* outer = new QVBoxLayout(window);
+    QPushButton* pb_endTurn = new QPushButton("End turn", window);
 
-    QGraphicsView view(&scene);
-    view.setRenderHint(QPainter::Antialiasing);
-    view.setDragMode(QGraphicsView::ScrollHandDrag);
-    view.setWindowTitle("Game");
-    view.resize(900, 900);
-    view.show();
+
+
+    outer->addWidget(view);
+    outer->addWidget(pb_endTurn);
+    window->setLayout(outer);
+    window->show();
 
     //TODO: Timer.
 
