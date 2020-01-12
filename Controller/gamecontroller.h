@@ -18,7 +18,7 @@ public:
     ~GameController();
 
     void setGrid(Grid* g);
-    void addUnit(Unit* u);
+    bool addUnit(Unit* u);
     Unit* activeUnit();
     void startGame();
     void endTurn();

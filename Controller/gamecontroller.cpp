@@ -27,10 +27,16 @@ void GameController::setGrid(Grid* g)
 }
 
 
-void GameController::addUnit(Unit* u)
+bool GameController::addUnit(Unit* u)
 {
     m_queue->push_back(u);
-    //TODO: set position on grid...
+    if(m_grid)
+    {
+        //TODO
+        return m_grid->placeUnit(u->position(), u);
+    }
+    //Grid not set yet (==nullptr), can't set units.
+    return false;
 }
 
 

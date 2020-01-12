@@ -67,6 +67,46 @@ std::vector<std::vector<Field*>> Grid::matrix() const
 }
 
 
+bool Grid::validField(std::pair<int,int> position)
+{
+    int row, col;
+    std::tie(row, col) = position;
+    if (row < 0 || col < 0 || row >= m_row_size || col >= m_col_size)
+    {
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+
+Field* Grid::operator[] (std::pair<int,int> position) {
+    if (validField(position))
+    {
+        return m_matrix[position.first][position.second];
+    }
+    return nullptr;
+}
+
+
+bool Grid::placeUnit(std::pair<int,int> field_position, Unit* unit)
+{
+    Field* f = (*this)[field_position];
+    if (f)
+    {
+        if (f->hasUnit()) {
+            return false;
+        }
+        else {
+            f->placeUnit(unit);
+            return true;
+        }
+    }
+    return false;
+}
+
+
 std::ostream& operator<<(std::ostream& out, const Grid& g)
 {
     unsigned number_of_rows, number_of_cols;

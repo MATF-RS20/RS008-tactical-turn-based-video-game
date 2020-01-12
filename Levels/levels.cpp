@@ -10,8 +10,14 @@ GameController createLevel1(QGraphicsScene* scene)
     scene->addItem(g);
     gController.setGrid(g);
 
-    gController.addUnit(new Warrior(300,10,5,3,3));
-    gController.addUnit(new Healer (200,10,5,0,0));
+    gController.addUnit(new Warrior(300,10,5,2,2));
+    std::cerr << gController.addUnit(new Healer (200,10,5,0,0)) << std::endl;
+
+    //TODO add CATCH tests!
+
+    //This shouldn't be added - bad index. Output = false!
+    std::cerr << gController.addUnit(new Healer (200,10,5,5,5)) << std::endl;
+    std::cerr << gController.addUnit(new Healer (200,10,5,3,3)) << std::endl;
 
     gController.startGame();
     return gController;
