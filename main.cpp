@@ -14,9 +14,7 @@ int main(int argc, char *argv[])
 
     std::tie(window, scene) = makeUI();
 
-    Grid* g = new Grid(3,2);
-    g->setPos(0, 0);
-    scene->addItem(g);
+    GameController gc = createLevel1(scene);
 
     window->show();
 

@@ -1,6 +1,7 @@
 #include "field.h"
 
 #include <QPainter>
+#include <QGraphicsSceneMouseEvent>
 
 Field::Field(unsigned row, unsigned col, int w, int h, QGraphicsItem* parent)
     : QGraphicsItem(parent)
@@ -41,7 +42,11 @@ void Field::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 void Field::mousePressEvent(QGraphicsSceneMouseEvent * event)
 {
     Q_UNUSED(event)
-    std::cerr << "Pressed field: " << m_row << ", " << m_col << ";" << std::endl;
+    //std::cerr << "Pressed field: " << m_row << ", " << m_col << ";" << std::endl;
+    if(event->button() == Qt::RightButton)
+    {
+        std::cerr << *this << std::endl;
+    }
 }
 
 
