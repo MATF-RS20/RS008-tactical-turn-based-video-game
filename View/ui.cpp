@@ -1,6 +1,8 @@
 #include "ui.h"
 #include "QString"
 
+#include <QLabel>
+
 
 std::pair<QWidget*, QGraphicsScene*> makeUI()
 {
@@ -12,31 +14,42 @@ std::pair<QWidget*, QGraphicsScene*> makeUI()
     QGraphicsView* view = new QGraphicsView(scene);
     view->setRenderHint(QPainter::Antialiasing);
     view->setDragMode(QGraphicsView::ScrollHandDrag);
-    //view->setWindowTitle("Game-view");
     view->resize(600, 600);
 
-    QVBoxLayout* outerLayout = new QVBoxLayout();
-    QHBoxLayout* actionsLayout = new QHBoxLayout();
+    QVBoxLayout* layoutV_outer = new QVBoxLayout();
+
+    //QHBoxLayout* layoutH_unitsQueue = new QHBoxLayout();
+    QHBoxLayout* layoutH_main = new QHBoxLayout();
+    QHBoxLayout* layoutH_actions = new QHBoxLayout();
+
+
+    //TODO: unitsQueue
+
+
+    //TODO: set fixed width for showInfo
+    QLabel* showInfo = new QLabel("Hello");
+    layoutH_main->addWidget(view);
+    layoutH_main->addWidget(showInfo);
 
     //TODO: Implement delete for actionButtons vector (vector only)
     std::vector<QPushButton*> * actionButtons = new std::vector<QPushButton*>();
     for (int i = 0; i < 10; i++)
     {
-        QString actionName = "Action #"; //QString("Action #" + std::to_string(i));
+        char const * actionName = std::string("Action " + std::to_string(i)).c_str();
         QPushButton* pb_tmp = new QPushButton(actionName, window);
+        //TODO: add signals and slots!
         actionButtons->push_back(pb_tmp);
-        actionsLayout->addWidget(pb_tmp);
+        layoutH_actions->addWidget(pb_tmp);
     }
 
     QPushButton* pb_endTurn = new QPushButton("End turn", window);
-    actionsLayout->addWidget(pb_endTurn);
+    layoutH_actions->addWidget(pb_endTurn);
 
-    //actionsLayout->add
+    //layoutH_actions->addLayout(layoutH_unitsQueue);
+    layoutV_outer->addLayout(layoutH_main);
+    layoutV_outer->addLayout(layoutH_actions);
 
-    outerLayout->addWidget(view);
-    outerLayout->addLayout(actionsLayout);
-
-    window->setLayout(outerLayout);
+    window->setLayout(layoutV_outer);
     window->setWindowTitle("The Game");
     window->resize(800, 800);
 
