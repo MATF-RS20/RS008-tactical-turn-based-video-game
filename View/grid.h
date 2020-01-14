@@ -11,7 +11,7 @@
 class Grid : public QGraphicsItem
 {
 public:
-    Grid(unsigned number_of_rows, unsigned number_of_cols, QGraphicsItem* parent = nullptr);
+    Grid(unsigned number_of_rows, unsigned number_of_cols, QGraphicsItem* parent = nullptr, QLabel* showInfo = nullptr);
 
     //~Grid() override;
 

@@ -9,12 +9,16 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+    /*
     QWidget* window;
     QGraphicsScene* scene;
+    QLabel* showInfo;
+    std::vector<QPushButton*> * actionButtons;
+    */
 
-    std::tie(window, scene) = makeUI();
+    auto [window, scene, showInfo, actionButtons] = makeUI();
 
-    GameController gc = createLevel1(scene);
+    GameController gc = createLevel1(scene, showInfo);
 
     window->show();
 

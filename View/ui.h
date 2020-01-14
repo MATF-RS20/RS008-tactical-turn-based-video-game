@@ -9,9 +9,19 @@
 #include <QPushButton>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QLabel>
 
 
-std::pair<QWidget*, QGraphicsScene*> makeUI();
+struct ui {
+    QWidget* window;
+    QGraphicsScene* scene;
+    QLabel* showInfo;
+    std::vector<QPushButton*> * actionButtons;
+
+};
+
+
+ui makeUI();
 
 
 #endif // UI_H

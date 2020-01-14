@@ -1,10 +1,8 @@
 #include "ui.h"
 #include "QString"
 
-#include <QLabel>
 
-
-std::pair<QWidget*, QGraphicsScene*> makeUI()
+ui makeUI()
 {
     QWidget* window = new QWidget();
 
@@ -28,6 +26,9 @@ std::pair<QWidget*, QGraphicsScene*> makeUI()
 
     //TODO: set fixed width for showInfo
     QLabel* showInfo = new QLabel("Hello");
+    //QObject::connect()
+
+
     layoutH_main->addWidget(view);
     layoutH_main->addWidget(showInfo);
 
@@ -53,5 +54,5 @@ std::pair<QWidget*, QGraphicsScene*> makeUI()
     window->setWindowTitle("The Game");
     window->resize(800, 800);
 
-    return {window, scene};
+    return {window, scene, showInfo, actionButtons};
 }

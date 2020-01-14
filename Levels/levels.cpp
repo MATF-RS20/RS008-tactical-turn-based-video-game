@@ -1,11 +1,11 @@
 #include "levels.h"
 
-GameController createLevel1(QGraphicsScene* scene)
+GameController createLevel1(QGraphicsScene* scene, QLabel* showInfo)
 {
     GameController gController;
     //gController.setGrid(new Grid(4, 4));
 
-    Grid* g = new Grid(3,4);
+    Grid* g = new Grid(3,4, nullptr, showInfo);
     g->setPos(0, 0);
     scene->addItem(g);
     gController.setGrid(g);
