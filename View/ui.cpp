@@ -54,5 +54,5 @@ ui makeUI()
     window->setWindowTitle("The Game");
     window->resize(800, 800);
 
-    return {window, scene, showInfo, actionButtons};
+    return {window, scene, showInfo, actionButtons, pb_endTurn};
 }

@@ -9,20 +9,22 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
     /*
     QWidget* window;
     QGraphicsScene* scene;
     QLabel* showInfo;
     std::vector<QPushButton*> * actionButtons;
+    QPushButton* pb_endTurn;
     */
+    auto [window, scene, showInfo, actionButtons, pb_endTurn] = makeUI();
 
-    auto [window, scene, showInfo, actionButtons] = makeUI();
-
-    GameController gc = createLevel1(scene, showInfo);
+    GameController* gc = createLevel1(scene, showInfo, pb_endTurn);
+    gc->startGame();
 
     window->show();
 
-    //TODO: Timer.
+    //TODO: Timer?
 
     return app.exec();
 }

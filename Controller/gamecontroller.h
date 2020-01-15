@@ -5,14 +5,17 @@
 #include "View/grid.h"
 
 #include <vector>
-#include <optional>
+//#include <optional>
+#include <QPushButton>
 
 class UnitQueue;
 
-class GameController
+class GameController : public QObject
 {
+    Q_OBJECT
+
 public:
-    GameController();
+    GameController(QObject* parent = nullptr);
     //TODO: singleton maybe?
 
     ~GameController();
@@ -21,7 +24,12 @@ public:
     bool addUnit(Unit* u);
     Unit* activeUnit();
     void startGame();
+    void add_pb_EndTurn(QPushButton* pb_endTurn);
+    //void endTurn();
+
+public slots:
     void endTurn();
+
 private:
     UnitQueue* m_queue;
     Unit* m_active_unit;
