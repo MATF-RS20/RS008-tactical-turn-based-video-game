@@ -4,15 +4,22 @@
 #include "Actions/action.h"
 #include "player.h"
 
+#include <QGraphicsItem>
 #include <iostream>
 #include <vector>
 
-class Unit
+class Unit : public QGraphicsItem
 {
 public:
-    virtual ~Unit() = default;
+    //virtual ~Unit() = default;
 
     //virtual Unit * Copy() const = 0;
+
+    QRectF boundingRect() const override;
+
+    void paint(QPainter *painter,
+                   const QStyleOptionGraphicsItem *option,
+                   QWidget *widget) override;
 
     std::pair<int,int> position() const;
     std::pair<int, int> health() const;
@@ -21,7 +28,7 @@ public:
     virtual std::string info() const;
 
 protected:
-    Unit(int HP, int AP, int initiative, int row, int col);
+    Unit(int HP, int AP, int initiative, int row, int col, QGraphicsItem* parent = nullptr);
     void setId();
 
     //HealthPoints, ActionPoints

@@ -1,11 +1,25 @@
 #include "unit.h"
+#include <QPainter>
 
-Unit::Unit(int HP,int AP,int initiative,int row,int col)
-    : m_max_HP(HP), m_max_AP(AP), m_initiative(initiative), m_row(row), m_col(col)
+Unit::Unit(int HP,int AP,int initiative,int row,int col, QGraphicsItem* parent)
+    : QGraphicsItem(parent)
+    , m_max_HP(HP)
+    , m_max_AP(AP)
+    , m_initiative(initiative)
+    , m_row(row)
+    , m_col(col)
 {
     setId();
     m_remaining_HP = m_max_HP;
     m_remaining_AP = m_max_AP;
+    //TODO: z depth?
+    //TODO: get setPos parameters from a source for both unit and field:
+
+    qreal grid_left = 0, grid_top = 0;
+    int m_field_width = 40;
+    int m_field_height = 40;
+    this->setPos(grid_left + row * m_field_width,
+                 grid_top  + col * m_field_height);
 }
 
 
@@ -21,6 +35,32 @@ void Unit::setId()
 unsigned Unit::getId() const
 {
     return m_id;
+}
+
+
+QRectF Unit::boundingRect() const
+{
+    //TODO: m_width...
+    int m_width = 30;
+    int m_height = 30;
+    return QRectF(-(m_width/2), -(m_height/2)
+                  , m_width, m_height);
+}
+
+void Unit::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
+{
+    Q_UNUSED(option)
+    int m_width = 30;
+    int m_height = 30;
+    QColor m_color = QColor(Qt::red);
+
+    QPainterPath path;
+    path.addEllipse(-(m_width/2), -(m_height/2)
+                 , m_width, m_height);
+    QPen pen(Qt::black, 3);
+    painter->setPen(pen);
+    painter->fillPath(path, m_color);
+    painter->drawPath(path);
 }
 
 

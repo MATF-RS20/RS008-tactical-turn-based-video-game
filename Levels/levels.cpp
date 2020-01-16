@@ -10,8 +10,12 @@ GameController* createLevel1(QGraphicsScene* scene, QLabel* showInfo, QPushButto
     scene->addItem(g);
     gController->setGrid(g);
 
-    gController->addUnit(new Warrior(300,10,5,2,2));
-    gController->addUnit(new Healer (200,10,5,0,0));
+    Unit* tmp_unit = new Warrior(300,10,5,2,2);
+    gController->addUnit(tmp_unit);
+    scene->addItem(tmp_unit);
+    tmp_unit = new Healer (200,10,5,0,0);
+    gController->addUnit(tmp_unit);
+    scene->addItem(tmp_unit);
 
     /*
     //TODO: add CATCH tests!
