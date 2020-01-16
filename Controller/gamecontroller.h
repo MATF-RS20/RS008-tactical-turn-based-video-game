@@ -15,7 +15,7 @@ class GameController : public QObject
     Q_OBJECT
 
 public:
-    GameController(QObject* parent = nullptr);
+    GameController(QObject* parent, QPushButton* pb_endTurn, QLabel* showInfo);
     //TODO: singleton maybe?
 
     ~GameController();
@@ -24,11 +24,15 @@ public:
     bool addUnit(Unit* u);
     Unit* activeUnit();
     void startGame();
-    void add_pb_EndTurn(QPushButton* pb_endTurn);
+    void add_pb_EndTurn();
     //void endTurn();
 
 public slots:
     void endTurn();
+
+signals:
+    //TODO: Research signals.
+    void changeInfo(const QString&);
 
 private:
     UnitQueue* m_queue;

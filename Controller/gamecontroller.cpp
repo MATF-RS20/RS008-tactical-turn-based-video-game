@@ -1,12 +1,15 @@
 #include "gamecontroller.h"
 
 
-GameController::GameController(QObject* parent)
+GameController::GameController(QObject* parent, QPushButton* pb_endTurn, QLabel* showInfo)
     : QObject(parent)
     , m_queue(new UnitQueue())
     , m_active_unit(nullptr)
     , m_grid(nullptr)
-{}
+{
+    QObject::connect(pb_endTurn, SIGNAL(clicked()), this, SLOT(endTurn()));
+    QObject::connect(this, SIGNAL(changeInfo(const QString&)), showInfo, SLOT(setText(const QString &)));
+}
 
 
 GameController::~GameController()
@@ -58,12 +61,6 @@ void GameController::endTurn()
 {
     std::cerr << "Game Controller endTurn() called!" << std::endl;
     m_active_unit = m_queue->next();
+    emit changeInfo("Turn ended!");
     //TODO: update unit queue list in the UI.
-}
-
-
-
-void GameController::add_pb_EndTurn(QPushButton* pb_endTurn)
-{
-    QObject::connect(pb_endTurn, SIGNAL(clicked()), this, SLOT(endTurn()));
 }
