@@ -26,6 +26,8 @@ ui makeUI()
 
     //TODO: set fixed width for showInfo
     QLabel* showInfo = new QLabel("Hello");
+    showInfo->setWordWrap(true);
+    showInfo->setFixedWidth(150);
     //QObject::connect()
 
 
