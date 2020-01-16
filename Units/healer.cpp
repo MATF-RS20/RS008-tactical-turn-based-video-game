@@ -16,7 +16,7 @@ Healer::~Healer()
 
 std::string Healer::info() const
 {
-    return "Healer says hello!\n"
+    return "Healer\n"
             "Id: " + std::to_string(getId()) + "; "
             "Health: " + std::to_string(health().first) + '/' + std::to_string(health().second) + ";\n";
 }

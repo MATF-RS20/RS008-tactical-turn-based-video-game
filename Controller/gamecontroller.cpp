@@ -6,6 +6,8 @@ GameController::GameController(QObject* parent, QPushButton* pb_endTurn, QLabel*
     , m_queue(new UnitQueue())
     , m_active_unit(nullptr)
     , m_grid(nullptr)
+    , m_infoLabel(showInfo)
+    , m_turn(0)
 {
     QObject::connect(pb_endTurn, SIGNAL(clicked()), this, SLOT(endTurn()));
     QObject::connect(this, SIGNAL(changeInfo(const QString&)), showInfo, SLOT(setText(const QString &)));
@@ -54,13 +56,31 @@ Unit* GameController::activeUnit()
 void GameController::startGame()
 {
     m_active_unit = m_queue->current();
+    setInfo(("Turn: " + std::to_string(m_turn)
+             + "\nActive unit is: " + activeUnit()->info()
+             ).c_str());
+}
+
+
+QString GameController::getInfo()
+{
+    return m_infoLabel->text();
 }
 
 
 void GameController::endTurn()
 {
     std::cerr << "Game Controller endTurn() called!" << std::endl;
+    m_turn++;
     m_active_unit = m_queue->next();
-    emit changeInfo("Turn ended!");
+    setInfo(("Turn: " + std::to_string(m_turn)
+             + "\nActive unit is: " + activeUnit()->info()
+             ).c_str());
     //TODO: update unit queue list in the UI.
+}
+
+
+void GameController::setInfo(QString msg)
+{
+    emit changeInfo(msg);
 }

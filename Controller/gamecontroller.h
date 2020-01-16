@@ -25,6 +25,8 @@ public:
     Unit* activeUnit();
     void startGame();
     void add_pb_EndTurn();
+    void setInfo(QString msg);
+    QString getInfo();
     //void endTurn();
 
 public slots:
@@ -38,6 +40,8 @@ private:
     UnitQueue* m_queue;
     Unit* m_active_unit;
     Grid* m_grid;
+    QLabel* m_infoLabel;
+    unsigned m_turn;
 };
 
 
