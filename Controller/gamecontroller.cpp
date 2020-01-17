@@ -117,9 +117,15 @@ bool GameController::moveUnit(Unit* unit, std::pair<int, int> position)
     if (!m_grid) {
         return false;
     }
+
+    auto old_position = unit->position();
+    if (old_position == position)
+    {
+        return true;
+    }
     if (m_grid->placeUnit(position, unit))
     {
-        m_grid->removeUnit(/*old_position*/unit->position());
+        m_grid->removeUnit(old_position);
         std::pair<qreal,qreal> pos = calculatePos(position);
         unit->setPos(pos.first, pos.second);
         return true;
