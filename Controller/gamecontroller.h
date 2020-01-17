@@ -3,6 +3,7 @@
 
 #include "Units/unit.h"
 #include "View/grid.h"
+#include "View/actionbutton.h"
 
 #include <vector>
 //#include <optional>
@@ -24,18 +25,23 @@ public:
     bool addUnit(Unit* u);
     Unit* activeUnit();
     void startGame();
-    void add_pb_EndTurn();
-    void setInfo(QString msg);
+
+    void add_pb_EndTurn(); //TODO: in constructor. Is this neccesary?
+    void add_pb_Action(ActionButton* pb_action);
+
+    void setInfo(std::string msg);
     QString getInfo();
+
     bool moveUnit (Unit* unit, std::pair<int, int> position);
     //This is for drawing units, setPos()!
     std::pair<qreal, qreal> calculatePos(unsigned row, unsigned col);
     std::pair<qreal, qreal> calculatePos(std::pair<int, int> position);
 
-    //void endTurn();
 
 public slots:
     void endTurn();
+    void actionButtonPressed(int button_number);
+    //void actionButtonPressed(Action*); //TODO
 
 signals:
     //TODO: Research signals.

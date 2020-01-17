@@ -78,16 +78,16 @@ void GameController::endTurn()
     std::cerr << "Game Controller endTurn() called!" << std::endl;
     m_turn++;
     m_active_unit = m_queue->next();
-    setInfo(("Turn: " + std::to_string(m_turn)
+    setInfo("Turn: " + std::to_string(m_turn)
              + "\nActive unit is: " + activeUnit()->info()
-             ).c_str());
+             );
     //TODO: update unit queue list in the UI.
 }
 
 
-void GameController::setInfo(QString msg)
+void GameController::setInfo(std::string msg)
 {
-    emit changeInfo(msg);
+    emit changeInfo(msg.c_str());
 }
 
 
@@ -133,4 +133,15 @@ bool GameController::moveUnit(Unit* unit, std::pair<int, int> position)
     else {
         return false;
     }
+}
+
+
+void GameController::add_pb_Action(ActionButton* pb_action)
+{
+    QObject::connect(pb_action, SIGNAL(actionUsed(int)), this, SLOT(actionButtonPressed(int)) );
+}
+
+void GameController::actionButtonPressed(int button_number)
+{
+    setInfo("Action pressed: " + std::to_string(button_number));
 }

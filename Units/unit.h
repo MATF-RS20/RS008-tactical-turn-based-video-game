@@ -48,7 +48,7 @@ protected:
         m_col;
     unsigned m_id;
     static unsigned next_id;
-    std::vector<Action>* m_actions;
+    std::vector<Action>* m_actions; //static?
     //GameController* m_gController;
     Player* m_player;
 };

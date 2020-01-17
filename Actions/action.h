@@ -8,12 +8,14 @@ class Action
 public:
     virtual ~Action() = default;
 
-protected:
-    int m_AP_cost;
-    std::string m_description;
+    std::string description() const;
+    //virtual bool use(); //TODO: make action do something.
 
 protected:
     Action(int AP_cost);
+
+    int m_AP_cost;
+    std::string m_description;
 };
 
 #endif // ACTION_H

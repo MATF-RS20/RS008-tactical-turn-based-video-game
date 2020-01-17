@@ -1,7 +1,6 @@
 #include "ui.h"
 #include "QString"
 
-
 ui makeUI()
 {
     QWidget* window = new QWidget();
@@ -34,12 +33,11 @@ ui makeUI()
     layoutH_main->addWidget(view);
     layoutH_main->addWidget(showInfo);
 
-    //TODO: Implement delete for actionButtons vector (vector only)
-    std::vector<QPushButton*> * actionButtons = new std::vector<QPushButton*>();
+    //TODO: Delete this vector when deleting window? After adding to gc?
+    std::vector<ActionButton*> * actionButtons = new std::vector<ActionButton*>();
     for (int i = 0; i < 10; i++)
     {
-        char const * actionName = std::string("Action " + std::to_string(i)).c_str();
-        QPushButton* pb_tmp = new QPushButton(actionName, window);
+        ActionButton* pb_tmp = new ActionButton(i, window);
         //TODO: add signals and slots!
         actionButtons->push_back(pb_tmp);
         layoutH_actions->addWidget(pb_tmp);

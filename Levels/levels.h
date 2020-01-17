@@ -6,7 +6,7 @@
 #include <QPushButton>
 
 
-GameController* createLevel1(QGraphicsScene* scene, QLabel* showInfo, QPushButton* pb_endTurn);
+GameController* createLevel1(QGraphicsScene* scene, QLabel* showInfo,std::vector<ActionButton*> * actionButtons, QPushButton* pb_endTurn);
 
 
 #endif // LEVELS_H

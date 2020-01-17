@@ -14,12 +14,12 @@ int main(int argc, char *argv[])
     QWidget* window;
     QGraphicsScene* scene;
     QLabel* showInfo;
-    std::vector<QPushButton*> * actionButtons;
+    std::vector<ActionButton*> * actionButtons;
     QPushButton* pb_endTurn;
     */
     auto [window, scene, showInfo, actionButtons, pb_endTurn] = makeUI();
 
-    GameController* gc = createLevel1(scene, showInfo, pb_endTurn);
+    GameController* gc = createLevel1(scene, showInfo, actionButtons, pb_endTurn);
     gc->startGame();
 
     window->show();

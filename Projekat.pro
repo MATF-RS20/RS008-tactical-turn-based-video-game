@@ -22,6 +22,7 @@ SOURCES += \
     Units/unit.cpp \
     Units/healer.cpp \
     Units/warrior.cpp \
+    View/actionbutton.cpp \
     View/field.cpp \
     View/grid.cpp \
     View/ui.cpp \
@@ -33,6 +34,7 @@ HEADERS += \
     Controller/gamecontroller.h \
     Levels/levels.h \
     Units/unit.h \
+    View/actionbutton.h \
     View/field.h \
     View/grid.h \
     View/ui.h \
