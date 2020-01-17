@@ -3,14 +3,18 @@
 
 #include "Actions/action.h"
 #include "player.h"
+//#include "Controller/gamecontroller.h"
 
 #include <QGraphicsItem>
 #include <iostream>
 #include <vector>
 
+class GameController;
+
 class Unit : public QGraphicsItem
 {
 public:
+
     //virtual ~Unit() = default;
 
     //virtual Unit * Copy() const = 0;
@@ -26,6 +30,9 @@ public:
     void updateHealth(int change);
     unsigned getId() const;
     virtual std::string info() const;
+    //void setController(GameController* gc);
+    //bool move(std::pair<int,int>);
+    //void setPos(std::pair<qreal,qreal> position);
 
 protected:
     Unit(int HP, int AP, int initiative, int row, int col, QGraphicsItem* parent = nullptr);
@@ -42,6 +49,7 @@ protected:
     unsigned m_id;
     static unsigned next_id;
     std::vector<Action>* m_actions;
+    //GameController* m_gController;
     Player* m_player;
 };
 
@@ -58,7 +66,7 @@ std::ostream& operator<<(std::ostream& out, const Unit& value);
 class Warrior: public Unit
 {
 public:
-    Warrior(int HP, int AP, int initiative, int row, int col);
+    Warrior(int HP, int AP, int initiative, int row, int col, QGraphicsItem* parent = nullptr);
     ~Warrior();
 
     std::string info() const;
@@ -74,7 +82,7 @@ private:
 class Healer: public Unit
 {
 public:
-    Healer(int HP, int AP, int initiative, int row, int col);
+    Healer(int HP, int AP, int initiative, int row, int col, QGraphicsItem* parent = nullptr);
     ~Healer();
 
     std::string info() const;

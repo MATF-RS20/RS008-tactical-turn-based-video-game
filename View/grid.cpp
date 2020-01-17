@@ -107,6 +107,13 @@ bool Grid::placeUnit(std::pair<int,int> field_position, Unit* unit)
 }
 
 
+void Grid::removeUnit(std::pair<int,int> field_position)
+{
+    Field* f = (*this)[field_position];
+    f->removeUnit();
+}
+
+
 std::ostream& operator<<(std::ostream& out, const Grid& g)
 {
     unsigned number_of_rows, number_of_cols;

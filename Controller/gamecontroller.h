@@ -27,6 +27,11 @@ public:
     void add_pb_EndTurn();
     void setInfo(QString msg);
     QString getInfo();
+    bool moveUnit (Unit* unit, std::pair<int, int> position);
+    //This is for drawing units, setPos()!
+    std::pair<qreal, qreal> calculatePos(unsigned row, unsigned col);
+    std::pair<qreal, qreal> calculatePos(std::pair<int, int> position);
+
     //void endTurn();
 
 public slots:
@@ -42,8 +47,10 @@ private:
     Grid* m_grid;
     QLabel* m_infoLabel;
     unsigned m_turn;
+    int m_field_width = 40,
+        m_field_height = 40;
 };
-
+// GameController
 
 
 

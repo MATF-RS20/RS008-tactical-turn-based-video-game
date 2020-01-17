@@ -25,6 +25,7 @@ public:
     bool validField(std::pair<int,int> position);
     Field* operator[] (std::pair<int,int> position);
     bool placeUnit(std::pair<int,int> field_position, Unit* unit);
+    void removeUnit(std::pair<int,int> field_position);
     std::pair<unsigned,unsigned> size() const;
     std::vector<std::vector<Field*>> matrix() const;
 

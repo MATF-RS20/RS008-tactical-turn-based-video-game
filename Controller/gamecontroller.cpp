@@ -37,10 +37,15 @@ void GameController::setGrid(Grid* g)
 bool GameController::addUnit(Unit* u)
 {
     m_queue->push_back(u);
-    if(m_grid)
+    if (m_grid)
     {
-        //TODO
-        return m_grid->placeUnit(u->position(), u);
+        auto field = u->position();
+        if (m_grid->placeUnit(field, u))
+        {
+            std::pair<qreal,qreal> pos = calculatePos(field);
+            u->setPos(pos.first, pos.second);
+            return true;
+        }
     }
     //Grid not set yet (==nullptr), can't set units.
     return false;
@@ -83,4 +88,43 @@ void GameController::endTurn()
 void GameController::setInfo(QString msg)
 {
     emit changeInfo(msg);
+}
+
+
+std::pair<qreal, qreal> GameController::calculatePos(unsigned row, unsigned col)
+{
+    if (m_grid)
+    {
+        //TODO: grid_left, grid_top?
+        return  {row * m_field_width,
+                 col * m_field_height};
+    }
+    else {
+        return {0, 0};
+    }
+}
+
+
+std::pair<qreal, qreal> GameController::calculatePos(std::pair<int, int> position)
+{
+    //TODO: cast to unsigned warning?
+    return calculatePos(position.first, position.second);
+}
+
+
+bool GameController::moveUnit(Unit* unit, std::pair<int, int> position)
+{
+    if (!m_grid) {
+        return false;
+    }
+    if (m_grid->placeUnit(position, unit))
+    {
+        m_grid->removeUnit(/*old_position*/unit->position());
+        std::pair<qreal,qreal> pos = calculatePos(position);
+        unit->setPos(pos.first, pos.second);
+        return true;
+    }
+    else {
+        return false;
+    }
 }

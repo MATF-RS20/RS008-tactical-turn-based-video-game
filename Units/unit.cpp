@@ -15,11 +15,10 @@ Unit::Unit(int HP,int AP,int initiative,int row,int col, QGraphicsItem* parent)
     //TODO: z depth?
     //TODO: get setPos parameters from a source for both unit and field:
 
-    qreal grid_left = 0, grid_top = 0;
-    int m_field_width = 40;
-    int m_field_height = 40;
-    this->setPos(grid_left + row * m_field_width,
-                 grid_top  + col * m_field_height);
+    //int m_field_width = 40;
+    //int m_field_height = 40;
+    //auto pos = m_gController->calculatePos(position());
+    //this->setPos(pos.first, pos.second);
 }
 
 
@@ -102,3 +101,28 @@ std::ostream& operator<<(std::ostream& out, const Unit& u)
 {
     return out << u.info();
 }
+
+
+
+/*void Unit::setPos(std::pair<qreal,qreal> position)
+{
+    QGraphicsItem::setPos(position.first, position.second);
+}*/
+
+
+/*void Unit::setController(GameController* gc)
+{
+    m_gController = gc;
+}*/
+
+
+/*bool Unit::move(std::pair<int,int> field){
+    if () {
+        //TODO: Some checks?
+        // subtract action points used for moving? (In action class?)
+        return true;
+    }
+    else {
+        return false;
+    }
+}*/

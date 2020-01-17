@@ -1,8 +1,8 @@
 #include "unit.h"
 
 
-Warrior::Warrior(int HP, int AP, int initiative, int row, int col)
-    : Unit(HP, AP, initiative, row, col)
+Warrior::Warrior(int HP, int AP, int initiative, int row, int col, QGraphicsItem* parent)
+    : Unit(HP, AP, initiative, row, col, parent)
 {
     //std::cerr<< "warrior constructor called"<< std::endl;
 }
