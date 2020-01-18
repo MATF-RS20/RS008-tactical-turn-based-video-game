@@ -7,8 +7,6 @@
 
 ## Opis projekta:
 
-Video igrica sa izometrijskim pogledom.
-
 Igrači kontrolišu svoje jedinice na bojnom polju.
 
 ## Biblioteke:
