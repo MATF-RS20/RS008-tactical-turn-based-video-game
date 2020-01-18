@@ -9,13 +9,15 @@ public:
     virtual ~Action() = default;
 
     std::string description() const;
-    //virtual bool use(); //TODO: make action do something.
+    std::string name();
+    virtual bool use(); //TODO: make action do something.
 
 protected:
     Action(int AP_cost);
 
     int m_AP_cost;
     std::string m_description;
+    std::string m_name;
 };
 
 #endif // ACTION_H

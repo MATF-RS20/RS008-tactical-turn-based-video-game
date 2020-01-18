@@ -12,6 +12,7 @@ class ActionButton : public QPushButton
 public:
     ActionButton(int button, QWidget* parent);
     void setText(std::string text);
+    void setAction(Action* action);
 
 public slots:
     void forwardAction();

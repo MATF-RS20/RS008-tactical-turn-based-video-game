@@ -138,7 +138,18 @@ bool GameController::moveUnit(Unit* unit, std::pair<int, int> position)
 
 void GameController::add_pb_Action(ActionButton* pb_action)
 {
-    QObject::connect(pb_action, SIGNAL(actionUsed(int)), this, SLOT(actionButtonPressed(int)) );
+    QObject::connect(pb_action, SIGNAL(actionUsed(Action*)), this, SLOT(actionButtonPressed(Action*)) );
+}
+
+void GameController::actionButtonPressed(Action* action)
+{
+    if (action) {
+        setInfo("Action activated: ");
+        action->use(); //TODO!
+    }
+    else {
+        setInfo("Invalid action!");
+    }
 }
 
 void GameController::actionButtonPressed(int button_number)
