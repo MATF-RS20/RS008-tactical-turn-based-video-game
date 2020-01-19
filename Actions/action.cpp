@@ -5,7 +5,7 @@ Action::Action(std::string name, int AP_cost)
     , m_name(name)
 {
     m_description = "No description.";
-    m_name = "X";
+    //m_name = "X";
 }
 
 bool Action::use()

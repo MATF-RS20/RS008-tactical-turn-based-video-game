@@ -8,7 +8,7 @@
 
 
 
-std::vector<Action> warriorActions = {Action("Base", 2), TestAction1("Hello", 1), };
+std::vector<Action> warriorActions = {Action("Base", 2), TestAction1("Hello", 1) };
 
 
 #endif // ACTIONPRESETS_H
