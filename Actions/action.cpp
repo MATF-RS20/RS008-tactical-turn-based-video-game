@@ -13,3 +13,14 @@ bool Action::use()
     std::cerr << "Action use called on base action! (Testing)" << std::endl;
     return true;
 }
+
+std::string Action::name() const
+{
+    return m_name;
+}
+
+
+std::string Action::description() const
+{
+    return m_description;
+}

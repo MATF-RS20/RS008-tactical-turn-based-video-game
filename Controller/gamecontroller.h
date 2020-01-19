@@ -49,11 +49,11 @@ public:
 public slots:
     void endTurn();
     void actionButtonPressed(int button_number);
-    void actionButtonPressed(Action* action); //TODO
+    void actionButtonPressed(Action* action);
 
 signals:
-    //TODO: Research signals.
     void changeInfo(const QString&);
+    void resetActionsOnButtons(std::vector<Action>* Actions);
 
 private:
     UnitQueue* m_queue;

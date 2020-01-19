@@ -81,6 +81,7 @@ void GameController::endTurn()
     setInfo("Turn: " + std::to_string(m_turn)
              + "\nActive unit is: " + activeUnit()->info()
              );
+    emit resetActionsOnButtons(m_active_unit->getActions());
     //TODO: update unit queue list in the UI.
 }
 
@@ -138,8 +139,8 @@ bool GameController::moveUnit(Unit* unit, std::pair<int, int> position)
 
 void GameController::add_pb_Action(ActionButton* pb_action)
 {
-    //QObject::connect();
     QObject::connect(pb_action, SIGNAL(actionUsed(Action*)), this, SLOT(actionButtonPressed(Action*)) );
+    QObject::connect(this, SIGNAL(resetActionsOnButtons(std::vector<Action>*)), pb_action, SLOT(setActions(std::vector<Action>*)));
 }
 
 
@@ -178,3 +179,4 @@ std::vector<Action>* GameController::getActions()
         return m_active_unit->getActions();
     }
 }
+

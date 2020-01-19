@@ -15,3 +15,27 @@ void ActionButton::forwardAction()
     emit actionUsed(m_action);
     //emit actionUsed(m_button);
 }
+
+
+void ActionButton::setActions(std::vector<Action>* Actions)
+{
+    if (m_button > Actions->size())
+    {
+        m_action = nullptr;
+        setText("");
+    }
+    else {
+        m_action = &((*Actions)[m_button]);
+        if (m_action == nullptr)
+        {
+            setText("");
+        }
+        else {
+            QString name = (m_action->name()).c_str();
+            setText(name);
+        }
+
+    }
+}
+
+//void ActionButton::setText(std::string text){}
