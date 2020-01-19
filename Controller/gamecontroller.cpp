@@ -52,7 +52,7 @@ bool GameController::addUnit(Unit* u)
 }
 
 
-Unit* GameController::activeUnit()
+Unit* GameController::activeUnit() const
 {
     return m_active_unit;
 }
@@ -61,9 +61,8 @@ Unit* GameController::activeUnit()
 void GameController::startGame()
 {
     m_active_unit = m_queue->current();
-    setInfo(("Turn: " + std::to_string(m_turn)
-             + "\nActive unit is: " + activeUnit()->info()
-             ).c_str());
+    setInfo(defaultInfo());
+    resetActions();
 }
 
 
@@ -75,14 +74,34 @@ QString GameController::getInfo()
 
 void GameController::endTurn()
 {
-    std::cerr << "Game Controller endTurn() called!" << std::endl;
+    //std::cerr << "Game Controller endTurn() called!" << std::endl;
     m_turn++;
+    setInfo(defaultInfo());
     m_active_unit = m_queue->next();
-    setInfo("Turn: " + std::to_string(m_turn)
-             + "\nActive unit is: " + activeUnit()->info()
-             );
-    emit resetActionsOnButtons(m_active_unit->getActions());
+    resetActions();
+
+    /*if (!m_active_unit)
+    {
+        //This shouldn't happen. Find an elegant solution.
+        std::cerr << "endTurn, m_active_unit = nullptr!???";
+    }*/
     //TODO: update unit queue list in the UI.
+}
+
+
+void GameController::resetActions()
+{
+    if (!m_active_unit)
+    {
+        //This should not happen.
+        return;
+    }
+    auto newActions = m_active_unit->getActions();
+    if (!newActions)
+    {
+        std::cerr << "No actions for unit ";
+    }
+    emit resetActionsOnButtons(newActions);
 }
 
 
@@ -140,16 +159,17 @@ bool GameController::moveUnit(Unit* unit, std::pair<int, int> position)
 void GameController::add_pb_Action(ActionButton* pb_action)
 {
     QObject::connect(pb_action, SIGNAL(actionUsed(Action*)), this, SLOT(actionButtonPressed(Action*)) );
-    QObject::connect(this, SIGNAL(resetActionsOnButtons(std::vector<Action>*)), pb_action, SLOT(setActions(std::vector<Action>*)));
+    QObject::connect(this, SIGNAL(resetActionsOnButtons(std::vector<Action>*)), pb_action, SLOT(setActionsOnButtons(std::vector<Action>*)));
 }
 
 
 void GameController::actionButtonPressed(Action* action)
 {
     if (action) {
-        setInfo("Action activated: ");
+        setInfo("Action " + action->name() + " activated ");
         setState(ControllerState::action);
-        //action->use(); //TODO!
+        action->use(); //TODO!
+        setState(ControllerState::init);
     }
     else {
         setInfo("Invalid action!");
@@ -178,5 +198,17 @@ std::vector<Action>* GameController::getActions()
     else {
         return m_active_unit->getActions();
     }
+}
+
+
+std::string GameController::defaultInfo() const
+{
+    auto unit = activeUnit();
+    std::string unitInfo = unit
+              ? "Active unit is: " + unit->info()
+              : "No active unit (Error)";
+
+    return "Turn: " + std::to_string(m_turn)
+            + "\n" + unitInfo;
 }
 

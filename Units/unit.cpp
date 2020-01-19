@@ -1,13 +1,14 @@
 #include "unit.h"
 #include <QPainter>
 
-Unit::Unit(int HP,int AP,int initiative,int row,int col, QGraphicsItem* parent)
+Unit::Unit(int HP,int AP,int initiative,int row,int col, std::vector<Action>* actions, QGraphicsItem* parent)
     : QGraphicsItem(parent)
     , m_max_HP(HP)
     , m_max_AP(AP)
     , m_initiative(initiative)
     , m_row(row)
     , m_col(col)
+    , m_actions(actions)
 {
     setId();
     m_remaining_HP = m_max_HP;
@@ -23,9 +24,6 @@ Unit::Unit(int HP,int AP,int initiative,int row,int col, QGraphicsItem* parent)
 
 
 unsigned Unit::next_id = 0;
-
-//TODO: Add actions to subclasses. In levels maybe?
-std::vector<Action>* Unit::m_actions = nullptr;
 
 
 void Unit::setId()

@@ -29,7 +29,7 @@ public:
 
     void setGrid(Grid* g);
     bool addUnit(Unit* u);
-    Unit* activeUnit();
+    Unit* activeUnit() const;
     void startGame();
 
     void add_pb_EndTurn(); //TODO: in constructor. Is this neccesary?
@@ -44,6 +44,10 @@ public:
     std::pair<qreal, qreal> calculatePos(std::pair<int, int> position) const;
     void setState(ControllerState state);
     std::vector<Action>* getActions();
+    std::string defaultInfo() const;
+
+private:
+    void resetActions();
 
 
 public slots:

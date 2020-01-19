@@ -16,7 +16,7 @@ public:
 
 public slots:
     void forwardAction(); //wrapper for clicked() signal.
-    void setActions(std::vector<Action>* Actions);
+    void setActionsOnButtons(std::vector<Action>* Actions);
 
 signals:
     //TODO: redef clicked()?

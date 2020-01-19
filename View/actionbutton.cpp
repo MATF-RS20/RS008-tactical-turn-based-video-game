@@ -11,15 +11,21 @@ ActionButton::ActionButton(int button, QWidget* parent)
 
 void ActionButton::forwardAction()
 {
-    std::cerr << "Action button " << m_button << " clicked!" << std::endl;
+    //std::cerr << "Action button " << m_button << " clicked!" << std::endl;
     emit actionUsed(m_action);
     //emit actionUsed(m_button);
 }
 
 
-void ActionButton::setActions(std::vector<Action>* Actions)
+void ActionButton::setActionsOnButtons(std::vector<Action>* Actions)
 {
-    if (m_button > Actions->size())
+    if (!Actions)
+    {
+        m_action = nullptr;
+        setText("");
+    }
+
+    if (m_button >= Actions->size())
     {
         m_action = nullptr;
         setText("");
@@ -37,5 +43,3 @@ void ActionButton::setActions(std::vector<Action>* Actions)
 
     }
 }
-
-//void ActionButton::setText(std::string text){}
