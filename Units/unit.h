@@ -30,7 +30,8 @@ public:
     void updateHealth(int change);
     unsigned getId() const;
     virtual std::string info() const;
-    Action* getAction(int i);
+    std::vector<Action>* getActions();
+    static void setActions(std::vector<Action>* newActions);
     //void setController(GameController* gc);
     //bool move(std::pair<int,int>);
     //void setPos(std::pair<qreal,qreal> position);
@@ -49,7 +50,7 @@ protected:
         m_col;
     unsigned m_id;
     static unsigned next_id;
-    std::vector<Action>* m_actions; //static?
+    static std::vector<Action>* m_actions;
     //GameController* m_gController;
     Player* m_player;
 };
@@ -72,6 +73,7 @@ public:
 
     std::string info() const;
 private:
+    static std::vector<Action>* m_actions;
 
 };
 
@@ -88,6 +90,7 @@ public:
 
     std::string info() const;
 private:
+    static std::vector<Action>* m_actions;
 
 };
 

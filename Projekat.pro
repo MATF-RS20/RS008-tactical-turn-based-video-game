@@ -33,6 +33,7 @@ HEADERS += \
     Actions/action.h \
     Controller/gamecontroller.h \
     Controller/unitqueue.h \
+    Levels/actionPresets.h \
     Levels/levels.h \
     Units/unit.h \
     View/actionbutton.h \

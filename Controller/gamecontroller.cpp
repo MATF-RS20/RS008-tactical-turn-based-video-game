@@ -138,8 +138,10 @@ bool GameController::moveUnit(Unit* unit, std::pair<int, int> position)
 
 void GameController::add_pb_Action(ActionButton* pb_action)
 {
+    //QObject::connect();
     QObject::connect(pb_action, SIGNAL(actionUsed(Action*)), this, SLOT(actionButtonPressed(Action*)) );
 }
+
 
 void GameController::actionButtonPressed(Action* action)
 {
@@ -153,24 +155,26 @@ void GameController::actionButtonPressed(Action* action)
     }
 }
 
+
 void GameController::actionButtonPressed(int button_number)
 {
     setInfo("Action pressed: " + std::to_string(button_number));
 }
+
 
 void GameController::setState(ControllerState state)
 {
     m_state = state;
 }
 
-Action* GameController::getAction(int i)
+
+std::vector<Action>* GameController::getActions()
 {
     if (!m_active_unit)
     {
         return nullptr;
     }
     else {
-        //return m_active_unit->
-        return nullptr;
+        return m_active_unit->getActions();
     }
 }

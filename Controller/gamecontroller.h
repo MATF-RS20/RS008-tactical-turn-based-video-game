@@ -43,7 +43,7 @@ public:
     std::pair<qreal, qreal> calculatePos(unsigned row, unsigned col) const;
     std::pair<qreal, qreal> calculatePos(std::pair<int, int> position) const;
     void setState(ControllerState state);
-    Action* getAction(int i);
+    std::vector<Action>* getActions();
 
 
 public slots:

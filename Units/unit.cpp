@@ -24,6 +24,9 @@ Unit::Unit(int HP,int AP,int initiative,int row,int col, QGraphicsItem* parent)
 
 unsigned Unit::next_id = 0;
 
+//TODO: Add actions to subclasses. In levels maybe?
+std::vector<Action>* Unit::m_actions = nullptr;
+
 
 void Unit::setId()
 {
@@ -103,17 +106,16 @@ std::ostream& operator<<(std::ostream& out, const Unit& u)
 }
 
 
-Action* Unit::getAction(int i)
+std::vector<Action>* Unit::getActions()
 {
-    if (m_actions->size() >= i)
-    {
-        return nullptr;
-    }
-    else {
-        return &(*m_actions)[i];
-    }
+    return Unit::m_actions;
 }
 
+
+void Unit::setActions(std::vector<Action>* newActions)
+{
+    m_actions = newActions;
+}
 
 
 /*void Unit::setPos(std::pair<qreal,qreal> position)

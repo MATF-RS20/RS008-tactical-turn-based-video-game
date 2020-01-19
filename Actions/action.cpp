@@ -1,7 +1,8 @@
 #include "action.h"
 
-Action::Action(int AP_cost)
+Action::Action(std::string name, int AP_cost)
     : m_AP_cost(AP_cost)
+    , m_name(name)
 {
     m_description = "No description.";
     m_name = "X";
