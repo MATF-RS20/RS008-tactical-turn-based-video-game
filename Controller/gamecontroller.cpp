@@ -162,3 +162,15 @@ void GameController::setState(ControllerState state)
 {
     m_state = state;
 }
+
+Action* GameController::getAction(int i)
+{
+    if (!m_active_unit)
+    {
+        return nullptr;
+    }
+    else {
+        //return m_active_unit->
+        return nullptr;
+    }
+}

@@ -103,6 +103,18 @@ std::ostream& operator<<(std::ostream& out, const Unit& u)
 }
 
 
+Action* Unit::getAction(int i)
+{
+    if (m_actions->size() >= i)
+    {
+        return nullptr;
+    }
+    else {
+        return &(*m_actions)[i];
+    }
+}
+
+
 
 /*void Unit::setPos(std::pair<qreal,qreal> position)
 {

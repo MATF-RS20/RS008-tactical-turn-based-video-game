@@ -30,6 +30,7 @@ public:
     void updateHealth(int change);
     unsigned getId() const;
     virtual std::string info() const;
+    Action* getAction(int i);
     //void setController(GameController* gc);
     //bool move(std::pair<int,int>);
     //void setPos(std::pair<qreal,qreal> position);
