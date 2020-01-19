@@ -21,6 +21,8 @@ public:
     //TODO: singleton maybe?
 
     ~GameController();
+    GameController(const GameController & other) = delete;
+    const GameController& operator= (const GameController & other) = delete;
 
     void setGrid(Grid* g);
     bool addUnit(Unit* u);
