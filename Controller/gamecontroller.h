@@ -10,7 +10,10 @@
 //#include <optional>
 #include <QPushButton>
 
+
 class UnitQueue;
+enum ControllerState {init, action};
+
 
 class GameController : public QObject
 {
@@ -37,8 +40,9 @@ public:
 
     bool moveUnit (Unit* unit, std::pair<int, int> position);
     //This is for drawing units, setPos()!
-    std::pair<qreal, qreal> calculatePos(unsigned row, unsigned col);
-    std::pair<qreal, qreal> calculatePos(std::pair<int, int> position);
+    std::pair<qreal, qreal> calculatePos(unsigned row, unsigned col) const;
+    std::pair<qreal, qreal> calculatePos(std::pair<int, int> position) const;
+    void setState(ControllerState state);
 
 
 public slots:
@@ -58,6 +62,8 @@ private:
     unsigned m_turn;
     int m_field_width = 40,
         m_field_height = 40;
+    ControllerState m_state = init;
+
 };
 // GameController
 

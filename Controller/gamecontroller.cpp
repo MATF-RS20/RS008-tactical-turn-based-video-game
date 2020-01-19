@@ -91,7 +91,7 @@ void GameController::setInfo(std::string msg)
 }
 
 
-std::pair<qreal, qreal> GameController::calculatePos(unsigned row, unsigned col)
+std::pair<qreal, qreal> GameController::calculatePos(unsigned row, unsigned col) const
 {
     if (m_grid)
     {
@@ -105,7 +105,7 @@ std::pair<qreal, qreal> GameController::calculatePos(unsigned row, unsigned col)
 }
 
 
-std::pair<qreal, qreal> GameController::calculatePos(std::pair<int, int> position)
+std::pair<qreal, qreal> GameController::calculatePos(std::pair<int, int> position) const
 {
     //TODO: cast to unsigned warning?
     return calculatePos(position.first, position.second);
@@ -145,7 +145,8 @@ void GameController::actionButtonPressed(Action* action)
 {
     if (action) {
         setInfo("Action activated: ");
-        action->use(); //TODO!
+        setState(ControllerState::action);
+        //action->use(); //TODO!
     }
     else {
         setInfo("Invalid action!");
@@ -155,4 +156,9 @@ void GameController::actionButtonPressed(Action* action)
 void GameController::actionButtonPressed(int button_number)
 {
     setInfo("Action pressed: " + std::to_string(button_number));
+}
+
+void GameController::setState(ControllerState state)
+{
+    m_state = state;
 }
