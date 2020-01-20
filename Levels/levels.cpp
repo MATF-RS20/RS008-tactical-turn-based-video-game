@@ -19,16 +19,15 @@ GameController* createLevel1(QGraphicsScene* scene, QLabel* showInfo,std::vector
 
 
     //Adding Units to gController
-    /*
-    Healer::setActions(&healerActions);
-    Warrior::setActions(&warriorActions);
-    */
 
-    Unit* tmp_unit = new Warrior(300, 10, 5, 2, 2, warriorActions);
+    Player* player1 = new Player(Qt::blue);
+    Player* player2 = new Player(Qt::green);
+
+    Unit* tmp_unit = new Warrior(300, 10, 5, 2, 2, player1, warriorActions);
     gController->addUnit(tmp_unit);
     scene->addItem(tmp_unit);
 
-    tmp_unit = new Healer (200, 10, 5, 0, 0, healerActions);
+    tmp_unit = new Healer (200, 10, 5, 0, 0, player2, healerActions);
     gController->addUnit(tmp_unit);
     scene->addItem(tmp_unit);
 

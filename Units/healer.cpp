@@ -1,8 +1,8 @@
 #include "unit.h"
 
 
-Healer::Healer(int HP, int AP, int initiative, int row, int col, std::vector<Action>* actions, QGraphicsItem* parent)
-    : Unit(HP, AP, initiative, row, col, actions, parent)
+Healer::Healer(int HP, int AP, int initiative, int row, int col, Player* player, std::vector<Action>* actions, QGraphicsItem* parent)
+    : Unit(HP, AP, initiative, row, col, player, actions, parent)
 {
     //std::cerr<< "Healer constructor called"<< std::endl;
 }

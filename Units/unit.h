@@ -37,7 +37,7 @@ public:
     //void setPos(std::pair<qreal,qreal> position);
 
 protected:
-    Unit(int HP, int AP, int initiative, int row, int col, std::vector<Action>* actions, QGraphicsItem* parent = nullptr);
+    Unit(int HP, int AP, int initiative, int row, int col, Player* player, std::vector<Action>* actions, QGraphicsItem* parent = nullptr);
     void setId();
 
     //HealthPoints, ActionPoints
@@ -52,6 +52,7 @@ protected:
     static unsigned next_id;
     std::vector<Action>* m_actions;
     //GameController* m_gController;
+    QColor m_color;
     Player* m_player;
 };
 
@@ -68,7 +69,7 @@ std::ostream& operator<<(std::ostream& out, const Unit& value);
 class Warrior: public Unit
 {
 public:
-    Warrior(int HP, int AP, int initiative, int row, int col, std::vector<Action>* actions, QGraphicsItem* parent = nullptr);
+    Warrior(int HP, int AP, int initiative, int row, int col, Player* player, std::vector<Action>* actions, QGraphicsItem* parent = nullptr);
     ~Warrior();
 
     std::string info() const;
@@ -84,7 +85,7 @@ private:
 class Healer: public Unit
 {
 public:
-    Healer(int HP, int AP, int initiative, int row, int col, std::vector<Action>* actions, QGraphicsItem* parent = nullptr);
+    Healer(int HP, int AP, int initiative, int row, int col, Player* player, std::vector<Action>* actions, QGraphicsItem* parent = nullptr);
     ~Healer();
 
     std::string info() const;

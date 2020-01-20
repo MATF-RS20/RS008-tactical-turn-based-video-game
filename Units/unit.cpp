@@ -1,7 +1,7 @@
 #include "unit.h"
 #include <QPainter>
 
-Unit::Unit(int HP,int AP,int initiative,int row,int col, std::vector<Action>* actions, QGraphicsItem* parent)
+Unit::Unit(int HP,int AP,int initiative,int row,int col, Player* player, std::vector<Action>* actions, QGraphicsItem* parent)
     : QGraphicsItem(parent)
     , m_max_HP(HP)
     , m_max_AP(AP)
@@ -9,10 +9,13 @@ Unit::Unit(int HP,int AP,int initiative,int row,int col, std::vector<Action>* ac
     , m_row(row)
     , m_col(col)
     , m_actions(actions)
+    , m_player(player)
 {
     setId();
     m_remaining_HP = m_max_HP;
     m_remaining_AP = m_max_AP;
+
+    m_color = m_player ? m_player->color() : Qt::black;
     //TODO: z depth?
     //TODO: get setPos parameters from a source for both unit and field:
 
@@ -52,7 +55,12 @@ void Unit::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     Q_UNUSED(option)
     int m_width = 30;
     int m_height = 30;
-    QColor m_color = QColor(Qt::red);
+    /*QColor m_color = QColor(Qt::black);
+    if (!m_player)
+    {
+        QColor m_color = QColor(Qt::black);
+        std::cerr << "Error: player=nullptr in unit::paint" << std::endl;
+    }*/
 
     QPainterPath path;
     path.addEllipse(-(m_width/2), -(m_height/2)

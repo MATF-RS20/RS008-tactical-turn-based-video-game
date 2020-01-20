@@ -27,8 +27,10 @@ ui makeUI()
     QVBoxLayout* layoutV_mainRight = new QVBoxLayout();
 
     QLabel* currentPlayer = new QLabel("TODO: Set Player");
+    //TODO: set color based on player.
+    //currentPlayer->setStyleSheet("QLabel { background-color : red; color : blue; }");
     currentPlayer->setWordWrap(true);
-    currentPlayer->setFixedSize(150,100);
+    currentPlayer->setFixedSize(150,50);
 
     QLabel* showInfo = new QLabel("Hello");
     showInfo->setWordWrap(true);
