@@ -1,7 +1,7 @@
 #include "unit.h"
 
 
-Warrior::Warrior(int HP, int AP, int initiative, int row, int col, Player* player, std::vector<Action>* actions, QGraphicsItem* parent)
+Warrior::Warrior(int HP, int AP, int initiative, int row, int col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent)
     : Unit(HP, AP, initiative, row, col, player, actions, parent)
 {
     //std::cerr<< "warrior constructor called"<< std::endl;

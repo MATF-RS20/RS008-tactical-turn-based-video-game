@@ -17,7 +17,7 @@ void ActionButton::forwardAction()
 }
 
 
-void ActionButton::setActionsOnButtons(std::vector<Action>* Actions)
+void ActionButton::setActionsOnButtons(std::vector<Action*>* Actions)
 {
     if (!Actions)
     {
@@ -31,7 +31,7 @@ void ActionButton::setActionsOnButtons(std::vector<Action>* Actions)
         setText("");
     }
     else {
-        m_action = &((*Actions)[m_button]);
+        m_action = (*Actions)[m_button];
         if (m_action == nullptr)
         {
             setText("");

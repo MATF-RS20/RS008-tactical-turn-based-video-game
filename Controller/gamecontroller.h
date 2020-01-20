@@ -43,7 +43,7 @@ public:
     std::pair<qreal, qreal> calculatePos(unsigned row, unsigned col) const;
     std::pair<qreal, qreal> calculatePos(std::pair<int, int> position) const;
     void setState(ControllerState state);
-    std::vector<Action>* getActions();
+    std::vector<Action*>* getCurrentActions();
     std::string defaultInfo() const;
     void addPlayer(Player*);
 
@@ -58,7 +58,7 @@ public slots:
 
 signals:
     void changeInfo(const QString&);
-    void resetActionsOnButtons(std::vector<Action>* Actions);
+    void resetActionsOnButtons(std::vector<Action*>* Actions);
 
 private:
     UnitQueue* m_queue;

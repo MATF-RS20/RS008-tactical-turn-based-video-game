@@ -1,7 +1,7 @@
 #include "unit.h"
 #include <QPainter>
 
-Unit::Unit(int HP,int AP,int initiative,int row,int col, Player* player, std::vector<Action>* actions, QGraphicsItem* parent)
+Unit::Unit(int HP,int AP,int initiative,int row,int col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent)
     : QGraphicsItem(parent)
     , m_max_HP(HP)
     , m_max_AP(AP)
@@ -112,13 +112,13 @@ std::ostream& operator<<(std::ostream& out, const Unit& u)
 }
 
 
-std::vector<Action>* Unit::getActions()
+std::vector<Action*>* Unit::getActions()
 {
-    return Unit::m_actions;
+    return m_actions;
 }
 
 
-void Unit::setActions(std::vector<Action>* newActions)
+void Unit::setActions(std::vector<Action*>* newActions)
 {
     m_actions = newActions;
 }
