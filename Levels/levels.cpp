@@ -1,7 +1,7 @@
 #include "levels.h"
 #include "actionPresets.h"
 
-GameController* createLevel1(QGraphicsScene* scene, QLabel* showInfo,std::vector<ActionButton*> * actionButtons, QPushButton* pb_endTurn)
+GameController* createLevel1(QGraphicsScene* scene, QLabel* showInfo, QLabel* playerLabel, std::vector<ActionButton*> * actionButtons, QPushButton* pb_endTurn)
 {
     GameController* gController = new GameController(nullptr, pb_endTurn, showInfo);
 
@@ -17,6 +17,7 @@ GameController* createLevel1(QGraphicsScene* scene, QLabel* showInfo,std::vector
     }
     delete actionButtons; //this deleted the vector, not the actionButtons whose pointers were inside.
 
+    gController->add_playerLabel(playerLabel);
 
     //Adding Units to gController
 

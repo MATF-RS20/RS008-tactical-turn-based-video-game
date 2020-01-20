@@ -34,6 +34,7 @@ public:
     void setActions(std::vector<Action*>* newActions);
     void changeColor(QColor);
     void changeColor();
+    Player* player();
     //void setController(GameController* gc);
     //bool move(std::pair<int,int>);
     //void setPos(std::pair<qreal,qreal> position);

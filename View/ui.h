@@ -17,6 +17,7 @@ struct ui {
     QWidget* window;
     QGraphicsScene* scene;
     QLabel* showInfo;
+    QLabel* playerLabel;
     std::vector<ActionButton*> * actionButtons;
     QPushButton* pb_endTurn;
 };

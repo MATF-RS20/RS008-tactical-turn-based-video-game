@@ -32,8 +32,9 @@ public:
     Unit* activeUnit() const;
     void startGame();
 
-    void add_pb_EndTurn(); //TODO: in constructor. Is this neccesary?
+    //void add_pb_EndTurn(); //TODO: in constructor. Is this neccesary?
     void add_pb_Action(ActionButton* pb_action);
+    void add_playerLabel(QLabel* label);
 
     void setInfo(std::string msg);
     QString getInfo();
@@ -49,6 +50,7 @@ public:
 
 private:
     void resetActions();
+    void updatePlayer();
 
 
 public slots:
@@ -58,6 +60,7 @@ public slots:
 
 signals:
     void changeInfo(const QString&);
+    void changeInfoPlayer(const QString&);
     void resetActionsOnButtons(std::vector<Action*>* Actions);
 
 private:

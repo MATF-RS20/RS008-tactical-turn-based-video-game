@@ -70,6 +70,7 @@ void GameController::startGame()
     m_active_unit = m_queue->current();
     m_active_unit->changeColor(ACTIVE_UNIT_COLOR);
     setInfo(defaultInfo());
+    updatePlayer();
     resetActions();
 }
 
@@ -84,12 +85,13 @@ void GameController::endTurn()
 {
     //std::cerr << "Game Controller endTurn() called!" << std::endl;
     m_turn++;
-    setInfo(defaultInfo());
     m_active_unit->changeColor();
     m_active_unit->update();
     m_active_unit = m_queue->next();
     m_active_unit->changeColor(ACTIVE_UNIT_COLOR);
     m_active_unit->update();
+    setInfo(defaultInfo());
+    updatePlayer();
     resetActions();
 
     /*if (!m_active_unit)
@@ -232,3 +234,22 @@ void GameController::addPlayer(Player* player)
         m_players->push_back(player);
     }
 }
+
+
+
+void GameController::add_playerLabel(QLabel* label)
+{
+    QObject::connect(this, SIGNAL(changeInfoPlayer(const QString&)), label, SLOT(setText(const QString &)));
+}
+
+
+void GameController::updatePlayer()
+{
+    if (!m_active_unit)
+    {
+        return;
+    }
+    QString name = m_active_unit->player()->name().c_str();
+    emit changeInfoPlayer(name);
+}
+

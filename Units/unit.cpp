@@ -129,10 +129,20 @@ void Unit::changeColor(QColor color)
     m_color = color;
 }
 
+
 void Unit::changeColor()
 {
     m_color = m_player->color();
 }
+
+
+Player* Unit::player()
+{
+    return m_player;
+}
+
+
+
 
 /*void Unit::setPos(std::pair<qreal,qreal> position)
 {
