@@ -1,10 +1,16 @@
 #include "player.h"
 
-Player::Player(QColor color)
+Player::Player(std::string name, QColor color)
     : m_color(color)
+    , m_name(name)
 {}
 
 QColor Player::color() const
 {
     return m_color;
+}
+
+std::string Player::name() const
+{
+    return m_name;
 }

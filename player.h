@@ -6,12 +6,14 @@
 class Player
 {
 public:
-    Player(QColor color);
+    Player(std::string name, QColor color);
 
     QColor color() const;
+    std::string name() const;
 
 private:
     QColor m_color;
+    std::string m_name;
 };
 
 #endif // PLAYER_H

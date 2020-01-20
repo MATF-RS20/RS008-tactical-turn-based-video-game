@@ -32,6 +32,8 @@ public:
     virtual std::string info() const;
     std::vector<Action*>* getActions();
     void setActions(std::vector<Action*>* newActions);
+    void changeColor(QColor);
+    void changeColor();
     //void setController(GameController* gc);
     //bool move(std::pair<int,int>);
     //void setPos(std::pair<qreal,qreal> position);

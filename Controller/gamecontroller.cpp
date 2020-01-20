@@ -1,5 +1,6 @@
 #include "gamecontroller.h"
 
+#define ACTIVE_UNIT_COLOR Qt::yellow
 
 GameController::GameController(QObject* parent, QPushButton* pb_endTurn, QLabel* showInfo)
     : QObject(parent)
@@ -67,6 +68,7 @@ Unit* GameController::activeUnit() const
 void GameController::startGame()
 {
     m_active_unit = m_queue->current();
+    m_active_unit->changeColor(ACTIVE_UNIT_COLOR);
     setInfo(defaultInfo());
     resetActions();
 }
@@ -83,7 +85,11 @@ void GameController::endTurn()
     //std::cerr << "Game Controller endTurn() called!" << std::endl;
     m_turn++;
     setInfo(defaultInfo());
+    m_active_unit->changeColor();
+    m_active_unit->update();
     m_active_unit = m_queue->next();
+    m_active_unit->changeColor(ACTIVE_UNIT_COLOR);
+    m_active_unit->update();
     resetActions();
 
     /*if (!m_active_unit)
@@ -122,8 +128,8 @@ std::pair<qreal, qreal> GameController::calculatePos(unsigned row, unsigned col)
     if (m_grid)
     {
         //TODO: grid_left, grid_top?
-        return  {row * m_field_width,
-                 col * m_field_height};
+        return  {col * m_field_width,
+                 row * m_field_height};
     }
     else {
         return {0, 0};

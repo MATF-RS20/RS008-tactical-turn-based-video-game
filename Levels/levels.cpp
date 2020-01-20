@@ -6,7 +6,7 @@ GameController* createLevel1(QGraphicsScene* scene, QLabel* showInfo,std::vector
     GameController* gController = new GameController(nullptr, pb_endTurn, showInfo);
 
 
-    Grid* g = new Grid(3,4, nullptr, showInfo);
+    Grid* g = new Grid(4,5, nullptr, showInfo);
     g->setPos(0, 0);
     scene->addItem(g);
     gController->setGrid(g);
@@ -20,17 +20,26 @@ GameController* createLevel1(QGraphicsScene* scene, QLabel* showInfo,std::vector
 
     //Adding Units to gController
 
-    Player* player1 = new Player(Qt::blue);
-    Player* player2 = new Player(Qt::green);
+    Player* player1 = new Player("Player1: Pera", Qt::blue);
+    Player* player2 = new Player("Player2: Zika", Qt::green);
     //
+    Unit* tmp_unit;
+    tmp_unit = new Warrior(300, 10, 5, 3, 2, player1, warriorActions);
+        gController->addUnit(tmp_unit);
+        scene->addItem(tmp_unit);
 
-    Unit* tmp_unit = new Warrior(300, 10, 5, 2, 2, player1, warriorActions);
-    gController->addUnit(tmp_unit);
-    scene->addItem(tmp_unit);
+    tmp_unit = new Healer (200, 10, 5, 2, 0, player1, healerActions);
+        gController->addUnit(tmp_unit);
+        scene->addItem(tmp_unit);
+
+
+    tmp_unit = new Warrior(300, 10, 5, 1, 3, player2, warriorActions);
+        gController->addUnit(tmp_unit);
+        scene->addItem(tmp_unit);
 
     tmp_unit = new Healer (200, 10, 5, 0, 0, player2, healerActions);
-    gController->addUnit(tmp_unit);
-    scene->addItem(tmp_unit);
+        gController->addUnit(tmp_unit);
+        scene->addItem(tmp_unit);
 
     /*
     //TODO: add CATCH tests!

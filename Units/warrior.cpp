@@ -19,4 +19,5 @@ std::string Warrior::info() const
     return "Warrior\n"
             "Id: " + std::to_string(getId()) + "; "
             "Health: " + std::to_string(health().first) + '/' + std::to_string(health().second) + ";\n";
+            //"Player: " + m_player->name() + ";\n";
 }

@@ -124,6 +124,16 @@ void Unit::setActions(std::vector<Action*>* newActions)
 }
 
 
+void Unit::changeColor(QColor color)
+{
+    m_color = color;
+}
+
+void Unit::changeColor()
+{
+    m_color = m_player->color();
+}
+
 /*void Unit::setPos(std::pair<qreal,qreal> position)
 {
     QGraphicsItem::setPos(position.first, position.second);
