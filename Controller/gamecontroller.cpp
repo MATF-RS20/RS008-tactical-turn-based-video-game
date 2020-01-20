@@ -8,6 +8,7 @@ GameController::GameController(QObject* parent, QPushButton* pb_endTurn, QLabel*
     , m_grid(nullptr)
     , m_infoLabel(showInfo)
     , m_turn(0)
+    , m_players(new std::vector<Player*>)
 {
     QObject::connect(pb_endTurn, SIGNAL(clicked()), this, SLOT(endTurn()));
     QObject::connect(this, SIGNAL(changeInfo(const QString&)), showInfo, SLOT(setText(const QString &)));
@@ -25,6 +26,11 @@ GameController::~GameController()
         //TODO: window deletes grid?
         //delete m_grid;
     }
+    for (auto player : *m_players)
+    {
+        delete player;
+    }
+    delete m_players;
 }
 
 
@@ -212,3 +218,11 @@ std::string GameController::defaultInfo() const
             + "\n" + unitInfo;
 }
 
+
+void GameController::addPlayer(Player* player)
+{
+    if(player)
+    {
+        m_players->push_back(player);
+    }
+}

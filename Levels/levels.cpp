@@ -22,6 +22,7 @@ GameController* createLevel1(QGraphicsScene* scene, QLabel* showInfo,std::vector
 
     Player* player1 = new Player(Qt::blue);
     Player* player2 = new Player(Qt::green);
+    //
 
     Unit* tmp_unit = new Warrior(300, 10, 5, 2, 2, player1, warriorActions);
     gController->addUnit(tmp_unit);

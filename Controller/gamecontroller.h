@@ -45,6 +45,7 @@ public:
     void setState(ControllerState state);
     std::vector<Action>* getActions();
     std::string defaultInfo() const;
+    void addPlayer(Player*);
 
 private:
     void resetActions();
@@ -68,9 +69,9 @@ private:
     int m_field_width = 40,
         m_field_height = 40;
     ControllerState m_state = init;
+    std::vector<Player*>* m_players; //for deleting.
 
 };
-// GameController
 
 
 
