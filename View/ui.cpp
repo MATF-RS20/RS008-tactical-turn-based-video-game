@@ -24,14 +24,22 @@ ui makeUI()
 
 
     //TODO: set fixed width for showInfo
+    QVBoxLayout* layoutV_mainRight = new QVBoxLayout();
+
+    QLabel* currentPlayer = new QLabel("TODO: Set Player");
+    currentPlayer->setWordWrap(true);
+    currentPlayer->setFixedSize(150,100);
+
     QLabel* showInfo = new QLabel("Hello");
     showInfo->setWordWrap(true);
     showInfo->setFixedWidth(150);
-    //QObject::connect()
+
+    layoutV_mainRight->addWidget(currentPlayer);
+    layoutV_mainRight->addWidget(showInfo);
 
 
     layoutH_main->addWidget(view);
-    layoutH_main->addWidget(showInfo);
+    layoutH_main->addLayout(layoutV_mainRight);
 
     //TODO: Delete this vector when deleting window? After adding to gc?
     std::vector<ActionButton*> * actionButtons = new std::vector<ActionButton*>();
