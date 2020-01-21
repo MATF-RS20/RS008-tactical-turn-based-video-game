@@ -2,11 +2,13 @@
 #define LEVELS_H
 
 #include "Controller/gamecontroller.h"
+#include "View/ui.h"
+
 #include <QLabel>
 #include <QPushButton>
 
 
-GameController* createLevel1(QGraphicsScene* scene, QLabel* showInfo, QLabel* playerLabel, std::vector<ActionButton*> * actionButtons, QPushButton* pb_endTurn);
+GameController* createLevel1(ui ui);
 
 
 #endif // LEVELS_H

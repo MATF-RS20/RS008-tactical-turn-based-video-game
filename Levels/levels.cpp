@@ -1,8 +1,9 @@
 #include "levels.h"
 #include "actionPresets.h"
 
-GameController* createLevel1(QGraphicsScene* scene, QLabel* showInfo, QLabel* playerLabel, std::vector<ActionButton*> * actionButtons, QPushButton* pb_endTurn)
+GameController* createLevel1(ui ui)
 {
+    auto [window, scene, showInfo, playerLabel, actionButtons, pb_endTurn] = ui;
     GameController* gController = new GameController(nullptr, pb_endTurn, showInfo);
 
 

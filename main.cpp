@@ -18,12 +18,12 @@ int main(int argc, char *argv[])
     std::vector<ActionButton*> * actionButtons;
     QPushButton* pb_endTurn;
     */
-    auto [window, scene, showInfo, playerLabel, actionButtons, pb_endTurn] = makeUI();
+    ui ui = makeUI();
 
-    GameController* gc = createLevel1(scene, showInfo, playerLabel, actionButtons, pb_endTurn);
+    GameController* gc = createLevel1(ui);
     gc->startGame();
 
-    window->show();
+    ui.window->show();
 
     //TODO: Timer?
 
