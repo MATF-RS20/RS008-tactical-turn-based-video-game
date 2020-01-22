@@ -1,5 +1,8 @@
 #include "ui.h"
-#include "QString"
+
+#include <QString>
+#include <QVBoxLayout>
+#include <QGraphicsView>
 
 ui makeUI()
 {

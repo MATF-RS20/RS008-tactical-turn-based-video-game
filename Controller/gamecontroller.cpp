@@ -2,17 +2,18 @@
 
 #define ACTIVE_UNIT_COLOR Qt::yellow
 
-GameController::GameController(QObject* parent, QPushButton* pb_endTurn, QLabel* showInfo)
+GameController::GameController(ui ui, QObject* parent)
     : QObject(parent)
     , m_queue(new UnitQueue())
     , m_active_unit(nullptr)
     , m_grid(nullptr)
-    , m_infoLabel(showInfo)
+    , m_infoLabel(ui.showInfo)
     , m_turn(0)
     , m_players(new std::vector<Player*>)
 {
-    QObject::connect(pb_endTurn, SIGNAL(clicked()), this, SLOT(endTurn()));
-    QObject::connect(this, SIGNAL(changeInfo(const QString&)), showInfo, SLOT(setText(const QString &)));
+    QObject::connect(ui.pb_endTurn, SIGNAL(clicked()), this, SLOT(endTurn()));
+    QObject::connect(this, SIGNAL(changeInfo(const QString&)), ui.showInfo, SLOT(setText(const QString &)));
+    QObject::connect(this, SIGNAL(changeInfoPlayer(const QString&)), ui.playerLabel, SLOT(setText(const QString &)));
 }
 
 
@@ -229,17 +230,10 @@ std::string GameController::defaultInfo() const
 
 void GameController::addPlayer(Player* player)
 {
-    if(player)
+    if (player)
     {
         m_players->push_back(player);
     }
-}
-
-
-
-void GameController::add_playerLabel(QLabel* label)
-{
-    QObject::connect(this, SIGNAL(changeInfoPlayer(const QString&)), label, SLOT(setText(const QString &)));
 }
 
 

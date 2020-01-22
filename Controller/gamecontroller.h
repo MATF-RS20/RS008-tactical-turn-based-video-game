@@ -5,9 +5,9 @@
 #include "View/grid.h"
 #include "View/actionbutton.h"
 #include "unitqueue.h"
+#include "View/ui.h"
 
 #include <vector>
-//#include <optional>
 #include <QPushButton>
 
 
@@ -20,7 +20,7 @@ class GameController : public QObject
     Q_OBJECT
 
 public:
-    GameController(QObject* parent, QPushButton* pb_endTurn, QLabel* showInfo);
+    GameController(ui ui, QObject* parent);
     //TODO: singleton maybe?
 
     ~GameController();
@@ -32,9 +32,7 @@ public:
     Unit* activeUnit() const;
     void startGame();
 
-    //void add_pb_EndTurn(); //TODO: in constructor. Is this neccesary?
     void add_pb_Action(ActionButton* pb_action);
-    void add_playerLabel(QLabel* label);
 
     void setInfo(std::string msg);
     QString getInfo();

@@ -6,11 +6,9 @@
 #include "actionbutton.h"
 
 #include <QWidget>
-#include <QVBoxLayout>
-#include <QPushButton>
 #include <QGraphicsScene>
-#include <QGraphicsView>
 #include <QLabel>
+#include <QPushButton>
 
 
 struct ui {
@@ -18,7 +16,7 @@ struct ui {
     QGraphicsScene* scene;
     QLabel* showInfo;
     QLabel* playerLabel;
-    std::vector<ActionButton*> * actionButtons;
+    std::vector<ActionButton*> * actionButtons; //TODO: delete vector.
     QPushButton* pb_endTurn;
 };
 
