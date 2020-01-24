@@ -7,11 +7,7 @@
 #include "unitqueue.h"
 #include "View/ui.h"
 
-#include <vector>
-#include <QPushButton>
 
-
-//class UnitQueue;
 enum ControllerState {init, action};
 
 
@@ -30,6 +26,7 @@ private:
     std::vector<Player*>* m_players;
     // UI:
     QLabel* m_infoLabel;
+    QGraphicsScene* m_scene;
 
 public:
     GameController(ui ui, QObject* parent);

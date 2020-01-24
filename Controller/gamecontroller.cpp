@@ -7,9 +7,10 @@ GameController::GameController(ui ui, QObject* parent)
     , m_queue(new UnitQueue())
     , m_active_unit(nullptr)
     , m_grid(nullptr)
-    , m_infoLabel(ui.showInfo)
     , m_turn(0)
     , m_players(new std::vector<Player*>)
+    , m_infoLabel(ui.showInfo)
+    , m_scene(ui.scene)
 {
     for (auto button: *(ui.actionButtons))
     {
@@ -36,26 +37,32 @@ GameController::~GameController()
 }
 
 
-void GameController::setGrid(Grid* g)
+void GameController::setGrid(Grid* grid)
 {
-    m_grid = g;
+    if (!grid) {
+        return;
+    }
+    grid->setPos(0, 0);
+    m_scene->addItem(grid);
+    m_grid = grid;
 }
 
 
 bool GameController::addUnit(Unit* u)
 {
-    m_queue->push_back(u);
-    if (m_grid)
+    if (!u || !m_grid)
     {
-        auto field = u->position();
-        if (m_grid->placeUnit(field, u))
-        {
-            std::pair<qreal,qreal> pos = calculatePos(field);
-            u->setPos(pos.first, pos.second);
-            return true;
-        }
+        return false;
     }
-    //Grid not set yet (==nullptr), can't set units.
+    auto field = u->position();
+    if (m_grid->placeUnit(field, u))
+    {
+        m_queue->push_back(u);
+        std::pair<qreal,qreal> pos = calculatePos(field);
+        u->setPos(pos.first, pos.second);
+        m_scene->addItem(u);
+        return true;
+    }
     return false;
 }
 
