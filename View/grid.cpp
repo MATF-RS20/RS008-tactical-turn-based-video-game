@@ -2,7 +2,7 @@
 #include "field.h"
 
 
-Grid::Grid(unsigned number_of_rows, unsigned number_of_cols, QGraphicsItem* parent, QLabel* showInfo)
+Grid::Grid(unsigned number_of_rows, unsigned number_of_cols, QGraphicsItem* parent)
     : QGraphicsItem(parent)
     , m_row_size(number_of_rows)
     , m_col_size(number_of_cols)
@@ -14,7 +14,7 @@ Grid::Grid(unsigned number_of_rows, unsigned number_of_cols, QGraphicsItem* pare
         std::vector<Field*> col = std::vector<Field*>();
         for (unsigned j = 0; j < m_col_size; j++)
         {
-            Field* f = new Field(i, j, m_field_width, m_field_height, this, showInfo);
+            Field* f = new Field(i, j, m_field_width, m_field_height, this);
             f->setPos(grid_left + j * m_field_width,
                       grid_top  + i * m_field_height);
             col.push_back(f);

@@ -12,7 +12,7 @@ class Field : public QGraphicsItem
     //Q_OBJECT
 
 public:
-    Field(unsigned row, unsigned col, int w = 40, int h = 40, QGraphicsItem* parent = nullptr, QLabel* showInfo = nullptr);
+    Field(unsigned row, unsigned col, int w = 40, int h = 40, QGraphicsItem* parent = nullptr);
 
     // Okvir polja, za ponovno isrtavanje.
     QRectF boundingRect() const override;
@@ -45,7 +45,6 @@ private:
         m_height;
     Unit* m_unit;
     QColor m_color;
-    QLabel* m_showInfo;
 };
 
 std::ostream& operator<<(std::ostream& out, const Field& value);

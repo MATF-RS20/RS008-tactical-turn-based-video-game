@@ -3,7 +3,7 @@
 #include <QPainter>
 #include <QGraphicsSceneMouseEvent>
 
-Field::Field(unsigned row, unsigned col, int w, int h, QGraphicsItem* parent, QLabel* showInfo)
+Field::Field(unsigned row, unsigned col, int w, int h, QGraphicsItem* parent)
     //: QObject(nullptr)
     : QGraphicsItem(parent)
     , m_row(row)
@@ -12,14 +12,7 @@ Field::Field(unsigned row, unsigned col, int w, int h, QGraphicsItem* parent, QL
     , m_height(h)
     , m_unit(nullptr)
     , m_color(Qt::white) // (int R, int G, int B)?
-    , m_showInfo(showInfo)
-{
-    if (m_showInfo)
-    {
-        //TODO
-        //QObject::connect(this, SIGNAL(LeftClicked()), m_showInfo, SLOT(setText("Left clicked!")));
-    }
-}
+{}
 
 
 QRectF Field::boundingRect() const
@@ -33,7 +26,7 @@ void Field::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 {
     Q_UNUSED(option)
 
-    //TODO: Make a nice rectangle.
+    // TODO: Make a nice rectangle.
     /*painter->setBrush(m_color);
     painter->drawRect(-(m_width/2), -(m_height/2)
                       , m_width, m_height);*/
@@ -55,21 +48,16 @@ Field* Field::LeftClicked()
 
 void Field::mousePressEvent(QGraphicsSceneMouseEvent * event)
 {
-    if(event->button() == Qt::LeftButton)
+    if (event->button() == Qt::LeftButton)
     {
-        if (m_showInfo)
-        {
-            emit LeftClicked();
-            std::cerr << "Left click on field: \n" << *this << std::endl;
-        }
-        else {
-            std::cerr << "not connected!" << std::endl;
-        }
+        // TODO: emit LeftClicked() -> emit wrapper(this) -> gc
+        //emit LeftClicked();
+        //std::cerr << "Left click on field: \n" << *this << std::endl;
     }
-    if(event->button() == Qt::RightButton)
+    if (event->button() == Qt::RightButton)
     {
-        std::cerr << "Right click on field: ("
-                  << m_row << ", " << m_col << ")" << std::endl;
+        //std::cerr << "Right click on field: ("
+        //          << m_row << ", " << m_col << ")" << std::endl;
     }
 }
 

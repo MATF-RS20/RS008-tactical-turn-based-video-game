@@ -4,11 +4,10 @@
 GameController* createLevel1(ui ui)
 {
     //TODO: remove this binding after refactor.
-    auto [window, scene, showInfo, playerLabel, actionButtons, pb_endTurn] = ui;
-    GameController* gController = new GameController(ui, window);
+    GameController* gController = new GameController(ui, ui.window);
 
 
-    Grid* g = new Grid(4,5, nullptr, showInfo);
+    Grid* g = new Grid(4,5, nullptr);
     gController->setGrid(g);
 
     //TODO: Make a player vector and add the vector to gameController.
