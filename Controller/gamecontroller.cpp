@@ -140,9 +140,8 @@ std::pair<qreal, qreal> GameController::calculatePos(unsigned row, unsigned col)
 {
     if (m_grid)
     {
-        //TODO: grid_left, grid_top?
-        return  {col * m_field_width,
-                 row * m_field_height};
+        return  {col * m_grid->field_width(),
+                 row * m_grid->field_height()};
     }
     else {
         return {0, 0};

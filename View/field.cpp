@@ -3,13 +3,16 @@
 #include <QPainter>
 #include <QGraphicsSceneMouseEvent>
 
-Field::Field(unsigned row, unsigned col, int w, int h, QGraphicsItem* parent)
+#define MAX_WIDTH  100
+#define MAX_HEIGHT 100
+
+Field::Field(unsigned row, unsigned col, unsigned w, unsigned h, QGraphicsItem* parent)
     //: QObject(nullptr)
     : QGraphicsItem(parent)
     , m_row(row)
     , m_col(col)
-    , m_width(w)
-    , m_height(h)
+    , m_width (w < MAX_WIDTH ? w : MAX_WIDTH)
+    , m_height(h < MAX_HEIGHT ? h : MAX_HEIGHT)
     , m_unit(nullptr)
     , m_color(Qt::white) // (int R, int G, int B)?
 {}
@@ -18,22 +21,22 @@ Field::Field(unsigned row, unsigned col, int w, int h, QGraphicsItem* parent)
 QRectF Field::boundingRect() const
 {
     //TODO: qreal penWidth...
-    return QRectF(-(m_width/2), -(m_height/2)
-                  , m_width, m_height);
+    qreal w = m_width,
+          h = m_height;
+    return QRectF(-(w/2), -(h/2)
+                  , w, h);
 }
 
 void Field::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
 {
     Q_UNUSED(option)
+    qreal w = m_width,
+          h = m_height;
 
-    // TODO: Make a nice rectangle.
-    /*painter->setBrush(m_color);
-    painter->drawRect(-(m_width/2), -(m_height/2)
-                      , m_width, m_height);*/
     QPainterPath path;
-    path.addRect(-(m_width/2), -(m_height/2)
-                 , m_width, m_height);
-    QPen pen(Qt::black, 3);
+    path.addRect(-(w/2), -(h/2), w, h);
+
+    QPen pen(Qt::black, 1);
     painter->setPen(pen);
     painter->fillPath(path, m_color);
     painter->drawPath(path);
@@ -54,10 +57,11 @@ void Field::mousePressEvent(QGraphicsSceneMouseEvent * event)
         //emit LeftClicked();
         //std::cerr << "Left click on field: \n" << *this << std::endl;
     }
+
     if (event->button() == Qt::RightButton)
     {
-        //std::cerr << "Right click on field: ("
-        //          << m_row << ", " << m_col << ")" << std::endl;
+        std::cerr << "Right click on field: ("
+                  << m_row << ", " << m_col << ")" << std::endl;
     }
 }
 

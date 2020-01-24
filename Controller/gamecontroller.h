@@ -19,9 +19,9 @@ private:
     UnitQueue* m_queue;
     Unit* m_active_unit;
     Grid* m_grid;
-    unsigned m_turn;
-    int m_field_width = 40,
-        m_field_height = 40; //TODO: Make uniform with grid!
+    unsigned m_turn,
+        m_field_width,
+        m_field_height; //TODO: Make uniform with grid!
     ControllerState m_state = init;
     std::vector<Player*>* m_players;
     // UI:

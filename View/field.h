@@ -12,7 +12,7 @@ class Field : public QGraphicsItem
     //Q_OBJECT
 
 public:
-    Field(unsigned row, unsigned col, int w = 40, int h = 40, QGraphicsItem* parent = nullptr);
+    Field(unsigned row, unsigned col, unsigned w = 40, unsigned h = 40, QGraphicsItem* parent = nullptr);
 
     // Okvir polja, za ponovno isrtavanje.
     QRectF boundingRect() const override;
@@ -39,9 +39,10 @@ signals:
     Field* LeftClicked();
 
 private:
-    const unsigned m_row,
-        m_col;
-    int m_width,
+    const unsigned
+        m_row,
+        m_col,
+        m_width,
         m_height;
     Unit* m_unit;
     QColor m_color;

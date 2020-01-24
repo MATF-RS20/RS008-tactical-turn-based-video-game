@@ -7,7 +7,7 @@ GameController* createLevel1(ui ui)
     GameController* gController = new GameController(ui);
 
 
-    Grid* g = new Grid(4,5, nullptr);
+    Grid* g = new Grid(4,5);
     gController->setGrid(g);
 
     //TODO: Make a player vector and add the vector to gameController.

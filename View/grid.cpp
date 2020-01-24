@@ -2,12 +2,15 @@
 #include "field.h"
 
 
-Grid::Grid(unsigned number_of_rows, unsigned number_of_cols, QGraphicsItem* parent)
+Grid::Grid(unsigned number_of_rows, unsigned number_of_cols
+           , unsigned field_width, unsigned field_height
+           , QGraphicsItem* parent)
     : QGraphicsItem(parent)
     , m_row_size(number_of_rows)
     , m_col_size(number_of_cols)
+    , m_field_width(field_width)
+    , m_field_height(field_height)
 {
-    qreal grid_left = 0, grid_top = 0;
     m_matrix = std::vector<std::vector<Field*>>();
     for (unsigned i = 0; i < m_row_size; i++)
     {
@@ -15,8 +18,8 @@ Grid::Grid(unsigned number_of_rows, unsigned number_of_cols, QGraphicsItem* pare
         for (unsigned j = 0; j < m_col_size; j++)
         {
             Field* f = new Field(i, j, m_field_width, m_field_height, this);
-            f->setPos(grid_left + j * m_field_width,
-                      grid_top  + i * m_field_height);
+            f->setPos(j * m_field_width,
+                      i * m_field_height);
             col.push_back(f);
         }
         m_matrix.push_back(col);
@@ -26,10 +29,9 @@ Grid::Grid(unsigned number_of_rows, unsigned number_of_cols, QGraphicsItem* pare
 
 QRectF Grid::boundingRect() const
 {
-    unsigned width = m_field_width * m_col_size,
-             height = m_field_height * m_row_size;
-    return QRectF(-(width/2), -(height/2)
-                  , width, height);
+    qreal w = m_field_width * m_col_size,
+          h = m_field_height * m_row_size;
+    return QRectF(-(w/2), -(h/2), w, h);
 }
 
 
@@ -67,11 +69,11 @@ std::vector<std::vector<Field*>> Grid::matrix() const
 }
 
 
-bool Grid::validField(std::pair<int,int> position)
+bool Grid::validField(std::pair<unsigned,unsigned> position)
 {
-    int row, col;
+    unsigned row, col;
     std::tie(row, col) = position;
-    if (row < 0 || col < 0 || row >= m_row_size || col >= m_col_size)
+    if (row >= m_row_size || col >= m_col_size)
     {
         return false;
     }
@@ -81,7 +83,7 @@ bool Grid::validField(std::pair<int,int> position)
 }
 
 
-Field* Grid::operator[] (std::pair<int,int> position) {
+Field* Grid::operator[] (std::pair<unsigned,unsigned> position) {
     if (validField(position))
     {
         return m_matrix[position.first][position.second];

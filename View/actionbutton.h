@@ -10,7 +10,7 @@ class ActionButton : public QPushButton
     Q_OBJECT
 
 public:
-    ActionButton(int button, QWidget* parent);
+    ActionButton(unsigned button, QWidget* parent);
     //void setText(std::string text);
     //void setAction(Action* action);
 
@@ -25,7 +25,7 @@ signals:
 
 private:
     Action* m_action;
-    int m_button;
+    unsigned m_button;
 };
 
 #endif // ACTIONBUTTON_H

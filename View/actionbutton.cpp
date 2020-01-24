@@ -1,6 +1,6 @@
 #include "actionbutton.h"
 
-ActionButton::ActionButton(int button, QWidget* parent)
+ActionButton::ActionButton(unsigned button, QWidget* parent)
     : QPushButton("", parent)
     , m_action(nullptr)
     , m_button(button)
