@@ -11,6 +11,12 @@ GameController::GameController(ui ui, QObject* parent)
     , m_turn(0)
     , m_players(new std::vector<Player*>)
 {
+    for (auto button: *(ui.actionButtons))
+    {
+        add_pb_Action(button);
+    }
+    delete ui.actionButtons;
+
     QObject::connect(ui.pb_endTurn, SIGNAL(clicked()), this, SLOT(endTurn()));
     QObject::connect(this, SIGNAL(changeInfo(const QString&)), ui.showInfo, SLOT(setText(const QString &)));
     QObject::connect(this, SIGNAL(changeInfoPlayer(const QString&)), ui.playerLabel, SLOT(setText(const QString &)));
@@ -19,20 +25,14 @@ GameController::GameController(ui ui, QObject* parent)
 
 GameController::~GameController()
 {
-    if (m_queue)
-    {
-        delete m_queue;
-    }
-    if (m_grid)
-    {
-        //TODO: window deletes grid?
-        //delete m_grid;
-    }
+    delete m_queue;
+    delete m_players;
+    //TODO: window deletes grid?
+    //delete m_grid;
     for (auto player : *m_players)
     {
         delete player;
     }
-    delete m_players;
 }
 
 
@@ -85,6 +85,9 @@ QString GameController::getInfo()
 void GameController::endTurn()
 {
     //std::cerr << "Game Controller endTurn() called!" << std::endl;
+    if (!m_active_unit) {
+        noActiveUnitError();
+    }
     m_turn++;
     m_active_unit->changeColor();
     m_active_unit->update();
@@ -247,3 +250,8 @@ void GameController::updatePlayer()
     emit changeInfoPlayer(name);
 }
 
+
+void GameController::noActiveUnitError()
+{
+    std::cerr << "No active unit! TODO: Protect yourself from this!" << std::endl;
+}

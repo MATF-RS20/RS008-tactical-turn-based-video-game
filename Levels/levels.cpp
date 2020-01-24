@@ -5,7 +5,7 @@ GameController* createLevel1(ui ui)
 {
     //TODO: remove this binding after refactor.
     auto [window, scene, showInfo, playerLabel, actionButtons, pb_endTurn] = ui;
-    GameController* gController = new GameController(ui, nullptr);
+    GameController* gController = new GameController(ui, window);
 
 
     Grid* g = new Grid(4,5, nullptr, showInfo);
@@ -13,18 +13,14 @@ GameController* createLevel1(ui ui)
     scene->addItem(g);
     gController->setGrid(g);
 
-    for (auto button: *actionButtons)
-    {
-        gController->add_pb_Action(button);
-    }
-    delete actionButtons; //this deleted the vector, not the actionButtons whose pointers were inside.
-
     //Adding Units to gController
 
     //TODO: Make a player vector and add the vector to gameController.
     Player* player1 = new Player("Player1: Pera", Qt::blue);
     Player* player2 = new Player("Player2: Zika", Qt::green);
-    //
+
+    std::vector<Action*>* warriorActions = new std::vector<Action*>({new Action("Move", 2), new TestAction1("Attack", 5)});
+    std::vector<Action*>* healerActions = new std::vector<Action*>({new Action("Move", 1), new TestAction1("Heal", 1)});
     Unit* tmp_unit;
 
     //TODO: Abstract this in game controller, keep a scene* in gc.

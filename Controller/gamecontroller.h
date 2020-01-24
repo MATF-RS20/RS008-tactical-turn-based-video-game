@@ -11,7 +11,7 @@
 #include <QPushButton>
 
 
-class UnitQueue;
+//class UnitQueue;
 enum ControllerState {init, action};
 
 
@@ -19,14 +19,27 @@ class GameController : public QObject
 {
     Q_OBJECT
 
+private:
+    UnitQueue* m_queue;
+    Unit* m_active_unit;
+    Grid* m_grid;
+    unsigned m_turn;
+    int m_field_width = 40,
+        m_field_height = 40; //TODO: Make uniform with grid!
+    ControllerState m_state = init;
+    std::vector<Player*>* m_players;
+    // UI:
+    QLabel* m_infoLabel;
+
 public:
     GameController(ui ui, QObject* parent);
-    //TODO: singleton maybe?
 
     ~GameController();
     GameController(const GameController & other) = delete;
     const GameController& operator= (const GameController & other) = delete;
 
+
+public:
     void setGrid(Grid* g);
     bool addUnit(Unit* u);
     Unit* activeUnit() const;
@@ -50,6 +63,9 @@ private:
     void resetActions();
     void updatePlayer();
 
+private:
+    void noActiveUnitError();
+
 
 public slots:
     void endTurn();
@@ -60,17 +76,6 @@ signals:
     void changeInfo(const QString&);
     void changeInfoPlayer(const QString&);
     void resetActionsOnButtons(std::vector<Action*>* Actions);
-
-private:
-    UnitQueue* m_queue;
-    Unit* m_active_unit;
-    Grid* m_grid;
-    QLabel* m_infoLabel;
-    unsigned m_turn;
-    int m_field_width = 40,
-        m_field_height = 40;
-    ControllerState m_state = init;
-    std::vector<Player*>* m_players; //for deleting.
 
 };
 
