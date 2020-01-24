@@ -28,14 +28,24 @@ ui makeUI()
             //TODO: set color based on player.
             //currentPlayer->setStyleSheet("QLabel { background-color : red; color : blue; }");
             currentPlayer->setWordWrap(true);
-            currentPlayer->setFixedSize(150,50);
+            currentPlayer->setFixedSize(200,50);
 
             QLabel* showInfo = new QLabel("Hello");
             showInfo->setWordWrap(true);
-            showInfo->setFixedWidth(150);
+            showInfo->setFixedWidth(200);
+
+            //<BOTTOM-OK_CANCEL>
+                QPushButton* pb_ok = new QPushButton("Ok", window);
+                pb_ok->setEnabled(false);
+                QPushButton* pb_cancel = new QPushButton("Cancel", window);
+                QHBoxLayout* mainRight_footer = new QHBoxLayout();
+                mainRight_footer->addWidget(pb_ok);
+                mainRight_footer->addWidget(pb_cancel);
+            //</BOTTOM-OK_CANCEL>
 
             layoutV_mainRight->addWidget(currentPlayer);
             layoutV_mainRight->addWidget(showInfo);
+            layoutV_mainRight->addLayout(mainRight_footer);
         //</MAIN-RIGHT>
 
 
@@ -58,7 +68,7 @@ ui makeUI()
     //<ACTIONS>
         //TODO: Delete this vector when deleting window? After adding to gc?
         std::vector<ActionButton*> * actionButtons = new std::vector<ActionButton*>();
-        for (int i = 0; i < 10; i++)
+        for (unsigned i = 0; i < 10; i++)
         {
             ActionButton* pb_tmp = new ActionButton(i, window);
             //TODO: add signals and slots!
@@ -79,5 +89,5 @@ ui makeUI()
     window->setWindowTitle("The Game");
     window->resize(800, 800);
 
-    return {window, scene, showInfo, currentPlayer, actionButtons, pb_endTurn};
+    return {window, scene, showInfo, currentPlayer, actionButtons, pb_ok, pb_cancel, pb_endTurn};
 }

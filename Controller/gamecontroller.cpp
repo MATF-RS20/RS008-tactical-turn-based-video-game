@@ -18,6 +18,8 @@ GameController::GameController(ui ui)
     }
     delete ui.actionButtons;
 
+    QObject::connect(ui.pb_ok, SIGNAL(clicked()), this, SLOT(ok()));
+    QObject::connect(ui.pb_cancel, SIGNAL(clicked()), this, SLOT(cancel()));
     QObject::connect(ui.pb_endTurn, SIGNAL(clicked()), this, SLOT(endTurn()));
     QObject::connect(this, SIGNAL(changeInfo(const QString&)), ui.showInfo, SLOT(setText(const QString &)));
     QObject::connect(this, SIGNAL(changeInfoPlayer(const QString&)), ui.playerLabel, SLOT(setText(const QString &)));
@@ -86,6 +88,20 @@ void GameController::startGame()
 QString GameController::getInfo()
 {
     return m_infoLabel->text();
+}
+
+
+void GameController::ok()
+{
+    std::cerr << "Ok pressed!" << std::endl;
+}
+
+
+void GameController::cancel()
+{
+    //TODO: state dependant actions (init, action...).
+    //if (m_state == init) {}
+    setInfo(defaultInfo());
 }
 
 

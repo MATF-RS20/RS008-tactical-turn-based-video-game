@@ -17,6 +17,8 @@ struct ui {
     QLabel* showInfo;
     QLabel* playerLabel;
     std::vector<ActionButton*>* actionButtons; //Vector deleted in the game controller constructor.
+    QPushButton* pb_ok;
+    QPushButton* pb_cancel;
     QPushButton* pb_endTurn;
 };
 

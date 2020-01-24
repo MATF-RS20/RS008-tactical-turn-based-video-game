@@ -65,6 +65,8 @@ private:
 
 
 public slots:
+    void ok();
+    void cancel();
     void endTurn();
     void actionButtonPressed(int button_number);
     void actionButtonPressed(Action* action);
