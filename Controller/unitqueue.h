@@ -30,7 +30,7 @@ public:
 
     void pop_at(unsigned i)
     {
-        if (m_vector.size() > i) {
+        if (m_vector.size() >= i) {
             std::cerr << "UnitQueue pop_at() bad index" << std::endl;
             return;
         }
