@@ -4,7 +4,7 @@
 GameController* createLevel1(ui ui)
 {
     //TODO: remove this binding after refactor.
-    GameController* gController = new GameController(ui, ui.window);
+    GameController* gController = new GameController(ui);
 
 
     Grid* g = new Grid(4,5, nullptr);

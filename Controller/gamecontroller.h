@@ -29,7 +29,7 @@ private:
     QGraphicsScene* m_scene;
 
 public:
-    GameController(ui ui, QObject* parent);
+    GameController(ui ui);
 
     ~GameController();
     GameController(const GameController & other) = delete;

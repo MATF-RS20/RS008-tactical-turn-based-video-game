@@ -2,8 +2,8 @@
 
 #define ACTIVE_UNIT_COLOR Qt::yellow
 
-GameController::GameController(ui ui, QObject* parent)
-    : QObject(parent)
+GameController::GameController(ui ui)
+    : QObject(ui.window)
     , m_queue(new UnitQueue())
     , m_active_unit(nullptr)
     , m_grid(nullptr)
