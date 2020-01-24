@@ -28,9 +28,9 @@ public:
         m_vector.push_back(u); //TODO: see emplace?
     }
 
-    void pop_at(int i)
+    void pop_at(unsigned i)
     {
-        if (m_vector.size() > i || i < 0) {
+        if (m_vector.size() > i) {
             std::cerr << "UnitQueue pop_at() bad index" << std::endl;
             return;
         }
@@ -43,14 +43,14 @@ public:
     }
 
     //TODO pop_Unit, get_Unit
-    /*void pop_Unit(Unit u)
+    /*void pop_Unit(Unit* u)
     {
         auto it = std::find(std::begin(m_vector), std::end(m_vector), u);
         //TODO: Redefine Unit == operator?
+        // Use unit id?!
         //TODO: add m_id to Units for comparison?
     }*/
 
-    //TODO: referance return?
     Unit* current()
     {
         if (m_vector.empty())
@@ -59,7 +59,8 @@ public:
         }
         return m_vector[m_index];
     }
-    //TODO
+
+
     Unit* next()
     {
         if (m_vector.empty())
@@ -77,9 +78,8 @@ public:
     }
 
 private:
-    //TODO: different implementation maybe?
     std::vector<Unit*> m_vector;
-    int m_index;
+    unsigned m_index;
 };
 
 #endif // UNITQUEUE_H
