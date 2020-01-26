@@ -1,7 +1,6 @@
 #include "grid.h"
 #include "field.h"
 
-
 Grid::Grid(unsigned number_of_rows, unsigned number_of_cols
            , unsigned field_width, unsigned field_height
            , QGraphicsItem* parent)
@@ -10,6 +9,7 @@ Grid::Grid(unsigned number_of_rows, unsigned number_of_cols
     , m_col_size(number_of_cols)
     , m_field_width(field_width)
     , m_field_height(field_height)
+    , m_signaler(new Signaler())
 {
     m_matrix = std::vector<std::vector<Field*>>();
     for (unsigned i = 0; i < m_row_size; i++)
@@ -17,7 +17,7 @@ Grid::Grid(unsigned number_of_rows, unsigned number_of_cols
         std::vector<Field*> col = std::vector<Field*>();
         for (unsigned j = 0; j < m_col_size; j++)
         {
-            Field* f = new Field(i, j, m_field_width, m_field_height, this);
+            Field* f = new Field(i, j, m_signaler, m_field_width, m_field_height, this);
             f->setPos(j * m_field_width,
                       i * m_field_height);
             col.push_back(f);
@@ -42,19 +42,20 @@ void Grid::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     return;
 }
 
-/*Grid::~Grid()
+Grid::~Grid()
 {
     //TODO: See if any double deleted.
     for (auto col : m_matrix)
     {
-        for(auto field : col)
+        for (auto field : col)
         {
-            delete field;
+            if (field)
+                delete field;
         }
         col.clear();
     }
     m_matrix.clear();
-}*/
+}
 
 
 std::pair<unsigned,unsigned> Grid::size() const
@@ -113,6 +114,12 @@ void Grid::removeUnit(std::pair<int,int> field_position)
 {
     Field* f = (*this)[field_position];
     f->removeUnit();
+}
+
+
+Signaler* Grid::signaler() const
+{
+    return m_signaler;
 }
 
 

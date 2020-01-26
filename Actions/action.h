@@ -10,7 +10,7 @@
 class Action
 {
 public:
-    Action(std::string name, int AP_cost);
+    Action(std::string name, int AP_cost, gcAction type = gcAction::move);
     virtual ~Action() = default;
 
     std::string description() const;
@@ -30,7 +30,7 @@ class TestAction1: public Action
 {
 public:
     TestAction1(std::string name, int AP_cost)
-        :Action(name, AP_cost)
+        :Action(name, AP_cost, gcAction::move)
     {}
 
     bool use() override

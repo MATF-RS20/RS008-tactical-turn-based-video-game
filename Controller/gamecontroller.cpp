@@ -47,6 +47,7 @@ void GameController::setGrid(Grid* grid)
     grid->setPos(0, 0);
     m_scene->addItem(grid);
     m_grid = grid;
+    QObject::connect(grid->signaler(), SIGNAL(fieldLeftClickSignal(std::pair<unsigned, unsigned>)), this, SLOT(fieldLeftClicked(std::pair<unsigned, unsigned>)) );
 }
 
 
@@ -165,14 +166,13 @@ std::pair<qreal, qreal> GameController::calculatePos(unsigned row, unsigned col)
 }
 
 
-std::pair<qreal, qreal> GameController::calculatePos(std::pair<int, int> position) const
+std::pair<qreal, qreal> GameController::calculatePos(std::pair<unsigned, unsigned> position) const
 {
-    //TODO: cast to unsigned warning?
     return calculatePos(position.first, position.second);
 }
 
 
-bool GameController::moveUnit(Unit* unit, std::pair<int, int> position)
+bool GameController::moveUnit(Unit* unit, std::pair<unsigned, unsigned> position)
 {
     if (!m_grid) {
         return false;
@@ -181,8 +181,9 @@ bool GameController::moveUnit(Unit* unit, std::pair<int, int> position)
     auto old_position = unit->position();
     if (old_position == position)
     {
-        return true;
+        return false;
     }
+
     if (m_grid->placeUnit(position, unit))
     {
         m_grid->removeUnit(old_position);
@@ -205,27 +206,33 @@ void GameController::add_pb_Action(ActionButton* pb_action)
 
 void GameController::actionButtonPressed(Action* action)
 {
-    if (action) {
-        setInfo("Action " + action->name() + " activated ");
-        setState(ControllerState::action);
-        action->use(); //TODO!
-        setState(ControllerState::init);
+    if (m_state != ControllerState::init) {
+        return;
     }
-    else {
+
+    if (action) {
+        actionStarted(action);
+        return;
+    } else {
+        //TODO: This shouldn't happen (non-action are buttons grayed out). Remove maybe?
         setInfo("Invalid action!");
     }
 }
 
 
-void GameController::actionButtonPressed(int button_number)
+void GameController::actionStarted(Action* action)
 {
-    setInfo("Action pressed: " + std::to_string(button_number));
+    setInfo("Action " + action->name() + " activated ");
+    m_state = ControllerState::action;
+    //TODO...
 }
 
 
-void GameController::setState(ControllerState state)
+void GameController::actionEnded()
 {
-    m_state = state;
+    //TODO...
+    m_state = ControllerState::init;
+    //TODO
 }
 
 
@@ -276,4 +283,14 @@ void GameController::updatePlayer()
 void GameController::noActiveUnitError()
 {
     std::cerr << "No active unit! TODO: Protect yourself from this!" << std::endl;
+}
+
+void GameController::fieldLeftClicked(std::pair<unsigned, unsigned> position)
+{
+    //if (m_grid) //?
+    Field* field = (*m_grid)[position];
+    if (!field)
+        return;
+    std::cerr << *field << std::endl;
+    setInfo("FIELD CLICKED TODO!!!");
 }

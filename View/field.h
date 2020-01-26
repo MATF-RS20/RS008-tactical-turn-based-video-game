@@ -2,6 +2,7 @@
 #define FIELD_H
 
 #include "Units/unit.h"
+#include "Controller/signaler.h"
 
 #include <QGraphicsItem>
 #include <QLabel>
@@ -12,7 +13,7 @@ class Field : public QGraphicsItem
     //Q_OBJECT
 
 public:
-    Field(unsigned row, unsigned col, unsigned w = 40, unsigned h = 40, QGraphicsItem* parent = nullptr);
+    Field(unsigned row, unsigned col, Signaler* signaler, unsigned w = 40, unsigned h = 40, QGraphicsItem* parent = nullptr);
 
     // Okvir polja, za ponovno isrtavanje.
     QRectF boundingRect() const override;
@@ -35,8 +36,8 @@ public:
     void placeUnit(Unit* u);
     void removeUnit();
 
-signals:
-    Field* LeftClicked();
+    // pseudo-signals
+    void LeftClicked();
 
 private:
     const unsigned
@@ -46,6 +47,7 @@ private:
         m_height;
     Unit* m_unit;
     QColor m_color;
+    Signaler* m_signaler;
 };
 
 std::ostream& operator<<(std::ostream& out, const Field& value);

@@ -6,7 +6,7 @@
 #define MAX_WIDTH  100
 #define MAX_HEIGHT 100
 
-Field::Field(unsigned row, unsigned col, unsigned w, unsigned h, QGraphicsItem* parent)
+Field::Field(unsigned row, unsigned col, Signaler* signaler, unsigned w, unsigned h, QGraphicsItem* parent)
     //: QObject(nullptr)
     : QGraphicsItem(parent)
     , m_row(row)
@@ -15,6 +15,7 @@ Field::Field(unsigned row, unsigned col, unsigned w, unsigned h, QGraphicsItem* 
     , m_height(h < MAX_HEIGHT ? h : MAX_HEIGHT)
     , m_unit(nullptr)
     , m_color(Qt::white) // (int R, int G, int B)?
+    , m_signaler(signaler)
 {}
 
 
@@ -43,9 +44,9 @@ void Field::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 }
 
 
-Field* Field::LeftClicked()
+void Field::LeftClicked()
 {
-    return this;
+    //signaler
 }
 
 
@@ -53,6 +54,7 @@ void Field::mousePressEvent(QGraphicsSceneMouseEvent * event)
 {
     if (event->button() == Qt::LeftButton)
     {
+        m_signaler->fieldLeftClick(position());
         // TODO: emit LeftClicked() -> emit wrapper(this) -> gc
         //emit LeftClicked();
         //std::cerr << "Left click on field: \n" << *this << std::endl;

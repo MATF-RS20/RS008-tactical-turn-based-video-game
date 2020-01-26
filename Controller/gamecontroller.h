@@ -47,11 +47,11 @@ public:
     void setInfo(std::string msg);
     QString getInfo();
 
-    bool moveUnit (Unit* unit, std::pair<int, int> position);
+    bool moveUnit (Unit* unit, std::pair<unsigned, unsigned> position);
     //This is for drawing units, setPos()!
     std::pair<qreal, qreal> calculatePos(unsigned row, unsigned col) const;
-    std::pair<qreal, qreal> calculatePos(std::pair<int, int> position) const;
-    void setState(ControllerState state);
+    std::pair<qreal, qreal> calculatePos(std::pair<unsigned, unsigned> position) const;
+    //void setState(ControllerState state);
     std::vector<Action*>* getCurrentActions();
     std::string defaultInfo() const;
     void addPlayer(Player*);
@@ -68,8 +68,11 @@ public slots:
     void ok();
     void cancel();
     void endTurn();
-    void actionButtonPressed(int button_number);
+    //void actionButtonPressed(int button_number);
     void actionButtonPressed(Action* action);
+    void actionStarted(Action* action);
+    void actionEnded();
+    void fieldLeftClicked(std::pair<unsigned, unsigned>);
 
 signals:
     void changeInfo(const QString&);

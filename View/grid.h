@@ -6,6 +6,7 @@
 #include <QGraphicsItem>
 #include <iostream>
 #include <vector>
+#include <Controller/signaler.h>
 
 
 class Grid : public QGraphicsItem
@@ -15,7 +16,7 @@ public:
          , unsigned field_width = 40, unsigned field_height = 40
          , QGraphicsItem* parent = nullptr);
 
-    //~Grid() override;
+    ~Grid() override;
 
     QRectF boundingRect() const override;
 
@@ -34,6 +35,8 @@ public:
     unsigned field_width() const {return m_field_width;}
     unsigned field_height() const {return m_field_height;}
 
+    Signaler* signaler() const;
+
 private:
     unsigned
         m_row_size,
@@ -41,6 +44,7 @@ private:
         m_field_width,
         m_field_height;
     std::vector<std::vector<Field*>> m_matrix;
+    Signaler* m_signaler;
 };
 
 std::ostream& operator<<(std::ostream& out, const Grid& value);

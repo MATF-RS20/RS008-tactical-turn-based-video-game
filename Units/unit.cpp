@@ -72,7 +72,7 @@ void Unit::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 }
 
 
-std::pair<int, int> Unit::position() const
+std::pair<unsigned, unsigned> Unit::position() const
 {
     return std::pair(m_row, m_col);
 }

@@ -25,7 +25,7 @@ public:
                    const QStyleOptionGraphicsItem *option,
                    QWidget *widget) override;
 
-    std::pair<int,int> position() const;
+    std::pair<unsigned, unsigned> position() const;
     std::pair<int, int> health() const;
     void updateHealth(int change);
     unsigned getId() const;
@@ -48,7 +48,8 @@ protected:
         m_remaining_HP,
         m_max_AP,
         m_remaining_AP,
-        m_initiative,
+        m_initiative;
+    unsigned
         m_row,
         m_col;
     unsigned m_id;
