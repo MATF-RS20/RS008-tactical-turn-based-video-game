@@ -5,6 +5,9 @@ ActionButton::ActionButton(unsigned button, QWidget* parent)
     , m_action(nullptr)
     , m_button(button)
 {
+    // TODO: make uiButton and set minimum width there!
+    setMinimumWidth(100);
+    setEnabled(false);
     QObject::connect(this, SIGNAL(clicked()), this, SLOT(forwardAction()));
 }
 
@@ -17,26 +20,31 @@ void ActionButton::forwardAction()
 }
 
 
+void ActionButton::disable()
+{
+    setEnabled(false);
+    m_action = nullptr;
+    setText("");
+}
+
+
 void ActionButton::setActionsOnButtons(std::vector<Action*>* Actions)
 {
-    if (!Actions)
-    {
-        m_action = nullptr;
-        setText("");
+    if (!Actions) {
+        disable();
     }
 
-    if (m_button >= Actions->size())
-    {
-        m_action = nullptr;
-        setText("");
+    if (m_button >= Actions->size()) {
+        disable();
     }
     else {
         m_action = (*Actions)[m_button];
         if (m_action == nullptr)
         {
-            setText("");
+            disable();
         }
         else {
+            setEnabled(true);
             QString name = (m_action->name()).c_str();
             setText(name);
         }

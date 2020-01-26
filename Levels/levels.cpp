@@ -15,7 +15,7 @@ GameController* createLevel1(ui ui)
     Player* player2 = new Player("Player2: Zika", Qt::green);
 
     std::vector<Action*>* warriorActions = new std::vector<Action*>({new Action("Move", 2), new TestAction1("Attack", 5)});
-    std::vector<Action*>* healerActions = new std::vector<Action*>({new Action("Move", 1), new TestAction1("Heal", 1)});
+    std::vector<Action*>* healerActions = new std::vector<Action*>({new Action("Move", 1), new TestAction1("Heal", 1), new TestAction1("Heal 2", 2)});
 
     //TODO: Get this from a vector? Get this from a txt/json file?!
     gController->addUnit(new Warrior(300, 10, 5, 3, 2, player1, warriorActions));

@@ -14,6 +14,9 @@ public:
     //void setText(std::string text);
     //void setAction(Action* action);
 
+private:
+    void disable();
+
 public slots:
     void forwardAction(); //wrapper for clicked() signal.
     void setActionsOnButtons(std::vector<Action*>* Actions);
