@@ -32,6 +32,7 @@ SOURCES += \
 
 HEADERS += \
     Actions/action.h \
+    Controller/controller_actions.h \
     Controller/gamecontroller.h \
     Controller/unitqueue.h \
     Levels/levels.h \

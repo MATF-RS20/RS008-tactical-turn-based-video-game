@@ -4,9 +4,9 @@
 #include "Units/unit.h"
 #include "View/grid.h"
 #include "View/actionbutton.h"
-#include "unitqueue.h"
 #include "View/ui.h"
-
+#include "unitqueue.h"
+#include "controller_actions.h"
 
 enum ControllerState {init, action};
 

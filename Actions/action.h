@@ -1,7 +1,11 @@
 #ifndef ACTION_H
 #define ACTION_H
 
+
+#include "Controller/controller_actions.h"
+
 #include <iostream>
+
 
 class Action
 {
@@ -16,6 +20,7 @@ public:
 protected:
 
     int m_AP_cost;
+    gcAction m_gc_action;
     std::string m_description;
     std::string m_name;
 };
