@@ -38,6 +38,7 @@ ui makeUI()
                 QPushButton* pb_ok = new QPushButton("Ok", window);
                 pb_ok->setEnabled(false);
                 QPushButton* pb_cancel = new QPushButton("Cancel", window);
+                pb_cancel->setEnabled(false);
                 QHBoxLayout* mainRight_footer = new QHBoxLayout();
                 mainRight_footer->addWidget(pb_ok);
                 mainRight_footer->addWidget(pb_cancel);

@@ -9,6 +9,8 @@ GameController::GameController(ui ui)
     , m_grid(nullptr)
     , m_turn(0)
     , m_players(new std::vector<Player*>)
+    , m_pb_ok(ui.pb_ok)
+    , m_pb_cancel(ui.pb_cancel)
     , m_infoLabel(ui.showInfo)
     , m_scene(ui.scene)
 {
@@ -98,12 +100,32 @@ void GameController::ok()
 }
 
 
+void GameController::changeState(ControllerState state)
+{
+    if (state == action_ready)
+    {
+        m_pb_ok->setEnabled(true);
+    }
+    else {
+        m_pb_ok->setEnabled(false);
+    }
+    if (state != init)
+    {
+        m_pb_cancel->setEnabled(true);
+    }
+    else {
+        m_pb_cancel->setEnabled(false);
+    }
+    m_state = state;
+}
+
+
 void GameController::cancel()
 {
     //TODO: state dependant actions (init, action...).
     //if (m_state == init) {}
     if (m_state != init) {
-        actionEnded();
+        actionEnd();
     }
     //setInfo(defaultInfo());
 }
@@ -116,7 +138,7 @@ void GameController::endTurn()
         noActiveUnitError(); //TODO
     }
     if (m_state != ControllerState::init) {
-        actionEnded();
+        actionEnd();
     }
     m_turn++;
     m_active_unit->changeColor();
@@ -159,22 +181,20 @@ void GameController::setInfo(std::string msg)
 }
 
 
-std::pair<qreal, qreal> GameController::calculatePos(unsigned row, unsigned col) const
+std::pair<qreal, qreal> GameController::calculatePos(std::pair<unsigned, unsigned> position) const
 {
+
     if (m_grid)
     {
+        unsigned row = position.first,
+                 col = position.second;
+
         return  {col * m_grid->field_width(),
                  row * m_grid->field_height()};
     }
     else {
         return {0, 0};
     }
-}
-
-
-std::pair<qreal, qreal> GameController::calculatePos(std::pair<unsigned, unsigned> position) const
-{
-    return calculatePos(position.first, position.second);
 }
 
 
@@ -213,12 +233,11 @@ void GameController::add_pb_Action(ActionButton* pb_action)
 void GameController::actionButtonPressed(Action* action)
 {
     if (m_state != ControllerState::init) {
-        // TODO: end old actions and start new
-        return;
+        actionEnd();
     }
 
     if (action) {
-        actionStarted(action);
+        actionStart(action);
         return;
     } else {
         //TODO: This shouldn't happen (non-action are buttons grayed out). Remove maybe?
@@ -227,15 +246,15 @@ void GameController::actionButtonPressed(Action* action)
 }
 
 
-void GameController::actionStarted(Action* action)
+void GameController::actionStart(Action* action)
 {
     setInfo("Action " + action->name() + " activated "); //TODO: activeActionInfo() -> std::string
-    m_state = ControllerState::action_waiting_input;
+    changeState(action_waiting_input);
     m_currentAction = new CurrentAction(action->type(), m_active_unit->position(), action->cost());
 }
 
 
-void GameController::actionEnded()
+void GameController::actionEnd()
 {
     //TODO...
     if (m_currentAction) {
@@ -243,20 +262,8 @@ void GameController::actionEnded()
     }
     //TODO: reset colored fields...
     setInfo(defaultInfo());
-    m_state = ControllerState::init;
+    changeState(init);
     //TODO
-}
-
-
-std::vector<Action*>* GameController::getCurrentActions()
-{
-    if (!m_active_unit)
-    {
-        return nullptr;
-    }
-    else {
-        return m_active_unit->getActions();
-    }
 }
 
 
@@ -296,6 +303,7 @@ void GameController::noActiveUnitError()
 {
     std::cerr << "No active unit! TODO: Protect yourself from this!" << std::endl;
 }
+
 
 void GameController::fieldLeftClicked(std::pair<unsigned, unsigned> position)
 {

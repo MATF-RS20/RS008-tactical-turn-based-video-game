@@ -5,4 +5,6 @@
 
 using position_t = std::pair<unsigned, unsigned>;
 
+using paintSize_t = unsigned;
+
 #endif // TYPE_DEFINITIONS_H

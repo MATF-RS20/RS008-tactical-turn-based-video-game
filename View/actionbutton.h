@@ -22,9 +22,8 @@ public slots:
     void setActionsOnButtons(std::vector<Action*>* Actions);
 
 signals:
-    //TODO: redef clicked()?
     void actionUsed(Action* action);
-    void actionUsed(int button);
+    //void actionUsed(int button);
 
 private:
     Action* m_action;

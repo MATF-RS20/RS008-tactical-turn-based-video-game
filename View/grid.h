@@ -41,7 +41,8 @@ public:
 private:
     const unsigned
         m_row_size,
-        m_col_size,
+        m_col_size;
+    paintSize_t
         m_field_width,
         m_field_height;
     std::vector<std::vector<Field*>> m_matrix;

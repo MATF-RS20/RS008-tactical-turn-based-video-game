@@ -36,7 +36,8 @@ public:
 private:
     const unsigned
         m_row,
-        m_col,
+        m_col;
+    paintSize_t
         m_width,
         m_height;
     Unit* m_unit;
