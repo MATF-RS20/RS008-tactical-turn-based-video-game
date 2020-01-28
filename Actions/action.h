@@ -15,11 +15,13 @@ public:
 
     std::string description() const;
     std::string name() const;
+    gcAction type() const;
+    unsigned cost() const;
     virtual bool use(); //TODO: make action do something.
 
 protected:
 
-    int m_AP_cost;
+    unsigned m_AP_cost; //TODO: alias type with using
     gcAction m_gc_action;
     std::string m_description;
     std::string m_name;

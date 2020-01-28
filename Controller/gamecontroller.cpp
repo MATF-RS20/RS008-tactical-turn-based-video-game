@@ -102,7 +102,10 @@ void GameController::cancel()
 {
     //TODO: state dependant actions (init, action...).
     //if (m_state == init) {}
-    setInfo(defaultInfo());
+    if (m_state != init) {
+        actionEnded();
+    }
+    //setInfo(defaultInfo());
 }
 
 
@@ -110,7 +113,10 @@ void GameController::endTurn()
 {
     //std::cerr << "Game Controller endTurn() called!" << std::endl;
     if (!m_active_unit) {
-        noActiveUnitError();
+        noActiveUnitError(); //TODO
+    }
+    if (m_state != ControllerState::init) {
+        actionEnded();
     }
     m_turn++;
     m_active_unit->changeColor();
@@ -207,6 +213,7 @@ void GameController::add_pb_Action(ActionButton* pb_action)
 void GameController::actionButtonPressed(Action* action)
 {
     if (m_state != ControllerState::init) {
+        // TODO: end old actions and start new
         return;
     }
 
@@ -222,15 +229,20 @@ void GameController::actionButtonPressed(Action* action)
 
 void GameController::actionStarted(Action* action)
 {
-    setInfo("Action " + action->name() + " activated ");
-    m_state = ControllerState::action;
-    //TODO...
+    setInfo("Action " + action->name() + " activated "); //TODO: activeActionInfo() -> std::string
+    m_state = ControllerState::action_waiting_input;
+    m_currentAction = new CurrentAction(action->type(), m_active_unit->position(), action->cost());
 }
 
 
 void GameController::actionEnded()
 {
     //TODO...
+    if (m_currentAction) {
+        delete m_currentAction;
+    }
+    //TODO: reset colored fields...
+    setInfo(defaultInfo());
     m_state = ControllerState::init;
     //TODO
 }

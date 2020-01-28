@@ -25,3 +25,15 @@ std::string Action::description() const
 {
     return m_description;
 }
+
+
+gcAction Action::type() const
+{
+    return m_gc_action;
+}
+
+
+unsigned Action::cost() const
+{
+    return m_AP_cost;
+}

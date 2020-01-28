@@ -7,8 +7,9 @@
 #include "View/ui.h"
 #include "unitqueue.h"
 #include "controller_actions.h"
+#include "currentaction.h"
 
-enum ControllerState {init, action};
+enum ControllerState {init, action_waiting_input, action_ready};
 
 
 class GameController : public QObject
@@ -23,6 +24,7 @@ private:
         m_field_width,
         m_field_height; //TODO: Make uniform with grid!
     ControllerState m_state = init;
+    CurrentAction* m_currentAction = nullptr;
     std::vector<Player*>* m_players;
     // UI:
     QLabel* m_infoLabel;

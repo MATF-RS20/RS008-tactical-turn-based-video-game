@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     Actions/action.cpp \
+    Controller/currentaction.cpp \
     Controller/gamecontroller.cpp \
     Controller/signaler.cpp \
     Levels/levels.cpp \
@@ -34,6 +35,7 @@ SOURCES += \
 HEADERS += \
     Actions/action.h \
     Controller/controller_actions.h \
+    Controller/currentaction.h \
     Controller/gamecontroller.h \
     Controller/signaler.h \
     Controller/unitqueue.h \
