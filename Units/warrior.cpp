@@ -1,7 +1,7 @@
 #include "unit.h"
 
 
-Warrior::Warrior(int HP, int AP, int initiative, int row, int col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent)
+Warrior::Warrior(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent)
     : Unit(HP, AP, initiative, row, col, player, actions, parent)
 {
     //std::cerr<< "warrior constructor called"<< std::endl;
@@ -17,7 +17,6 @@ Warrior::~Warrior()
 std::string Warrior::info() const
 {
     return "Warrior\n"
-            "Id: " + std::to_string(getId()) + "; "
-            "Health: " + std::to_string(health().first) + '/' + std::to_string(health().second) + ";\n";
-            //"Player: " + m_player->name() + ";\n";
+           "Id: " + std::to_string(m_id) + "\n"
+           "Health: " + std::to_string(m_remaining_HP) + '/' + std::to_string(m_max_HP);
 }

@@ -46,7 +46,8 @@ HEADERS += \
     View/field.h \
     View/grid.h \
     View/ui.h \
-    player.h
+    player.h \
+    type_definitions.h
 
 FORMS += \
 

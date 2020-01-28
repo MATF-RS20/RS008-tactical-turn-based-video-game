@@ -1,6 +1,7 @@
 #ifndef FIELD_H
 #define FIELD_H
 
+#include "type_definitions.h"
 #include "Units/unit.h"
 #include "Controller/signaler.h"
 
@@ -8,7 +9,6 @@
 #include <QLabel>
 #include <iostream>
 
-using position_t = std::pair<unsigned, unsigned>;
 
 
 class Field : public QGraphicsItem

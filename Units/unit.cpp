@@ -1,7 +1,7 @@
 #include "unit.h"
 #include <QPainter>
 
-Unit::Unit(int HP,int AP,int initiative,int row,int col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent)
+Unit::Unit(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent)
     : QGraphicsItem(parent)
     , m_max_HP(HP)
     , m_max_AP(AP)
@@ -16,13 +16,6 @@ Unit::Unit(int HP,int AP,int initiative,int row,int col, Player* player, std::ve
     m_remaining_AP = m_max_AP;
 
     m_color = m_player ? m_player->color() : Qt::black;
-    //TODO: z depth?
-    //TODO: get setPos parameters from a source for both unit and field:
-
-    //int m_field_width = 40;
-    //int m_field_height = 40;
-    //auto pos = m_gController->calculatePos(position());
-    //this->setPos(pos.first, pos.second);
 }
 
 
@@ -43,8 +36,7 @@ unsigned Unit::getId() const
 
 QRectF Unit::boundingRect() const
 {
-    //TODO: m_width...
-    int m_width = 30;
+    int m_width = 30; //TODO: get dimensions from external source?
     int m_height = 30;
     return QRectF(-(m_width/2), -(m_height/2)
                   , m_width, m_height);
@@ -72,7 +64,7 @@ void Unit::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 }
 
 
-std::pair<unsigned, unsigned> Unit::position() const
+position_t Unit::position() const
 {
     return std::pair(m_row, m_col);
 }
@@ -100,9 +92,9 @@ void Unit::updateHealth(int change)
 
 std::string Unit::info() const
 {
-    return "Unit says hello!\n"
-            "Id: " + std::to_string(getId()) + "; "
-            "Health: (" + std::to_string(health().first) + '/' + std::to_string(health().second) + ");";
+    return "BaseUnit\n"
+           "Id: " + std::to_string(m_id) + "\n"
+           "Health: " + std::to_string(m_remaining_HP) + '/' + std::to_string(m_max_HP);
 }
 
 
@@ -140,29 +132,3 @@ Player* Unit::player()
 {
     return m_player;
 }
-
-
-
-
-/*void Unit::setPos(std::pair<qreal,qreal> position)
-{
-    QGraphicsItem::setPos(position.first, position.second);
-}*/
-
-
-/*void Unit::setController(GameController* gc)
-{
-    m_gController = gc;
-}*/
-
-
-/*bool Unit::move(std::pair<int,int> field){
-    if () {
-        //TODO: Some checks?
-        // subtract action points used for moving? (In action class?)
-        return true;
-    }
-    else {
-        return false;
-    }
-}*/

@@ -1,7 +1,7 @@
 #include "unit.h"
 
 
-Healer::Healer(int HP, int AP, int initiative, int row, int col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent)
+Healer::Healer(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent)
     : Unit(HP, AP, initiative, row, col, player, actions, parent)
 {
     //std::cerr<< "Healer constructor called"<< std::endl;
@@ -17,12 +17,12 @@ Healer::~Healer()
 std::string Healer::info() const
 {
     return "Healer\n"
-            "Id: " + std::to_string(getId()) + "; "
-            "Health: " + std::to_string(health().first) + '/' + std::to_string(health().second) + ";\n";
+           "Id: " + std::to_string(m_id) + "\n"
+           "Health: " + std::to_string(m_remaining_HP) + '/' + std::to_string(m_max_HP);
 }
 
 
-std::ostream& operator<<(std::ostream& out, const Healer& h)
+std::ostream& operator<<(std::ostream& out, const Healer& healer)
 {
-    return out<< "Healer (id=" << h.getId() <<") says hello!"<< std::endl;
+    return out << healer.info();
 }
