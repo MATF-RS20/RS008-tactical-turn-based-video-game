@@ -98,7 +98,7 @@ bool Grid::placeUnit(std::pair<int,int> field_position, Unit* unit)
     Field* f = (*this)[field_position];
     if (f)
     {
-        if (f->hasUnit()) {
+        if (f->unit()) {
             return false;
         }
         else {

@@ -6,6 +6,7 @@
 #define MAX_WIDTH  100
 #define MAX_HEIGHT 100
 
+
 Field::Field(unsigned row, unsigned col, Signaler* signaler, unsigned w, unsigned h, QGraphicsItem* parent)
     //: QObject(nullptr)
     : QGraphicsItem(parent)
@@ -28,6 +29,7 @@ QRectF Field::boundingRect() const
                   , w, h);
 }
 
+
 void Field::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
 {
     Q_UNUSED(option)
@@ -44,20 +46,12 @@ void Field::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 }
 
 
-void Field::LeftClicked()
-{
-    //signaler
-}
-
-
 void Field::mousePressEvent(QGraphicsSceneMouseEvent * event)
 {
     if (event->button() == Qt::LeftButton)
     {
+        if (m_signaler)
         m_signaler->fieldLeftClick(position());
-        // TODO: emit LeftClicked() -> emit wrapper(this) -> gc
-        //emit LeftClicked();
-        //std::cerr << "Left click on field: \n" << *this << std::endl;
     }
 
     if (event->button() == Qt::RightButton)
@@ -68,32 +62,15 @@ void Field::mousePressEvent(QGraphicsSceneMouseEvent * event)
 }
 
 
-unsigned Field::row() const
-{
-    return m_row;
-}
-
-
-unsigned Field::col() const
-{
-    return m_col;
-}
-
-
-std::pair<int, int> Field::position() const
+position_t Field::position() const
 {
     return std::pair(m_row, m_col);
 }
 
+
 Unit* Field::unit() const
 {
     return m_unit;
-}
-
-
-bool Field::hasUnit() const
-{
-    return m_unit != nullptr;
 }
 
 
@@ -109,11 +86,18 @@ void Field::removeUnit()
 }
 
 
-std::ostream& operator<<(std::ostream& out, const Field& f)
+std::string Field::info() const
 {
-    if (f.hasUnit())
-        return out << "Field: (" << f.row() << ", " << f.col() << "), with placed unit:\n"
-                   << *(f.unit());
+    if (m_unit)
+        return "Field: (" + std::to_string(m_row) + ", "  + std::to_string(m_col) +  ")\n"
+                + "Placed Unit:\n" + m_unit->info();
     else
-        return out << "Empty field: (" << f.row() << ", " << f.col() << ")";
+        return "Field: (" + std::to_string(m_row) + ", "  + std::to_string(m_col) +  ")"
+                + "No placed unit";
+}
+
+
+std::ostream& operator<<(std::ostream& out, const Field& field)
+{
+    return out << field.info();
 }

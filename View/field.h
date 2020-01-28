@@ -8,36 +8,30 @@
 #include <QLabel>
 #include <iostream>
 
+using position_t = std::pair<unsigned, unsigned>;
+
+
 class Field : public QGraphicsItem
 {
-    //Q_OBJECT
 
 public:
     Field(unsigned row, unsigned col, Signaler* signaler, unsigned w = 40, unsigned h = 40, QGraphicsItem* parent = nullptr);
 
-    // Okvir polja, za ponovno isrtavanje.
     QRectF boundingRect() const override;
 
-    //QPainterPath shape() const override;
     void paint(QPainter *painter,
-                   const QStyleOptionGraphicsItem *option,
-                   QWidget *widget) override;
+               const QStyleOptionGraphicsItem *option,
+               QWidget *widget) override;
 
-    //TODO: Show info on mouse click.
     void mousePressEvent(QGraphicsSceneMouseEvent * event) override;
 
-    //getters
-    unsigned row() const;
-    unsigned col() const;
-    std::pair<int, int> position() const;
-    Unit* unit() const;
 
-    bool hasUnit() const;
+    position_t position() const; //row, col
+    Unit* unit() const;
+    std::string info() const;
+
     void placeUnit(Unit* u);
     void removeUnit();
-
-    // pseudo-signals
-    void LeftClicked();
 
 private:
     const unsigned
