@@ -70,7 +70,7 @@ std::vector<std::vector<Field*>> Grid::matrix() const
 }
 
 
-bool Grid::validField(std::pair<unsigned,unsigned> position)
+bool Grid::validField(position_t position)
 {
     unsigned row, col;
     std::tie(row, col) = position;
@@ -84,7 +84,7 @@ bool Grid::validField(std::pair<unsigned,unsigned> position)
 }
 
 
-Field* Grid::operator[] (std::pair<unsigned,unsigned> position) {
+Field* Grid::operator[] (position_t position) {
     if (validField(position))
     {
         return m_matrix[position.first][position.second];
@@ -93,7 +93,7 @@ Field* Grid::operator[] (std::pair<unsigned,unsigned> position) {
 }
 
 
-bool Grid::placeUnit(std::pair<int,int> field_position, Unit* unit)
+bool Grid::placeUnit(position_t field_position, Unit* unit)
 {
     Field* f = (*this)[field_position];
     if (f)
@@ -110,7 +110,7 @@ bool Grid::placeUnit(std::pair<int,int> field_position, Unit* unit)
 }
 
 
-void Grid::removeUnit(std::pair<int,int> field_position)
+void Grid::removeUnit(position_t field_position)
 {
     Field* f = (*this)[field_position];
     f->removeUnit();

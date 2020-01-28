@@ -22,13 +22,14 @@ public:
 
     //QPainterPath shape() const override;
     void paint(QPainter *painter,
-                   const QStyleOptionGraphicsItem *option,
-                   QWidget *widget) override;
+               const QStyleOptionGraphicsItem *option,
+               QWidget *widget) override;
 
-    bool validField(std::pair<unsigned,unsigned> position);
-    Field* operator[] (std::pair<unsigned,unsigned> position);
-    bool placeUnit(std::pair<int,int> field_position, Unit* unit);
-    void removeUnit(std::pair<int,int> field_position);
+    bool validField(position_t position);
+    Field* operator[] (position_t position);
+    bool placeUnit(position_t field_position, Unit* unit);
+    void removeUnit(position_t field_position);
+
     std::pair<unsigned,unsigned> size() const;
     std::vector<std::vector<Field*>> matrix() const;
 
@@ -38,7 +39,7 @@ public:
     Signaler* signaler() const;
 
 private:
-    unsigned
+    const unsigned
         m_row_size,
         m_col_size,
         m_field_width,
