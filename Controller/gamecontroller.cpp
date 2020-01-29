@@ -101,6 +101,7 @@ void GameController::ok()
     }
     // TODO:
     // do the action...
+    m_ActionClosure->doAction();
     std::cerr << "Action done!" << std::endl;
     actionEnd();
 }
