@@ -76,6 +76,7 @@ Unit* Field::unit() const
 
 void Field::placeUnit(Unit* u)
 {
+    u->setParentItem(this);
     m_unit = u;
 }
 

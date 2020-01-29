@@ -61,9 +61,10 @@ bool GameController::addUnit(Unit* u)
     if (m_grid->placeUnit(field, u))
     {
         m_queue->push_back(u);
-        std::pair<qreal,qreal> pos = calculatePos(field);
-        u->setPos(pos.first, pos.second);
-        m_scene->addItem(u);
+        //std::pair<qreal,qreal> pos = calculatePos(field);
+        //u->setPos(pos.first, pos.second);
+        u->setParentItem((*m_grid)[field]);
+        //m_scene->addItem(u);
         return true;
     }
     return false;
