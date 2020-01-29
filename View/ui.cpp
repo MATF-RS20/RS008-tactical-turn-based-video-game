@@ -67,13 +67,11 @@ ui makeUI()
 
 
     //<ACTIONS>
-        //TODO: Delete this vector when deleting window? After adding to gc?
-        std::vector<ActionButton*> * actionButtons = new std::vector<ActionButton*>();
+        std::vector<ActionButton*> actionButtons = std::vector<ActionButton*>();
         for (unsigned i = 0; i < 10; i++)
         {
             ActionButton* pb_tmp = new ActionButton(i, window);
-            //TODO: add signals and slots!
-            actionButtons->push_back(pb_tmp);
+            actionButtons.push_back(pb_tmp);
             layoutH_actions->addWidget(pb_tmp);
         }
 

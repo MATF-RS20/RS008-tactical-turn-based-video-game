@@ -10,8 +10,6 @@
 #include "controller_actions.h"
 #include "currentaction.h"
 
-enum ControllerState {init, action_waiting_input, action_ready};
-
 
 class GameController : public QObject
 {

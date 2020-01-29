@@ -14,11 +14,10 @@ GameController::GameController(ui ui)
     , m_infoLabel(ui.showInfo)
     , m_scene(ui.scene)
 {
-    for (auto button: *(ui.actionButtons))
+    for (auto button: ui.actionButtons)
     {
         add_pb_Action(button);
     }
-    delete ui.actionButtons;
 
     QObject::connect(ui.pb_ok, SIGNAL(clicked()), this, SLOT(ok()));
     QObject::connect(ui.pb_cancel, SIGNAL(clicked()), this, SLOT(cancel()));
@@ -31,13 +30,11 @@ GameController::GameController(ui ui)
 GameController::~GameController()
 {
     delete m_queue;
-    delete m_players;
-    //TODO: window deletes grid?
-    //delete m_grid;
     for (auto player : *m_players)
     {
         delete player;
     }
+    delete m_players;
 }
 
 

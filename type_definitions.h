@@ -3,6 +3,8 @@
 
 #include <iostream>
 
+enum ControllerState {init, action_waiting_input, action_ready};
+
 using position_t = std::pair<unsigned, unsigned>;
 
 using paintSize_t = unsigned;
