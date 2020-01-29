@@ -35,6 +35,7 @@ GameController::~GameController()
         delete player;
     }
     delete m_players;
+    delete m_ActionClosure;
 }
 
 
@@ -247,15 +248,17 @@ void GameController::actionStart(Action* action)
 {
     setInfo("Action " + action->name() + " activated "); //TODO: activeActionInfo() -> std::string
     changeState(action_waiting_input);
-    m_currentAction = new CurrentAction(action->type(), m_active_unit->position(), action->cost());
+    m_ActionClosure = new ActionClosure(action->type(), m_active_unit->position(), action->cost());
+    //if (m_ActionClosure->)
 }
 
 
 void GameController::actionEnd()
 {
     //TODO...
-    if (m_currentAction) {
-        delete m_currentAction;
+    if (m_ActionClosure) {
+        delete m_ActionClosure;
+        m_ActionClosure = nullptr;
     }
     //TODO: reset colored fields...
     setInfo(defaultInfo());

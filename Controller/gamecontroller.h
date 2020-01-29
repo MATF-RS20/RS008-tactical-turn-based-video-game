@@ -7,7 +7,7 @@
 #include "View/actionbutton.h"
 #include "View/ui.h"
 #include "unitqueue.h"
-#include "currentaction.h"
+#include "action_closure.h"
 
 
 class GameController : public QObject
@@ -71,7 +71,7 @@ private:
         m_field_width,
         m_field_height; //TODO: Make uniform with grid!
     ControllerState m_state = init;
-    CurrentAction* m_currentAction = nullptr;
+    ActionClosure* m_ActionClosure = nullptr;
     std::vector<Player*>* m_players;
     // UI:
     QPushButton* m_pb_ok;

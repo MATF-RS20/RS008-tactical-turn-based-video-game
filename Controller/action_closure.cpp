@@ -1,6 +1,6 @@
-#include "currentaction.h"
+#include "action_closure.h"
 
-CurrentAction::CurrentAction(ActionType type, position_t position, AP_cost_t cost)
+ActionClosure::ActionClosure(ActionType type, position_t position, AP_cost_t cost)
 {
     std::cerr << "New closure: position = " << position << ", cost = " << std::to_string(cost) << std::endl;
     if (type == ActionType::move) {
@@ -9,7 +9,7 @@ CurrentAction::CurrentAction(ActionType type, position_t position, AP_cost_t cos
     }
 }
 
-CurrentAction::~CurrentAction()
+ActionClosure::~ActionClosure()
 {
     std::cerr << "Closure destroyed" << std::endl;
 }
