@@ -12,4 +12,7 @@ using AP_cost_t = unsigned;
 
 using paintSize_t = unsigned;
 
+
+std::ostream& operator<<(std::ostream& out, position_t position);
+
 #endif // TYPE_DEFINITIONS_H

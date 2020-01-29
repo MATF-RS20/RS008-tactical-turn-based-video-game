@@ -34,7 +34,6 @@ SOURCES += \
 
 HEADERS += \
     Actions/action.h \
-    Controller/controller_actions.h \
     Controller/currentaction.h \
     Controller/gamecontroller.h \
     Controller/signaler.h \

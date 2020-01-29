@@ -7,7 +7,6 @@
 #include "View/actionbutton.h"
 #include "View/ui.h"
 #include "unitqueue.h"
-#include "controller_actions.h"
 #include "currentaction.h"
 
 
@@ -56,7 +55,7 @@ public slots:
     void actionButtonPressed(Action* action);
     void actionStart(Action* action);
     void actionEnd();
-    void fieldLeftClicked(std::pair<unsigned, unsigned>);
+    void fieldLeftClicked(position_t);
 
 signals:
     void changeInfo(const QString&);

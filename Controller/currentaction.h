@@ -11,6 +11,7 @@ class CurrentAction
 public:
     //TODO: pass an action object or some kind of struct?
     CurrentAction(ActionType type, position_t position, AP_cost_t cost);
+    ~CurrentAction();
     void addFieldtoMap();
 
 private:

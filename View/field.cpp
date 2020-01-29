@@ -101,3 +101,8 @@ std::ostream& operator<<(std::ostream& out, const Field& field)
 {
     return out << field.info();
 }
+
+
+std::ostream& operator<<(std::ostream& out, position_t position) {
+    return out << "(" << position.first << "," << position.second << ")";
+}

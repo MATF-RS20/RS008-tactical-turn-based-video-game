@@ -46,7 +46,7 @@ void GameController::setGrid(Grid* grid)
     grid->setPos(0, 0);
     m_scene->addItem(grid);
     m_grid = grid;
-    QObject::connect(grid->signaler(), SIGNAL(fieldLeftClickSignal(std::pair<unsigned, unsigned>)), this, SLOT(fieldLeftClicked(std::pair<unsigned, unsigned>)) );
+    QObject::connect(grid->signaler(), SIGNAL(fieldLeftClickSignal(position_t)), this, SLOT(fieldLeftClicked(position_t)) );
 }
 
 
