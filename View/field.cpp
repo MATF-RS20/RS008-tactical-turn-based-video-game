@@ -77,6 +77,7 @@ Unit* Field::unit() const
 void Field::placeUnit(Unit* u)
 {
     u->setParentItem(this);
+    u->setPosition(position());
     m_unit = u;
 }
 
@@ -106,4 +107,10 @@ std::ostream& operator<<(std::ostream& out, const Field& field)
 
 std::ostream& operator<<(std::ostream& out, position_t position) {
     return out << "(" << position.first << "," << position.second << ")";
+}
+
+
+std::string to_string(position_t position)
+{
+    return "(" + std::to_string(position.first) + "," + std::to_string(position.second) + ")";
 }

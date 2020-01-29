@@ -15,4 +15,6 @@ using paintSize_t = unsigned;
 
 std::ostream& operator<<(std::ostream& out, position_t position);
 
+std::string to_string(position_t);
+
 #endif // TYPE_DEFINITIONS_H

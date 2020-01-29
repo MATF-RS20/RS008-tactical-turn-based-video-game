@@ -28,6 +28,8 @@ public:
     void updateHealth(int change);
     unsigned getId() const;
     std::vector<Action*>* getActions();
+
+    void setPosition(position_t);
     void setActions(std::vector<Action*>* newActions);
     void changeColor(QColor);
     void changeColor();

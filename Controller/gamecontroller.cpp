@@ -325,7 +325,7 @@ void GameController::fieldLeftClicked(position_t position)
     Field* field = (*m_grid)[position];
     if (!field)
         return;
-    if (m_state == action_waiting_input && m_ActionClosure)
+    if ((m_state == action_waiting_input) && m_ActionClosure)
     {
         //TODO: print msg to info label
         addFieldToClosure(field); //TODO: field or position?

@@ -132,3 +132,9 @@ Player* Unit::player()
 {
     return m_player;
 }
+
+void Unit::setPosition(position_t new_position)
+{
+    m_row = new_position.first;
+    m_col = new_position.second;
+}
