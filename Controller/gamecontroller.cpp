@@ -323,9 +323,10 @@ void GameController::fieldLeftClicked(position_t position)
     Field* field = (*m_grid)[position];
     if (!field)
         return;
-    addFieldToClosure(field); //TODO: field or position?
-    if (m_ActionClosure->fieldsToAdd() == 0) {
-        changeState(action_ready);
+    if (m_state == action_waiting_input && m_ActionClosure)
+    {
+        //TODO: print msg to info label
+        addFieldToClosure(field); //TODO: field or position?
     }
     //std::cerr << *field << std::endl;
     //setInfo("FIELD CLICKED TODO!!!");
@@ -335,4 +336,7 @@ void GameController::fieldLeftClicked(position_t position)
 void GameController::addFieldToClosure(Field* field)
 {
     m_ActionClosure->addField(field);
+    if (m_ActionClosure->fieldsToAdd() == 0) {
+        changeState(action_ready);
+    }
 }

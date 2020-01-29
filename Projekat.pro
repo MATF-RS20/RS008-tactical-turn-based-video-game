@@ -21,7 +21,6 @@ SOURCES += \
     Controller/gamecontroller.cpp \
     Controller/signaler.cpp \
     Levels/levels.cpp \
-    Levels/presets.cpp \
     Units/unit.cpp \
     Units/healer.cpp \
     Units/warrior.cpp \
@@ -39,7 +38,6 @@ HEADERS += \
     Controller/signaler.h \
     Controller/unitqueue.h \
     Levels/levels.h \
-    Levels/presets.h \
     Units/unit.h \
     View/actionbutton.h \
     View/field.h \
