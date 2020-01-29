@@ -12,7 +12,7 @@ class ActionClosure
 {
 public:
     //TODO: pass an action object or some kind of struct?
-    ActionClosure(ActionType type, Grid* grid, position_t position, AP_cost_t cost);
+    ActionClosure(ActionType type, Grid* grid, Unit* unit, AP_cost_t cost);
     ~ActionClosure();
 
     void setValidFields();
@@ -33,7 +33,7 @@ private:
 private:
     ActionType m_type;
     unsigned m_cost;
-    position_t m_position; //active unit position
+    Unit* m_unit;
     Grid* m_grid;
     std::map<position_t, AP_cost_t> m_valid_fields; //position/AP_cost
     unsigned m_fields_to_add;

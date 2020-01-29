@@ -103,7 +103,7 @@ void GameController::ok()
     // TODO:
     // do the action...
     m_ActionClosure->doAction();
-    std::cerr << "Action done!" << std::endl;
+    std::cerr << "Action done! (in gc ok)" << std::endl;
     actionEnd();
 }
 
@@ -258,7 +258,7 @@ void GameController::actionStart(Action* action)
 {
     setInfo("Action " + action->name() + " activated "); //TODO: activeActionInfo() -> std::string
     changeState(action_waiting_input);
-    m_ActionClosure = new ActionClosure(action->type(), m_grid, m_active_unit->position(), action->cost());
+    m_ActionClosure = new ActionClosure(action->type(), m_grid, m_active_unit, action->cost());
     if (m_ActionClosure->fieldsToAdd() == 0) {
         changeState(action_ready);
     }

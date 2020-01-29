@@ -1,11 +1,12 @@
 #include "action_closure.h"
 
-ActionClosure::ActionClosure(ActionType type, Grid* grid, position_t position, AP_cost_t cost)
-    : m_cost(cost)
-    , m_position(position)
+ActionClosure::ActionClosure(ActionType type, Grid* grid, Unit* unit, AP_cost_t cost)
+    : m_type(type)
+    , m_cost(cost)
+    , m_unit(unit)
     , m_grid(grid)
 {
-    std::cerr << "New closure: position = " << position << ", cost = " << std::to_string(cost) << std::endl;
+    std::cerr << "New closure: position = " << m_unit->position() << ", cost = " << std::to_string(cost) << std::endl;
     m_valid_fields = {};
 
     if (type == ActionType::move) {
@@ -29,14 +30,14 @@ void ActionClosure::addField(Field *field)
 {
     //check if field is valid...
     //TODO: add to map on closure creation
-    //std::cerr << "ACTION CLOSURE: addField called!" << std::endl;
-    //std::cerr << (bool)field << std::endl;
+    std::cerr << "ACTION CLOSURE: addField called!" << std::endl;
+    std::cerr << (bool)field << std::endl;
     if (m_fields_to_add < 1) {
         return;
     }
     if (!field || m_valid_fields.count(field->position()) == 0)
     {
-        //std::cerr << "ACTION CLOSURE: Field not added!" << std::endl;
+        std::cerr << "ACTION CLOSURE: Field not added!" << std::endl;
         return;
     }
     m_added_fields.push_back(field->position());
@@ -61,8 +62,8 @@ void ActionClosure::setValidFields()
     if (!m_grid) {
         return;
     }
-    unsigned row = m_position.first,
-             col = m_position.second,
+    unsigned row = m_unit->position().first,
+             col = m_unit->position().second,
              rows = m_grid->size().first,
              cols = m_grid-> size().second;
     //TODO: based on action type
@@ -87,6 +88,7 @@ void ActionClosure::setValidFields()
 
 void ActionClosure::move(Unit* unit, position_t position)
 {
+    std::cerr << "MOVEEE" << std::endl;
     if (!m_grid) {
         //TODO: this shouldn't happen, throw some error?
         return;
@@ -118,9 +120,12 @@ void ActionClosure::move(Unit* unit, position_t position)
 
 void ActionClosure::doAction()
 {
+    std::cerr << "doAction!" << std::endl;
     if (m_type == ActionType::move) {
+        std::cerr << "ActionType::move!" << std::endl;
         if (m_added_fields.size() > 0) {
-            move((*m_grid)[m_position]->unit(), m_added_fields[0]);
+            std::cerr << "size > 0" << std::endl;
+            move(m_unit, m_added_fields[0]);
         }
     }
 }
