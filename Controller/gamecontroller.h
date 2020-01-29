@@ -43,6 +43,8 @@ private:
     void resetActions();
     void updatePlayer();
     void changeState(ControllerState state);
+    void addFieldToClosure(Field* field);
+
     //Errors:
     void noActiveUnitError();
 

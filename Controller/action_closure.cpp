@@ -13,3 +13,21 @@ ActionClosure::~ActionClosure()
 {
     std::cerr << "Closure destroyed" << std::endl;
 }
+
+
+unsigned ActionClosure::fieldsToAdd() const
+{
+    return m_fields_to_add;
+}
+
+void ActionClosure::addField(Field *field)
+{
+    //check if field is valid...
+    //TODO: add to map on closure creation
+    std::cerr << "Adding field... TODO: add the field!" << std::endl;
+
+    //TODO: add the field before this!
+    if (m_fields_to_add > 0) {
+        m_fields_to_add--;
+    }
+}

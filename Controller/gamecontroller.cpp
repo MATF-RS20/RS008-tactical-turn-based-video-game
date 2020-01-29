@@ -94,7 +94,15 @@ QString GameController::getInfo()
 
 void GameController::ok()
 {
-    std::cerr << "Ok pressed!" << std::endl;
+    //std::cerr << "Ok pressed!" << std::endl;
+    if (!m_ActionClosure || m_state != action_ready)
+    {
+        return;
+    }
+    // TODO:
+    // do the action...
+    std::cerr << "Action done!" << std::endl;
+    actionEnd();
 }
 
 
@@ -249,7 +257,9 @@ void GameController::actionStart(Action* action)
     setInfo("Action " + action->name() + " activated "); //TODO: activeActionInfo() -> std::string
     changeState(action_waiting_input);
     m_ActionClosure = new ActionClosure(action->type(), m_active_unit->position(), action->cost());
-    //if (m_ActionClosure->)
+    if (m_ActionClosure->fieldsToAdd() == 0) {
+        changeState(action_ready);
+    }
 }
 
 
@@ -305,12 +315,24 @@ void GameController::noActiveUnitError()
 }
 
 
-void GameController::fieldLeftClicked(std::pair<unsigned, unsigned> position)
+void GameController::fieldLeftClicked(position_t position)
 {
-    //if (m_grid) //?
+    if (!m_grid) {
+        return;
+    }
     Field* field = (*m_grid)[position];
     if (!field)
         return;
-    std::cerr << *field << std::endl;
-    setInfo("FIELD CLICKED TODO!!!");
+    addFieldToClosure(field); //TODO: field or position?
+    if (m_ActionClosure->fieldsToAdd() == 0) {
+        changeState(action_ready);
+    }
+    //std::cerr << *field << std::endl;
+    //setInfo("FIELD CLICKED TODO!!!");
+}
+
+
+void GameController::addFieldToClosure(Field* field)
+{
+    m_ActionClosure->addField(field);
 }
