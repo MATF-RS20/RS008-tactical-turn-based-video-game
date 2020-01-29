@@ -1,18 +1,16 @@
 #ifndef CURRENTACTION_H
 #define CURRENTACTION_H
 
-#include "controller_actions.h"
+#include "type_definitions.h"
 
 #include <map>
 
-using position_t = std::pair<unsigned, unsigned>;
-using AP_cost_t = unsigned;
 
 class CurrentAction
 {
 public:
     //TODO: pass an action object or some kind of struct?
-    CurrentAction(gcAction type, position_t position, AP_cost_t cost);
+    CurrentAction(ActionType type, position_t position, AP_cost_t cost);
     void addFieldtoMap();
 
 private:

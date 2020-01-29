@@ -1,6 +1,6 @@
 #include "action.h"
 
-Action::Action(std::string name, int AP_cost, gcAction type)
+Action::Action(std::string name, int AP_cost, ActionType type)
     : m_AP_cost(AP_cost)
     , m_gc_action(type)
     , m_name(name)
@@ -27,7 +27,7 @@ std::string Action::description() const
 }
 
 
-gcAction Action::type() const
+ActionType Action::type() const
 {
     return m_gc_action;
 }
