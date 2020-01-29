@@ -1,6 +1,7 @@
 #ifndef SIGNALER_H
 #define SIGNALER_H
 
+#include "type_definitions.h"
 
 #include <QObject>
 
@@ -13,10 +14,10 @@ class Signaler : public QObject
     Q_OBJECT
 public:
     explicit Signaler(QObject *parent = nullptr);
-    void fieldLeftClick(std::pair<unsigned, unsigned> position);
+    void fieldLeftClick(position_t position);
 
 signals:
-    void fieldLeftClickSignal(std::pair<unsigned, unsigned>);
+    void fieldLeftClickSignal(position_t);
 
 };
 
