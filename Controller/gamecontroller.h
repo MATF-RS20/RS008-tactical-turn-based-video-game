@@ -33,7 +33,7 @@ public:
     void setInfo(std::string msg);
     QString getInfo();
 
-    bool moveUnit (Unit* unit, std::pair<unsigned, unsigned> position);
+    bool moveUnit (Unit* unit, position_t position);
     //This is for drawing units, setPos()!
     std::pair<qreal, qreal> calculatePos(position_t position) const;
     std::string defaultInfo() const;

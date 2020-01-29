@@ -256,7 +256,7 @@ void GameController::actionStart(Action* action)
 {
     setInfo("Action " + action->name() + " activated "); //TODO: activeActionInfo() -> std::string
     changeState(action_waiting_input);
-    m_ActionClosure = new ActionClosure(action->type(), m_active_unit->position(), action->cost());
+    m_ActionClosure = new ActionClosure(action->type(), m_grid, m_active_unit->position(), action->cost());
     if (m_ActionClosure->fieldsToAdd() == 0) {
         changeState(action_ready);
     }
@@ -328,7 +328,7 @@ void GameController::fieldLeftClicked(position_t position)
         //TODO: print msg to info label
         addFieldToClosure(field); //TODO: field or position?
     }
-    //std::cerr << *field << std::endl;
+    std::cerr << *field << std::endl;
     //setInfo("FIELD CLICKED TODO!!!");
 }
 

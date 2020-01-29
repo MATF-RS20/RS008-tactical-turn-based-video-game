@@ -18,5 +18,6 @@ std::string Warrior::info() const
 {
     return "Warrior\n"
            "Id: " + std::to_string(m_id) + "\n"
+           //"Position " + std::to_string()
            "Health: " + std::to_string(m_remaining_HP) + '/' + std::to_string(m_max_HP);
 }
