@@ -70,6 +70,12 @@ position_t Unit::position() const
 }
 
 
+AP_cost_t Unit::AP_left() const
+{
+    return static_cast<AP_cost_t>(m_remaining_AP);
+}
+
+
 std::pair<int, int> Unit::health() const
 {
     return std::pair(m_remaining_HP, m_max_HP);

@@ -25,8 +25,9 @@ public:
                const QStyleOptionGraphicsItem *option,
                QWidget *widget) override;
 
-    bool validField(position_t position);
-    Field* operator[] (position_t position);
+    bool validField(position_t position) const;
+    Field* at(position_t position) const;
+    Field* operator[] (position_t position) const;
     bool placeUnit(position_t field_position, Unit* unit);
     void removeUnit(position_t field_position);
 

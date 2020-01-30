@@ -53,8 +53,8 @@ void ActionClosure::setValidFields(ActionType type)
     }
     unsigned row = m_unit->position().first,
              col = m_unit->position().second,
-             rows = m_grid->size().first,
-             cols = m_grid-> size().second;
+             rows = m_grid->size().first - 1, //subtract 1 in grid definition?
+             cols = m_grid-> size().second - 1;
 
     //TODO make position_t a class?
     unsigned left_bound = col > 0 ? col-1 : 0,
@@ -70,9 +70,19 @@ void ActionClosure::setValidFields(ActionType type)
         {
             if (validField({row,col}, type)) {
                 m_valid_fields.insert({{row,col}, m_cost});
-                //TODO: color valid fields?
             }
         }
+    }
+    colorValidFields(DEFAULT_HIGHLIGHT_FIELD_COLOR);
+}
+
+
+void ActionClosure::colorValidFields(QColor color)
+{
+    for (auto it = m_valid_fields.begin(); it != m_valid_fields.end(); it++)
+    {
+        //std::cerr << it->first << std::endl;
+        m_grid->at(it->first)->setColor(color);
     }
 }
 
@@ -84,6 +94,12 @@ bool ActionClosure::validField(position_t position, ActionType type)
     // move -> no unit, not previous position
     // damage -> opponents unit!
     // heal -> our unit (same player as active unit)!
+    if (type == ActionType::move)
+    {
+        if (m_grid->at(position)->unit()) { //TODO: This isn't safe! Check pointers!
+            return false;
+        }
+    }
     return true;
 }
 
@@ -107,8 +123,6 @@ void ActionClosure::move(Unit* unit, position_t position)
     if (m_grid->placeUnit(position, unit))
     {
         m_grid->removeUnit(old_position);
-
-        m_unit->updateAP(m_cost);
         return;
     }
     else {
@@ -126,6 +140,8 @@ void ActionClosure::doAction()
             move(m_unit, m_added_fields[0]);
         }
     }
+    m_unit->updateAP(m_cost);
+    colorValidFields(DEFAULT_FIELD_COLOR);
 }
 
 

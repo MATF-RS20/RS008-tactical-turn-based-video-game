@@ -15,7 +15,7 @@ Field::Field(unsigned row, unsigned col, Signaler* signaler, unsigned w, unsigne
     , m_width (w < MAX_WIDTH ? w : MAX_WIDTH)
     , m_height(h < MAX_HEIGHT ? h : MAX_HEIGHT)
     , m_unit(nullptr)
-    , m_color(Qt::white) // (int R, int G, int B)?
+    , m_color(DEFAULT_FIELD_COLOR) // (int R, int G, int B)?
     , m_signaler(signaler)
 {}
 
@@ -88,6 +88,20 @@ bool Field::placeUnit(Unit* u)
 void Field::removeUnit()
 {
     m_unit = nullptr;
+}
+
+
+void Field::setColor(QColor new_color)
+{
+    m_color = new_color;
+    this->update();
+}
+
+
+void Field::setColor()
+{
+    m_color = DEFAULT_FIELD_COLOR;
+    this->update();
 }
 
 

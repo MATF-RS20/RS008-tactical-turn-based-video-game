@@ -256,6 +256,14 @@ void GameController::actionButtonPressed(Action* action)
 
 void GameController::actionStart(Action* action)
 {
+    if(!action) {
+        return;
+    }
+    if (action->cost() > m_active_unit->AP_left()) {
+        setInfo("Not enough AP left!");
+        //TODO: show default info. New button?
+        return;
+    }
     setInfo("Action " + action->name() + " activated "); //TODO: activeActionInfo() -> std::string
     changeState(action_waiting_input);
     m_ActionClosure = new ActionClosure(action->type(), m_grid, m_active_unit, action->cost());

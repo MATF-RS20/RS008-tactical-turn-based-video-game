@@ -7,6 +7,8 @@
 
 #include <map>
 
+#define DEFAULT_HIGHLIGHT_FIELD_COLOR Qt::gray
+
 
 class ActionClosure
 {
@@ -31,6 +33,7 @@ private:
     bool validField(position_t position, ActionType type); //TODO: Use fields not positions!?
     void addFieldtoMap();
     void setNumberOfFieldsToAdd(ActionType type);
+    void colorValidFields(QColor color);
 
 private:
     ActionType m_type;

@@ -9,6 +9,7 @@
 #include <QLabel>
 #include <iostream>
 
+#define DEFAULT_FIELD_COLOR Qt::white
 
 
 class Field : public QGraphicsItem
@@ -29,6 +30,9 @@ public:
     position_t position() const; //row, col
     Unit* unit() const;
     std::string info() const;
+
+    void setColor(QColor new_color);
+    void setColor();
 
     bool placeUnit(Unit* u);
     void removeUnit();

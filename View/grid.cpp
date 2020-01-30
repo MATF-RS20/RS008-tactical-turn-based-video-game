@@ -71,7 +71,7 @@ std::vector<std::vector<Field*>> Grid::matrix() const
 }
 
 
-bool Grid::validField(position_t position)
+bool Grid::validField(position_t position) const
 {
     unsigned row, col;
     std::tie(row, col) = position;
@@ -85,12 +85,19 @@ bool Grid::validField(position_t position)
 }
 
 
-Field* Grid::operator[] (position_t position) {
+Field* Grid::at(position_t position) const
+{
     if (validField(position))
     {
         return m_matrix[position.first][position.second];
     }
     return nullptr;
+}
+
+
+Field* Grid::operator[] (position_t position) const
+{
+    return at(position);
 }
 
 
