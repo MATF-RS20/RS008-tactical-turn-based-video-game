@@ -36,6 +36,7 @@ public:
     Player* player();
 
     virtual std::string info() const;
+    virtual std::string unitClass() const;
 
 protected:
     Unit(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent = nullptr);
@@ -68,9 +69,10 @@ class Warrior: public Unit
 {
 public:
     Warrior(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent = nullptr);
+    //Warrior(Unit u); //?
     ~Warrior() override;
 
-    std::string info() const override;
+    virtual std::string unitClass() const override;
 };
 
 
@@ -82,7 +84,7 @@ public:
     Healer(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent = nullptr);
     ~Healer() override;
 
-    std::string info() const override;
+    virtual std::string unitClass() const override;
 };
 
 

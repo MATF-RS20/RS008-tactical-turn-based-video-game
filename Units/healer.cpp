@@ -14,11 +14,9 @@ Healer::~Healer()
 }
 
 
-std::string Healer::info() const
+std::string Healer::unitClass() const
 {
-    return "Healer\n"
-           "Id: " + std::to_string(m_id) + "\n"
-           "Health: " + std::to_string(m_remaining_HP) + '/' + std::to_string(m_max_HP);
+    return "Healer";
 }
 
 

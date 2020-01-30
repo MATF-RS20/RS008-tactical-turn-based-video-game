@@ -14,10 +14,13 @@ Warrior::~Warrior()
 }
 
 
-std::string Warrior::info() const
+std::string Warrior::unitClass() const
 {
-    return "Warrior\n"
-           "Id: " + std::to_string(m_id) + "\n"
-           "Position: " + to_string(position()); +
-           "Health: " + std::to_string(m_remaining_HP) + '/' + std::to_string(m_max_HP);
+    return "Warrior";
+}
+
+
+std::ostream& operator<<(std::ostream& out, const Warrior& warrior)
+{
+    return out << warrior.info();
 }

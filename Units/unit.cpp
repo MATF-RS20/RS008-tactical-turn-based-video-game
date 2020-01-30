@@ -92,9 +92,17 @@ void Unit::updateHealth(int change)
 
 std::string Unit::info() const
 {
-    return "BaseUnit\n"
-           "Id: " + std::to_string(m_id) + "\n"
-           "Health: " + std::to_string(m_remaining_HP) + '/' + std::to_string(m_max_HP);
+    return unitClass() + "\n"
+    "Id: " + std::to_string(m_id) + "\n"
+    "Position: " + to_string(position()) + "\n"
+    "Health: " + std::to_string(m_remaining_HP) + '/' + std::to_string(m_max_HP);
+    "Action Points: " + std::to_string(m_remaining_AP) + '/' + std::to_string(m_max_AP);
+}
+
+
+std::string Unit::unitClass() const
+{
+    return "Base Unit";
 }
 
 
