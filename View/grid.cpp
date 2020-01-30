@@ -45,7 +45,8 @@ void Grid::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 Grid::~Grid()
 {
     //TODO: See if any double deleted.
-    for (auto col : m_matrix)
+    //check if qgraphics item parent deltes child
+    /*for (auto col : m_matrix)
     {
         for (auto field : col)
         {
@@ -54,7 +55,7 @@ Grid::~Grid()
         }
         col.clear();
     }
-    m_matrix.clear();
+    m_matrix.clear();*/
 }
 
 
@@ -98,13 +99,7 @@ bool Grid::placeUnit(position_t field_position, Unit* unit)
     Field* f = (*this)[field_position];
     if (f)
     {
-        if (f->unit()) {
-            return false;
-        }
-        else {
-            f->placeUnit(unit);
-            return true;
-        }
+        return f->placeUnit(unit);
     }
     return false;
 }
@@ -113,7 +108,9 @@ bool Grid::placeUnit(position_t field_position, Unit* unit)
 void Grid::removeUnit(position_t field_position)
 {
     Field* f = (*this)[field_position];
-    f->removeUnit();
+    if (f) {
+        f->removeUnit();
+    }
 }
 
 

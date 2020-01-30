@@ -30,7 +30,7 @@ public:
     Unit* unit() const;
     std::string info() const;
 
-    void placeUnit(Unit* u);
+    bool placeUnit(Unit* u);
     void removeUnit();
 
 private:

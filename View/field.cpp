@@ -56,8 +56,7 @@ void Field::mousePressEvent(QGraphicsSceneMouseEvent * event)
 
     if (event->button() == Qt::RightButton)
     {
-        std::cerr << "Right click on field: ("
-                  << m_row << ", " << m_col << ")" << std::endl;
+        //std::cerr << "Right click on field: (" << m_row << ", " << m_col << ")" << std::endl;
     }
 }
 
@@ -74,11 +73,15 @@ Unit* Field::unit() const
 }
 
 
-void Field::placeUnit(Unit* u)
+bool Field::placeUnit(Unit* u)
 {
+    if (unit()) {
+        return false;
+    }
     u->setParentItem(this);
     u->setPosition(position());
     m_unit = u;
+    return true;
 }
 
 
