@@ -8,15 +8,8 @@ ActionClosure::ActionClosure(ActionType type, Grid* grid, Unit* unit, AP_cost_t 
 {
     //std::cerr << "New closure: position = " << m_unit->position() << ", cost = " << std::to_string(cost) << std::endl;
     m_valid_fields = {};
-
-    if (type == ActionType::move) {
-        m_fields_to_add = 1;
-        setValidFields();
-    }
-    if (type == ActionType::damage) {
-        m_fields_to_add = 1;
-        setValidFields();
-    }
+    setNumberOfFieldsToAdd(type);
+    setValidFields(type);
 }
 
 ActionClosure::~ActionClosure()
@@ -52,7 +45,7 @@ void ActionClosure::addField(Field *field)
 }
 
 
-void ActionClosure::setValidFields()
+void ActionClosure::setValidFields(ActionType type)
 {
     //TODO setValidFields(action_type, range...)
     if (!m_grid) {
@@ -63,23 +56,35 @@ void ActionClosure::setValidFields()
              rows = m_grid->size().first,
              cols = m_grid-> size().second;
 
-    //TODO: based on action type
-    // add only (or don't add) fields with units.
-    // move -> no unit, damage -> unit!
-
     //TODO make position_t a class?
     unsigned left_bound = col > 0 ? col-1 : 0,
              right_bound = col < cols ? col+1 : cols,
              top_bound = row > 0 ? row-1 : 0,
             bottom_bound = row < rows ? row+1 : rows;
 
+
+    //TODO: clean up this code. Filter maybe?
     for (unsigned row = top_bound; row <= bottom_bound; row++)
     {
         for (unsigned col = left_bound; col <= right_bound; col++)
         {
-            m_valid_fields.insert({{row,col}, m_cost});
+            if (validField({row,col}, type)) {
+                m_valid_fields.insert({{row,col}, m_cost});
+                //TODO: color valid fields?
+            }
         }
     }
+}
+
+
+bool ActionClosure::validField(position_t position, ActionType type)
+{
+    //TODO: based on action type or position
+    // add only (or don't add) fields with units.
+    // move -> no unit, not previous position
+    // damage -> opponents unit!
+    // heal -> our unit (same player as active unit)!
+    return true;
 }
 
 
@@ -114,9 +119,30 @@ void ActionClosure::move(Unit* unit, position_t position)
 void ActionClosure::doAction()
 {
     if (m_type == ActionType::move) {
-        //std::cerr << "ActionType::move!" << std::endl;
+        //TODO: check vector size in a generic way
+        // to work for move, damage, heal ...
+        // based on setNumberOfFieldsToAdd logic
         if (m_added_fields.size() > 0) {
             move(m_unit, m_added_fields[0]);
         }
+    }
+}
+
+
+void ActionClosure::setNumberOfFieldsToAdd(ActionType type)
+{
+    switch (type) {
+
+    case ActionType::move :
+        m_fields_to_add = 1;
+        break;
+
+    case ActionType::damage :
+        m_fields_to_add = 1;
+        break;
+
+    case ActionType::heal :
+        m_fields_to_add = 1;
+        break;
     }
 }

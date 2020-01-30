@@ -4,7 +4,7 @@
 #include <iostream>
 
 enum ControllerState { init, action_waiting_input, action_ready };
-enum class ActionType { move, damage };
+enum class ActionType { move, damage, heal };
 
 using position_t = std::pair<unsigned, unsigned>;
 

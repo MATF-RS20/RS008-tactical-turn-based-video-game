@@ -15,9 +15,9 @@ public:
     ActionClosure(ActionType type, Grid* grid, Unit* unit, AP_cost_t cost);
     ~ActionClosure();
 
-    void setValidFields();
     void addField(Field* field);
     unsigned fieldsToAdd() const;
+
 
     void doAction();
     //Actions
@@ -27,8 +27,10 @@ public:
 
 
 private:
-    bool validField();
+    void setValidFields(ActionType type);
+    bool validField(position_t position, ActionType type); //TODO: Use fields not positions!?
     void addFieldtoMap();
+    void setNumberOfFieldsToAdd(ActionType type);
 
 private:
     ActionType m_type;
