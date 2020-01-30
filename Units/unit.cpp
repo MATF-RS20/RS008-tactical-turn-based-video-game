@@ -90,12 +90,23 @@ void Unit::updateHealth(int change)
 }
 
 
+void Unit::updateAP(int change)
+{
+    //std::cerr << "Update AP" << std::endl;
+    int new_AP = m_remaining_AP - change;
+    new_AP = new_AP > m_max_AP ? m_max_AP : new_AP;
+    new_AP = new_AP < 0 ? 0 : new_AP;
+
+    m_remaining_AP = new_AP;
+}
+
+
 std::string Unit::info() const
 {
     return unitClass() + "\n"
     "Id: " + std::to_string(m_id) + "\n"
     "Position: " + to_string(position()) + "\n"
-    "Health: " + std::to_string(m_remaining_HP) + '/' + std::to_string(m_max_HP);
+    "Health: " + std::to_string(m_remaining_HP) + '/' + std::to_string(m_max_HP) + "\n"
     "Action Points: " + std::to_string(m_remaining_AP) + '/' + std::to_string(m_max_AP);
 }
 

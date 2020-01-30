@@ -94,7 +94,7 @@ std::string Field::info() const
         return "Field: (" + std::to_string(m_row) + ", "  + std::to_string(m_col) +  ")\n"
                 + "Placed Unit:\n" + m_unit->info();
     else
-        return "Field: (" + std::to_string(m_row) + ", "  + std::to_string(m_col) +  ")"
+        return "Field: (" + std::to_string(m_row) + ", "  + std::to_string(m_col) +  ")\n"
                 + "No placed unit";
 }
 

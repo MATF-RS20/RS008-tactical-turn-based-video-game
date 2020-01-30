@@ -26,6 +26,7 @@ public:
     position_t position() const;
     std::pair<int, int> health() const;
     void updateHealth(int change);
+    void updateAP(int change);
     unsigned getId() const;
     std::vector<Action*>* getActions();
 

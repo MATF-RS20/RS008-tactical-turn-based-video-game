@@ -3,8 +3,8 @@
 
 #include <iostream>
 
-enum ControllerState {init, action_waiting_input, action_ready};
-enum class ActionType { move };
+enum ControllerState { init, action_waiting_input, action_ready };
+enum class ActionType { move, damage };
 
 using position_t = std::pair<unsigned, unsigned>;
 
