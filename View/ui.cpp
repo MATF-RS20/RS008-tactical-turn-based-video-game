@@ -4,6 +4,8 @@
 #include <QVBoxLayout>
 #include <QGraphicsView>
 
+#define MAX_NUMBER_OF_ACTION_BUTTONS 10
+
 ui makeUI()
 {
     QWidget* window = new QWidget();
@@ -68,7 +70,7 @@ ui makeUI()
 
     //<ACTIONS>
         std::vector<ActionButton*> actionButtons = std::vector<ActionButton*>();
-        for (unsigned i = 0; i < 10; i++)
+        for (unsigned i = 0; i < MAX_NUMBER_OF_ACTION_BUTTONS; i++)
         {
             ActionButton* pb_tmp = new ActionButton(i, window);
             actionButtons.push_back(pb_tmp);
