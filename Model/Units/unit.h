@@ -1,9 +1,9 @@
 #ifndef UNIT_H
 #define UNIT_H
 
-#include "type_definitions.h"
+#include "Model/type_definitions.h"
 #include "Actions/action.h"
-#include "player.h"
+#include "Model/player.h"
 
 #include <QGraphicsItem>
 

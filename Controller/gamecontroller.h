@@ -1,8 +1,8 @@
 #ifndef GAMECONTROLLER_H
 #define GAMECONTROLLER_H
 
-#include "type_definitions.h"
-#include "Units/unit.h"
+#include "Model/type_definitions.h"
+#include "Model/Units/unit.h"
 #include "View/grid.h"
 #include "View/actionbutton.h"
 #include "View/ui.h"

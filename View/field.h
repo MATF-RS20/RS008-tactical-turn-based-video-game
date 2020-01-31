@@ -1,8 +1,8 @@
 #ifndef FIELD_H
 #define FIELD_H
 
-#include "type_definitions.h"
-#include "Units/unit.h"
+#include "Model/type_definitions.h"
+#include "Model/Units/unit.h"
 #include "Controller/signaler.h"
 
 #include <QGraphicsItem>

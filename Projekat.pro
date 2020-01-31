@@ -21,15 +21,15 @@ SOURCES += \
     Controller/gamecontroller.cpp \
     Controller/signaler.cpp \
     Levels/levels.cpp \
-    Units/unit.cpp \
-    Units/healer.cpp \
-    Units/warrior.cpp \
+    Model/Units/unit.cpp \
+    Model/Units/healer.cpp \
+    Model/Units/warrior.cpp \
+    Model/player.cpp \
     View/actionbutton.cpp \
     View/field.cpp \
     View/grid.cpp \
     View/ui.cpp \
-    main.cpp \
-    player.cpp
+    main.cpp
 
 HEADERS += \
     Actions/action.h \
@@ -38,13 +38,13 @@ HEADERS += \
     Controller/signaler.h \
     Controller/unitqueue.h \
     Levels/levels.h \
-    Units/unit.h \
+    Model/Units/unit.h \
+    Model/player.h \
+    Model/type_definitions.h \
     View/actionbutton.h \
     View/field.h \
     View/grid.h \
-    View/ui.h \
-    player.h \
-    type_definitions.h
+    View/ui.h
 
 FORMS += \
 

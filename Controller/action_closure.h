@@ -1,7 +1,7 @@
 #ifndef ACTION_CLOSURE_H
 #define ACTION_CLOSURE_H
 
-#include "type_definitions.h"
+#include "Model/type_definitions.h"
 #include "View/field.h"
 #include "View/grid.h"
 
