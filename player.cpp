@@ -14,3 +14,8 @@ std::string Player::name() const
 {
     return m_name;
 }
+
+bool Player::operator==(Player other)
+{
+    return m_name == other.name();
+}

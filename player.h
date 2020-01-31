@@ -10,6 +10,7 @@ public:
 
     QColor color() const;
     std::string name() const;
+    bool operator==(Player other);
 
 private:
     QColor m_color;

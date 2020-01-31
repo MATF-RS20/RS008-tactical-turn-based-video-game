@@ -26,10 +26,6 @@ unsigned ActionClosure::fieldsToAdd() const
 
 void ActionClosure::addField(Field *field)
 {
-    //check if field is valid...
-    //TODO: add to map on closure creation
-    //std::cerr << "ACTION CLOSURE: addField called!" << std::endl;
-    //std::cerr << (bool)field << std::endl;
     if (m_fields_to_add < 1) {
         return;
     }
@@ -38,7 +34,7 @@ void ActionClosure::addField(Field *field)
         //std::cerr << "ACTION CLOSURE: Field not added!" << std::endl;
         return;
     }
-    m_added_fields.push_back(field->position());
+    m_added_fields.push_back(field->position()); //TODO: cost from map.
 
     if (m_fields_to_add > 0) {
         m_fields_to_add--;
@@ -82,7 +78,6 @@ void ActionClosure::colorValidFields(QColor color)
 {
     for (auto it = m_valid_fields.begin(); it != m_valid_fields.end(); it++)
     {
-        //std::cerr << it->first << std::endl;
         m_grid->at(it->first)->setColor(color);
     }
 }
@@ -90,20 +85,59 @@ void ActionClosure::colorValidFields(QColor color)
 
 bool ActionClosure::validField(position_t position, ActionType type)
 {
-    //TODO: based on action type or position
-    // add only (or don't add) fields with units.
-    // move -> no unit, not previous position
-    // damage -> opponents unit!
-    // heal -> our unit (same player as active unit)!
-    if (type == ActionType::move)
-    {
-        if (m_grid->at(position)->unit()) { //TODO: This isn't safe! Check pointers!
-            return false;
-        }
+    if (!m_grid) {
+        return false;
     }
-    return true;
+    Field* field = m_grid->at(position);
+    return validField(field, type);
 }
 
+
+bool ActionClosure::validField(Field* field, ActionType type)
+{
+    if (!field) {
+        return false;
+    }
+
+    if (type == ActionType::move)
+    {
+        if (field->unit()) {
+            return false;
+        }
+        return true;
+    }
+
+    if (type == ActionType::damage)
+    {
+        Unit* target = field->unit();
+        if (!target || target == m_unit) {
+            return false;
+        }
+        if (target->player() != m_unit->player()) {
+            return true;
+        }
+        return false;
+    }
+
+    if (type == ActionType::heal)
+    {
+        Unit* target = field->unit();
+        if (!target) {
+            return false;
+        }
+        if (samePlayer(m_unit, target)) {
+            return true;
+        }
+        return false;
+    }
+
+    return false;
+}
+
+
+bool samePlayer(Unit* unit1, Unit* unit2) {
+    return *(unit1->player()) == *(unit2->player());
+}
 
 
 void ActionClosure::move(Unit* unit, position_t position)

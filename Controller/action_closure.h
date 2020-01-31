@@ -30,7 +30,8 @@ public:
 
 private:
     void setValidFields(ActionType type);
-    bool validField(position_t position, ActionType type); //TODO: Use fields not positions!?
+    bool validField(position_t position, ActionType type);
+    bool validField(Field* field, ActionType type);
     void addFieldtoMap();
     void setNumberOfFieldsToAdd(ActionType type);
     void colorValidFields(QColor color);
@@ -45,5 +46,8 @@ private:
     std::vector<position_t> m_added_fields;
     //unsigned m_range;
 };
+
+
+bool samePlayer(Unit* unit1, Unit* unit2);
 
 #endif // ACTION_CLOSURE_H
