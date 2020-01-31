@@ -19,7 +19,7 @@ public:
 
     QRectF boundingRect() const override;
 
-    void paint(QPainter *painter,
+    virtual void paint(QPainter *painter,
                    const QStyleOptionGraphicsItem *option,
                    QWidget *widget) override;
 
@@ -73,6 +73,10 @@ public:
     Warrior(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent = nullptr);
     //Warrior(Unit u); //?
     ~Warrior() override;
+
+    void paint(QPainter *painter,
+                   const QStyleOptionGraphicsItem *option,
+                   QWidget *widget) override;
 
     virtual std::string unitClass() const override;
 };
