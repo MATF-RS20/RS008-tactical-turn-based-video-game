@@ -20,12 +20,17 @@ public:
     void addField(Field* field);
     unsigned fieldsToAdd() const;
 
+    Field* fieldAt(position_t position) const;
+    Unit* unitAt(position_t position) const;
+
 
     void doAction();
     //Actions
-    void move(Unit* unit, position_t position);
-    void damage(Unit* unit);
-    void heal(Unit* unit);
+    void move(position_t position);
+    void damage(Unit* target);
+    void damage(position_t position);
+    void heal(Unit* target);
+    void heal(position_t position);
 
 
 private:
@@ -34,6 +39,7 @@ private:
     bool validField(Field* field, ActionType type);
     void addFieldtoMap();
     void setNumberOfFieldsToAdd(ActionType type);
+    unsigned NumberOfFieldsToAdd(ActionType type);
     void colorValidFields(QColor color);
 
 private:
