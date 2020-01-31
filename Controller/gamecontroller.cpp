@@ -14,6 +14,9 @@ GameController::GameController(ui ui)
     , m_infoLabel(ui.showInfo)
     , m_scene(ui.scene)
 {
+    //TODO: check ui for nullptrs
+    // create an error(check) method in the ui struct
+    // if (ui.error) ...
     for (auto button: ui.actionButtons)
     {
         add_pb_Action(button);
@@ -36,6 +39,7 @@ GameController::~GameController()
     }
     delete m_players;
     delete m_ActionClosure;
+    //delete m_scene; //?
 }
 
 
@@ -47,7 +51,9 @@ void GameController::setGrid(Grid* grid)
     grid->setPos(0, 0);
     m_scene->addItem(grid);
     m_grid = grid;
-    QObject::connect(grid->signaler(), SIGNAL(fieldLeftClickSignal(position_t)), this, SLOT(fieldLeftClicked(position_t)) );
+    if (grid->signaler()) {
+        QObject::connect(grid->signaler(), SIGNAL(fieldLeftClickSignal(position_t)), this, SLOT(fieldLeftClicked(position_t)) );
+    }
 }
 
 
@@ -86,6 +92,9 @@ Unit* GameController::activeUnit() const
 void GameController::startGame()
 {
     m_active_unit = m_queue->current();
+    if (!m_active_unit) {
+        noActiveUnitError();
+    }
     m_active_unit->changeColor(ACTIVE_UNIT_COLOR);
     setInfo(defaultInfo());
     updatePlayer();
@@ -101,15 +110,11 @@ QString GameController::getInfo()
 
 void GameController::ok()
 {
-    //std::cerr << "Ok pressed!" << std::endl;
     if (!m_ActionClosure || m_state != action_ready)
     {
         return;
     }
-    // TODO:
-    // do the action...
     m_ActionClosure->doAction();
-    std::cerr << "Action done! (in gc ok)" << std::endl;
     actionEnd();
 }
 
@@ -136,20 +141,19 @@ void GameController::changeState(ControllerState state)
 
 void GameController::cancel()
 {
-    //TODO: state dependant actions (init, action...).
-    //if (m_state == init) {}
     if (m_state != init) {
         actionEnd();
     }
-    //setInfo(defaultInfo());
+    else {
+        setInfo(defaultInfo());
+    }
 }
 
 
 void GameController::endTurn()
 {
-    //std::cerr << "Game Controller endTurn() called!" << std::endl;
     if (!m_active_unit) {
-        noActiveUnitError(); //TODO
+        noActiveUnitError();
     }
     if (m_state != ControllerState::init) {
         actionEnd();
@@ -163,12 +167,6 @@ void GameController::endTurn()
     setInfo(defaultInfo());
     updatePlayer();
     resetActions();
-
-    /*if (!m_active_unit)
-    {
-        //This shouldn't happen. Find an elegant solution.
-        std::cerr << "endTurn, m_active_unit = nullptr!???";
-    }*/
     //TODO: update unit queue list in the UI.
 }
 
@@ -177,8 +175,7 @@ void GameController::resetActions()
 {
     if (!m_active_unit)
     {
-        //This should not happen.
-        return;
+        noActiveUnitError();
     }
     auto newActions = m_active_unit->getActions();
     if (!newActions)
@@ -192,48 +189,6 @@ void GameController::resetActions()
 void GameController::setInfo(std::string msg)
 {
     emit changeInfo(msg.c_str());
-}
-
-
-std::pair<qreal, qreal> GameController::calculatePos(std::pair<unsigned, unsigned> position) const
-{
-
-    if (m_grid)
-    {
-        unsigned row = position.first,
-                 col = position.second;
-
-        return  {col * m_grid->field_width(),
-                 row * m_grid->field_height()};
-    }
-    else {
-        return {0, 0};
-    }
-}
-
-
-bool GameController::moveUnit(Unit* unit, std::pair<unsigned, unsigned> position)
-{
-    if (!m_grid) {
-        return false;
-    }
-
-    auto old_position = unit->position();
-    if (old_position == position)
-    {
-        return false;
-    }
-
-    if (m_grid->placeUnit(position, unit))
-    {
-        m_grid->removeUnit(old_position);
-        std::pair<qreal,qreal> pos = calculatePos(position);
-        unit->setPos(pos.first, pos.second);
-        return true;
-    }
-    else {
-        return false;
-    }
 }
 
 
@@ -254,7 +209,7 @@ void GameController::actionButtonPressed(Action* action)
         actionStart(action);
         return;
     } else {
-        //TODO: This shouldn't happen (non-action are buttons grayed out). Remove maybe?
+        // This shouldn't happen.
         setInfo("Invalid action!");
     }
 }
@@ -262,7 +217,7 @@ void GameController::actionButtonPressed(Action* action)
 
 void GameController::actionStart(Action* action)
 {
-    if(!action) {
+    if (!action) {
         return;
     }
     if (action->cost() > m_active_unit->AP_left()) {
@@ -281,15 +236,12 @@ void GameController::actionStart(Action* action)
 
 void GameController::actionEnd()
 {
-    //TODO...
     if (m_ActionClosure) {
         delete m_ActionClosure;
         m_ActionClosure = nullptr;
     }
-    //TODO: reset colored fields...
     setInfo(defaultInfo());
     changeState(init);
-    //TODO
 }
 
 
@@ -316,18 +268,18 @@ void GameController::addPlayer(Player* player)
 
 void GameController::updatePlayer()
 {
-    if (!m_active_unit)
-    {
-        return;
+    if (!m_active_unit) {
+        noActiveUnitError();
     }
-    QString name = m_active_unit->player()->name().c_str();
+    Player* player = m_active_unit->player();
+    QString name;
+    if (player) {
+        name = player->name().c_str();
+    } else {
+        name = "No player!";
+        //TODO: No player error?
+    }
     emit changeInfoPlayer(name);
-}
-
-
-void GameController::noActiveUnitError()
-{
-    std::cerr << "No active unit! TODO: Protect yourself from this!" << std::endl;
 }
 
 
@@ -336,7 +288,7 @@ void GameController::fieldLeftClicked(position_t position)
     if (!m_grid) {
         return;
     }
-    Field* field = (*m_grid)[position];
+    Field* field = at(position);
     if (!field)
         return;
     if ((m_state == action_waiting_input) && m_ActionClosure)
@@ -351,8 +303,18 @@ void GameController::fieldLeftClicked(position_t position)
 
 void GameController::addFieldToClosure(Field* field)
 {
+    if (!m_ActionClosure) {
+        return;
+    }
     m_ActionClosure->addField(field);
     if (m_ActionClosure->fieldsToAdd() == 0) {
         changeState(action_ready);
     }
+}
+
+
+[[ noreturn ]] void GameController::noActiveUnitError()
+{
+    std::cerr << "No active unit!" << std::endl;
+    exit(0);
 }

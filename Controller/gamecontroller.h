@@ -33,9 +33,6 @@ public:
     void setInfo(std::string msg);
     QString getInfo();
 
-    bool moveUnit (Unit* unit, position_t position);
-    //This is for drawing units, setPos()!
-    std::pair<qreal, qreal> calculatePos(position_t position) const;
     std::string defaultInfo() const;
     void addPlayer(Player*);
 
@@ -47,7 +44,7 @@ private:
     void addFieldToClosure(Field* field);
 
     //Errors:
-    void noActiveUnitError();
+    [[ noreturn ]] void noActiveUnitError();
 
 
 public slots:
@@ -70,9 +67,6 @@ private:
     Unit* m_active_unit;
     Grid* m_grid;
     unsigned m_turn;
-    paintSize_t
-        m_field_width,
-        m_field_height; //TODO: Make uniform with grid!
     ControllerState m_state = init;
     ActionClosure* m_ActionClosure = nullptr;
     std::vector<Player*>* m_players;
