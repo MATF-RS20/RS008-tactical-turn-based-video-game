@@ -14,6 +14,7 @@ ActionClosure::ActionClosure(ActionType type, Grid* grid, Unit* unit, AP_cost_t 
 
 ActionClosure::~ActionClosure()
 {
+    colorValidFields(DEFAULT_FIELD_COLOR);
     //std::cerr << "Closure destroyed" << std::endl;
 }
 
@@ -141,7 +142,6 @@ void ActionClosure::doAction()
         }
     }
     m_unit->updateAP(m_cost);
-    colorValidFields(DEFAULT_FIELD_COLOR);
 }
 
 
