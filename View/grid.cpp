@@ -45,7 +45,7 @@ void Grid::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 Grid::~Grid()
 {
     //TODO: See if any double deleted.
-    //check if qgraphics item parent deltes child
+    //check if qgraphics item parent deletes children
     /*for (auto col : m_matrix)
     {
         for (auto field : col)
@@ -65,10 +65,10 @@ std::pair<unsigned,unsigned> Grid::size() const
 }
 
 
-std::vector<std::vector<Field*>> Grid::matrix() const
+/*std::vector<std::vector<Field*>> Grid::matrix() const
 {
     return m_matrix;
-}
+}*/
 
 
 bool Grid::validField(position_t position) const
@@ -103,7 +103,7 @@ Field* Grid::operator[] (position_t position) const
 
 bool Grid::placeUnit(position_t field_position, Unit* unit)
 {
-    Field* f = (*this)[field_position];
+    Field* f = at(field_position);
     if (f)
     {
         return f->placeUnit(unit);
@@ -114,7 +114,7 @@ bool Grid::placeUnit(position_t field_position, Unit* unit)
 
 void Grid::removeUnit(position_t field_position)
 {
-    Field* f = (*this)[field_position];
+    Field* f = at(field_position);
     if (f) {
         f->removeUnit();
     }
@@ -124,24 +124,4 @@ void Grid::removeUnit(position_t field_position)
 Signaler* Grid::signaler() const
 {
     return m_signaler;
-}
-
-
-std::ostream& operator<<(std::ostream& out, const Grid& g)
-{
-    unsigned number_of_rows, number_of_cols;
-    std::tie(number_of_rows, number_of_cols) = g.size();
-
-    out << "Grid matrix output start:\n";
-    for (unsigned i = 0; i < number_of_rows; i++)
-    {
-        out << "  ";
-        for (unsigned j = 0; j < number_of_cols; j++) {
-            auto field = g.matrix()[i][j];
-            out << field << ", ";
-        }
-        out << ";\n";
-    }
-    out << "End of grid matrix output.";
-    return out;
 }

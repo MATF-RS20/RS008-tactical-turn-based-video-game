@@ -20,24 +20,26 @@ public:
 
     QRectF boundingRect() const override;
 
-    //QPainterPath shape() const override;
     void paint(QPainter *painter,
                const QStyleOptionGraphicsItem *option,
                QWidget *widget) override;
 
-    bool validField(position_t position) const;
+
     Field* at(position_t position) const;
     Field* operator[] (position_t position) const;
     bool placeUnit(position_t field_position, Unit* unit);
     void removeUnit(position_t field_position);
 
     std::pair<unsigned,unsigned> size() const;
-    std::vector<std::vector<Field*>> matrix() const;
 
     unsigned field_width() const {return m_field_width;}
     unsigned field_height() const {return m_field_height;}
 
     Signaler* signaler() const;
+
+private:
+    bool validField(position_t position) const;
+
 
 private:
     const unsigned
@@ -49,7 +51,5 @@ private:
     std::vector<std::vector<Field*>> m_matrix;
     Signaler* m_signaler;
 };
-
-std::ostream& operator<<(std::ostream& out, const Grid& value);
 
 #endif // GRID_H

@@ -14,9 +14,7 @@ ActionButton::ActionButton(unsigned button, QWidget* parent)
 
 void ActionButton::forwardAction()
 {
-    //std::cerr << "Action button " << m_button << " clicked!" << std::endl;
     emit actionUsed(m_action);
-    //emit actionUsed(m_button);
 }
 
 

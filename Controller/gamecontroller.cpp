@@ -51,6 +51,15 @@ void GameController::setGrid(Grid* grid)
 }
 
 
+Field* GameController::at(position_t position) const
+{
+    if (!m_grid) {
+        return nullptr;
+    }
+    return m_grid->at(position);
+}
+
+
 bool GameController::addUnit(Unit* u)
 {
     if (!u || !m_grid)
@@ -61,10 +70,7 @@ bool GameController::addUnit(Unit* u)
     if (m_grid->placeUnit(field, u))
     {
         m_queue->push_back(u);
-        //std::pair<qreal,qreal> pos = calculatePos(field);
-        //u->setPos(pos.first, pos.second);
-        u->setParentItem((*m_grid)[field]);
-        //m_scene->addItem(u);
+        u->setParentItem(at(field));
         return true;
     }
     return false;

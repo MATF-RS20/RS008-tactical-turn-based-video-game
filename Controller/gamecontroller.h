@@ -40,6 +40,7 @@ public:
     void addPlayer(Player*);
 
 private:
+    Field* at(position_t position) const;
     void resetActions();
     void updatePlayer();
     void changeState(ControllerState state);
