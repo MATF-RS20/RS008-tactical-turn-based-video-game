@@ -24,10 +24,12 @@ public:
                    QWidget *widget) override;
 
     position_t position() const;
-    std::pair<int, int> health() const;
+
     AP_cost_t AP_left() const; //TODO: think about types to use?
     void updateHealth(int change);
+    void updateHealth(unsigned change);
     void updateAP(int change);
+
     unsigned getId() const;
     std::vector<Action*>* getActions();
 

@@ -76,12 +76,6 @@ AP_cost_t Unit::AP_left() const
 }
 
 
-std::pair<int, int> Unit::health() const
-{
-    return std::pair(m_remaining_HP, m_max_HP);
-}
-
-
 void Unit::updateHealth(int change)
 {
     int new_HP = m_remaining_HP + change;
@@ -93,6 +87,12 @@ void Unit::updateHealth(int change)
         new_HP = 0;
     }
     m_remaining_HP = new_HP;
+}
+
+
+void Unit::updateHealth(unsigned change)
+{
+    updateHealth(static_cast<int>(change));
 }
 
 
