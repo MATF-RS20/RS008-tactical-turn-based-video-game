@@ -1,15 +1,16 @@
 #include "action_closure.h"
 
-ActionClosure::ActionClosure(ActionType type, Grid* grid, Unit* unit, AP_cost_t cost)
-    : m_type(type)
-    , m_cost(cost)
+ActionClosure::ActionClosure(Action action, Grid* grid, Unit* unit)
+    : m_type(action.type())
+    , m_intensity(action.intensity())
+    , m_cost(action.cost())
     , m_unit(unit)
     , m_grid(grid)
 {
     //std::cerr << "New closure: position = " << m_unit->position() << ", cost = " << std::to_string(cost) << std::endl;
     m_valid_fields = {};
-    m_fields_to_add = NumberOfFieldsToAdd(type);
-    setValidFields(type);
+    m_fields_to_add = NumberOfFieldsToAdd(m_type);
+    setValidFields(m_type);
 }
 
 ActionClosure::~ActionClosure()
@@ -226,7 +227,7 @@ void ActionClosure::move(position_t position)
 void ActionClosure::heal(Unit* target)
 {
     if (target) {
-        target->updateHealth(20); //TODO: get from action (new var intensity?)
+        target->updateHealth(m_intensity);
     }
 }
 
@@ -240,7 +241,7 @@ void ActionClosure::heal(position_t position)
 void ActionClosure::damage(Unit* target)
 {
     if (target) {
-        target->updateHealth(-20); //TODO: get from action (new var intensity?)
+        target->updateHealth(-m_intensity);
     }
 }
 

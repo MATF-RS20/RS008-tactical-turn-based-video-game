@@ -14,7 +14,7 @@ class ActionClosure
 {
 public:
     //TODO: pass an action object or some kind of struct?
-    ActionClosure(ActionType type, Grid* grid, Unit* unit, AP_cost_t cost);
+    ActionClosure(Action action, Grid* grid, Unit* unit);
     ~ActionClosure();
 
     void addField(Field* field);
@@ -44,6 +44,7 @@ private:
 
 private:
     ActionType m_type;
+    unsigned m_intensity;
     unsigned m_cost;
     Unit* m_unit;
     Grid* m_grid;
