@@ -1,10 +1,11 @@
 #include "action_closure.h"
 
-ActionClosure::ActionClosure(Action action, Grid* grid, Unit* unit)
+ActionClosure::ActionClosure(Action action, Grid* grid, UnitQueue* uq)
     : m_type(action.type())
     , m_intensity(action.intensity())
     , m_cost(action.cost())
-    , m_unit(unit)
+    , m_queue(uq)
+    , m_unit(uq->current())
     , m_grid(grid)
 {
     //std::cerr << "New closure: position = " << m_unit->position() << ", cost = " << std::to_string(cost) << std::endl;
@@ -242,7 +243,20 @@ void ActionClosure::damage(Unit* target)
 {
     if (target) {
         target->updateHealth(-m_intensity);
+        if (target->HP_left() == 0) {
+            kill(target);
+        }
     }
+}
+
+
+void ActionClosure::kill(Unit* target)
+{
+    auto field = fieldAt(target->position());
+    field->removeUnit();
+    //TODO: do some checks?
+    m_queue->pop_Unit(target);
+    field->update();
 }
 
 

@@ -227,7 +227,7 @@ void GameController::actionStart(Action* action)
     }
     setInfo("Action " + action->name() + " activated "); //TODO: activeActionInfo() -> std::string
     changeState(action_waiting_input);
-    m_ActionClosure = new ActionClosure(*action, m_grid, m_active_unit);
+    m_ActionClosure = new ActionClosure(*action, m_grid, m_queue);
     if (m_ActionClosure->fieldsToAdd() == 0) {
         changeState(action_ready);
     }

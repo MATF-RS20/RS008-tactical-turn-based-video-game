@@ -14,19 +14,21 @@ public:
         m_index = 0;
     }
 
+
     ~UnitQueue()
     {
-        //TODO: smart pointers?
         for (Unit* u : m_vector) {
             delete u;
         }
         m_vector.clear();
     }
 
+
     void push_back(Unit* u)
     {
         m_vector.push_back(u); //TODO: see emplace?
     }
+
 
     void pop_at(unsigned i)
     {
@@ -42,14 +44,42 @@ public:
         }
     }
 
-    //TODO pop_Unit, get_Unit
-    /*void pop_Unit(Unit* u)
+
+    auto find_Unit(Unit* u)
     {
-        auto it = std::find(std::begin(m_vector), std::end(m_vector), u);
-        //TODO: Redefine Unit == operator?
-        // Use unit id?!
-        //TODO: add m_id to Units for comparison?
-    }*/
+        for (auto it = m_vector.begin(); it < m_vector.end(); it++)
+        {
+            if (*(*it) == *u) {
+                return it;
+            }
+        }
+        return m_vector.end();
+    }
+
+
+    bool pop_Unit(Unit* u)
+    {
+        auto it = find_Unit(u);
+        if (it == m_vector.end()) {
+            return false;
+        }
+
+        if (it == (m_vector.begin() + m_index))
+        {
+            //TODO: game controller
+            // shouldn't delete m_active_unit?
+            return false;
+        }
+
+        if (it < (m_vector.begin() + m_index)) {
+            m_index--;
+        }
+
+        delete *it;
+        m_vector.erase(it);
+        return true;
+    }
+
 
     Unit* current()
     {
@@ -76,6 +106,7 @@ public:
         }
         return m_vector[m_index];
     }
+
 
 private:
     std::vector<Unit*> m_vector;

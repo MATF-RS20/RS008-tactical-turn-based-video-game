@@ -30,6 +30,7 @@ public:
     position_t position() const;
 
     AP_cost_t AP_left() const; //TODO: think about types to use?
+    int HP_left() const;
     void updateHealth(int change);
     void updateHealth(unsigned change);
     void updateAP(int change);
@@ -57,9 +58,11 @@ protected:
     int
         m_remaining_HP, //Health points
         m_max_HP,
+        m_HP_regen,
 
         m_remaining_AP, //Action points
         m_max_AP,
+        m_AP_regen,
 
         m_initiative;
     unsigned

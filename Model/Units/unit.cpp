@@ -89,6 +89,12 @@ AP_cost_t Unit::AP_left() const
 }
 
 
+int Unit::HP_left() const
+{
+    return m_remaining_HP;
+}
+
+
 void Unit::updateHealth(int change)
 {
     int new_HP = m_remaining_HP + change;

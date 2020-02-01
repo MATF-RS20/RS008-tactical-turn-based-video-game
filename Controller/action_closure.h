@@ -1,6 +1,7 @@
 #ifndef ACTION_CLOSURE_H
 #define ACTION_CLOSURE_H
 
+#include "unitqueue.h"
 #include "Model/type_definitions.h"
 #include "View/field.h"
 #include "View/grid.h"
@@ -14,7 +15,7 @@ class ActionClosure
 {
 public:
     //TODO: pass an action object or some kind of struct?
-    ActionClosure(Action action, Grid* grid, Unit* unit);
+    ActionClosure(Action action, Grid* grid, UnitQueue* uq);
     ~ActionClosure();
 
     void addField(Field* field);
@@ -41,11 +42,14 @@ private:
     void setNumberOfFieldsToAdd(ActionType type);
     unsigned NumberOfFieldsToAdd(ActionType type);
     void colorValidFields(QColor color);
+    void kill(Unit* target);
 
 private:
     ActionType m_type;
     unsigned m_intensity;
     unsigned m_cost;
+
+    UnitQueue* m_queue;
     Unit* m_unit;
     Grid* m_grid;
     std::map<position_t, AP_cost_t> m_valid_fields; //position/AP_cost
