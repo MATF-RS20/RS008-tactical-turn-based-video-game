@@ -20,12 +20,17 @@ public:
 
     void addField(Field* field);
     unsigned fieldsToAdd() const;
+    std::string info() const;
+
+    void doAction();
+
+
+private:
 
     Field* fieldAt(position_t position) const;
     Unit* unitAt(position_t position) const;
 
 
-    void doAction();
     //Actions
     void move(position_t position);
     void damage(Unit* target);
@@ -34,7 +39,6 @@ public:
     void heal(position_t position);
 
 
-private:
     void setValidFields(ActionType type);
     bool validField(position_t position, ActionType type);
     bool validField(Field* field, ActionType type);

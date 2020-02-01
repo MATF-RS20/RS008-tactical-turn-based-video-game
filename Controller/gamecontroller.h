@@ -34,6 +34,7 @@ public:
     QString getInfo();
 
     std::string defaultInfo() const;
+    std::string fieldInfo(Field* field) const;
     void addPlayer(Player*);
 
 private:

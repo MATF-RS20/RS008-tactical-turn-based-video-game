@@ -150,6 +150,8 @@ unsigned ActionClosure::NumberOfFieldsToAdd(ActionType type)
     case ActionType::heal :
         return 1;
     }
+    // default
+    return 1;
 }
 
 
@@ -263,4 +265,10 @@ void ActionClosure::kill(Unit* target)
 void ActionClosure::damage(position_t position)
 {
     damage(unitAt(position));
+}
+
+std::string ActionClosure::info() const
+{
+    //auto actionInfo =
+    return "Closure active. TODO"; //TODO: nice output
 }

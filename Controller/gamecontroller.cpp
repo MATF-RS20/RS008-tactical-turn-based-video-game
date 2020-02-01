@@ -257,6 +257,12 @@ std::string GameController::defaultInfo() const
 }
 
 
+std::string GameController::fieldInfo(Field* field) const
+{
+    return field->info();
+}
+
+
 void GameController::addPlayer(Player* player)
 {
     if (player)
@@ -289,15 +295,22 @@ void GameController::fieldLeftClicked(position_t position)
         return;
     }
     Field* field = at(position);
-    if (!field)
+    if (!field) {
         return;
+    }
+
+    if (m_state == init)
+    {
+        setInfo(fieldInfo(field));
+        return;
+    }
+
     if ((m_state == action_waiting_input) && m_ActionClosure)
     {
-        //TODO: print msg to info label
-        addFieldToClosure(field); //TODO: field or position?
+        addFieldToClosure(field);
+        setInfo(m_ActionClosure->info());
     }
     std::cerr << *field << std::endl;
-    //setInfo("FIELD CLICKED TODO!!!");
 }
 
 
