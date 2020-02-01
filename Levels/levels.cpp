@@ -13,14 +13,21 @@ GameController* createLevel1(ui ui)
     Player* player1 = new Player("Player1: Pera", Qt::blue);
     Player* player2 = new Player("Player2: Zika", Qt::green);
 
-    std::vector<Action*>* warriorActions = new std::vector<Action*>({new Action("Move", ActionType::move, 0, 2), new Action("Attack", ActionType::damage, 40, 3)});
-    std::vector<Action*>* healerActions = new std::vector<Action*>({new Action("Move", ActionType::move, 0, 2), new Action("Heal", ActionType::heal, 20, 2), new Action("Weak Attack", ActionType::damage, 20, 3)});
+
+    /*
+    //Catch tests?
+    Warrior a = {5, 3, nullptr};
+    Warrior b = {5, 3, nullptr};
+    std::cerr << "Equality test: " << (a == a) << std::endl;
+    std::cerr << "Equality test: " << !(a == b) << std::endl;
+    std::cerr << "Inequality test: " << !(a != a) << std::endl;
+    */
 
     //TODO: Get this from a vector? Get this from a txt/json file?!
-    gController->addUnit(new Warrior(300,  8, 5, 3, 2, player1, warriorActions));
-    gController->addUnit(new Healer (200, 10, 5, 2, 0, player1, healerActions));
-    gController->addUnit(new Warrior(300,  8, 5, 1, 3, player2, warriorActions));
-    gController->addUnit(new Healer (200, 10, 5, 0, 0, player2, healerActions));
+    gController->addUnit(new Warrior(3, 2, player1));
+    gController->addUnit(new Healer (2, 0, player1));
+    gController->addUnit(new Warrior(1, 3, player2));
+    gController->addUnit(new Healer (0, 0, player2));
 
     return gController;
 }

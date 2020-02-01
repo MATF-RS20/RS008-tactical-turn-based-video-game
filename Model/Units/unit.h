@@ -43,6 +43,10 @@ public:
     void changeColor();
     Player* player();
 
+    unsigned id();
+    bool operator==(Unit& other);
+    bool operator!=(Unit& other);
+
     virtual std::string info() const;
     virtual std::string unitClass() const;
 
@@ -77,8 +81,7 @@ class Warrior: public Unit
 {
 public:
     Warrior(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent = nullptr);
-    Warrior(Unit u);
-    Warrior(position_t position);
+    Warrior(unsigned row, unsigned col, Player* player);
 
     ~Warrior() override;
 
@@ -96,8 +99,7 @@ class Healer: public Unit
 {
 public:
     Healer(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent = nullptr);
-    Healer(Unit u);
-    Healer(position_t position);
+    Healer(unsigned row, unsigned col, Player* player);
 
     ~Healer() override;
 

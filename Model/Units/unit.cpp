@@ -136,12 +136,6 @@ std::string Unit::unitClass() const
 }
 
 
-std::ostream& operator<<(std::ostream& out, const Unit& u)
-{
-    return out << u.info();
-}
-
-
 std::vector<Action*>* Unit::getActions()
 {
     return m_actions;
@@ -175,4 +169,28 @@ void Unit::setPosition(position_t new_position)
 {
     m_row = new_position.first;
     m_col = new_position.second;
+}
+
+
+unsigned Unit::id()
+{
+    return m_id;
+}
+
+
+bool Unit::operator==(Unit& other)
+{
+    return m_id == other.id();
+}
+
+
+bool Unit::operator!=(Unit& other)
+{
+    return !(*this == other);
+}
+
+
+std::ostream& operator<<(std::ostream& out, const Unit& u)
+{
+    return out << u.info();
 }
