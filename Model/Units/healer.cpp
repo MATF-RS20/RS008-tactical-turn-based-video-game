@@ -1,4 +1,5 @@
 #include "unit.h"
+#include <QPainter>
 
 
 Healer::Healer(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent)
@@ -17,6 +18,12 @@ Healer::~Healer()
 std::string Healer::unitClass() const
 {
     return "Healer";
+}
+
+
+void Healer::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    Unit::paintWithText("h", painter, option, widget);
 }
 
 

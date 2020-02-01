@@ -20,24 +20,13 @@ std::string Warrior::unitClass() const
 }
 
 
+void Warrior::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    Unit::paintWithText("w", painter, option, widget);
+}
+
+
 std::ostream& operator<<(std::ostream& out, const Warrior& warrior)
 {
     return out << warrior.info();
-}
-
-void Warrior::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *)
-{
-    Q_UNUSED(option)
-    int m_width = 30;
-    int m_height = 30;
-
-    QPainterPath path;
-    path.addEllipse(-(m_width/2), -(m_height/2)
-                 , m_width, m_height);
-    QPen pen(Qt::black, 2);
-    painter->setPen(pen);
-    painter->fillPath(path, m_color);
-    painter->drawPath(path);
-    painter->drawText(QRectF(-(m_width/2), -(m_height/2)
-                             , m_width, m_height), Qt::AlignHCenter, "w");
 }

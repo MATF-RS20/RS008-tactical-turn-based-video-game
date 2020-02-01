@@ -64,6 +64,19 @@ void Unit::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 }
 
 
+void Unit::paintWithText(QString text, QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+{
+    Unit::paint(painter, option, widget);
+
+    int m_width = 40;
+    int m_height = 40; //TODO: define w & height relative to field. Get(set) somehow.
+    QPen pen(Qt::black, 2);
+    painter->setPen(pen);
+    painter->drawText(QRectF(-(m_width/2), -(m_height/2)
+                             , m_width, m_height), Qt::AlignHCenter | Qt::AlignVCenter, text);
+}
+
+
 position_t Unit::position() const
 {
     return std::pair(m_row, m_col);

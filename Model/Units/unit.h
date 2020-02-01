@@ -23,6 +23,10 @@ public:
                    const QStyleOptionGraphicsItem *option,
                    QWidget *widget) override;
 
+    void paintWithText(QString text, QPainter *painter,
+                       const QStyleOptionGraphicsItem *option,
+                       QWidget *widget);
+
     position_t position() const;
 
     AP_cost_t AP_left() const; //TODO: think about types to use?
@@ -73,7 +77,9 @@ class Warrior: public Unit
 {
 public:
     Warrior(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent = nullptr);
-    //Warrior(Unit u); //?
+    Warrior(Unit u);
+    Warrior(position_t position);
+
     ~Warrior() override;
 
     void paint(QPainter *painter,
@@ -90,7 +96,14 @@ class Healer: public Unit
 {
 public:
     Healer(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent = nullptr);
+    Healer(Unit u);
+    Healer(position_t position);
+
     ~Healer() override;
+
+    void paint(QPainter *painter,
+                   const QStyleOptionGraphicsItem *option,
+                   QWidget *widget) override;
 
     virtual std::string unitClass() const override;
 };
