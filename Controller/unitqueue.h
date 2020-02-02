@@ -108,6 +108,37 @@ public:
     }
 
 
+    std::pair<bool, Player*> onePlayerLeft() const
+    {
+        if (m_vector.empty())
+        {
+            //raise noUnit error?
+            return {false, nullptr};
+        }
+
+        auto firstUnit = m_vector[0];
+        if (!firstUnit)
+        {
+            return {false, nullptr};
+        }
+        auto firstPlayer = firstUnit->player();
+        if (firstPlayer)
+        {
+            //error - player not set.
+            return {false, nullptr};
+        }
+
+        for (auto unit: m_vector)
+        {
+            Player player = *(unit->player());
+            if (player != *firstPlayer) {
+                return {false, firstPlayer}; //nullptr as second argument indicates error
+            }
+        }
+        return {true, firstPlayer};
+    }
+
+
 private:
     std::vector<Unit*> m_vector;
     unsigned m_index;
