@@ -1,5 +1,8 @@
 #include "gamecontroller.h"
 
+#include <QApplication>
+#include <QMessageBox>
+
 #define ACTIVE_UNIT_COLOR Qt::yellow
 
 GameController::GameController(ui ui)
@@ -13,6 +16,7 @@ GameController::GameController(ui ui)
     , m_pb_cancel(ui.pb_cancel)
     , m_infoLabel(ui.showInfo)
     , m_scene(ui.scene)
+    , m_app(nullptr)
 {
     //TODO: check ui for nullptrs
     // create an error(check) method in the ui struct
@@ -89,8 +93,10 @@ Unit* GameController::activeUnit() const
 }
 
 
-void GameController::startGame()
+void GameController::startGame(QApplication* app)
 {
+    m_app = app;
+
     m_active_unit = m_queue->current();
     if (!m_active_unit) {
         noActiveUnitError();
@@ -222,7 +228,8 @@ void GameController::actionStart(Action* action)
     }
     if (action->cost() > m_active_unit->AP_left()) {
         setInfo("Not enough AP left!");
-        //TODO: show default info. New button?
+        //TODO: show default info. New button (show info)?
+        // set on view click to show default info?
         return;
     }
     setInfo("Action " + action->name() + " activated "); //TODO: activeActionInfo() -> std::string
@@ -244,12 +251,12 @@ void GameController::actionEnd()
 
     if (checkWinCondition())
     {
-        setInfo("Player " + m_active_unit->player()->name() + " has won!"); //TODO
-        //stopGame(); //TODO
-        std::cerr << "WIN!!!" << std::endl;
+        setInfo(m_active_unit->player()->name() + " has won!"); //TODO
+        endGame(m_active_unit->player()->name() + " has won!");
+        //std::cerr << "WIN!!!" << std::endl;
         return;
     }
-    std::cerr << "No win" << std::endl;
+    //std::cerr << "No win" << std::endl;
 
     setInfo(defaultInfo());
     changeState(init);
@@ -350,6 +357,21 @@ bool GameController::checkWinCondition() const
     else {
         //handle error
         return false;
+    }
+}
+
+
+void GameController::endGame(std::string text) const
+{
+    QMessageBox msgBox;
+    msgBox.setWindowTitle("Victory!");
+    msgBox.setText(text.c_str());
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    if (msgBox.exec() == QMessageBox::Ok) {
+        if (m_app)
+        {
+            m_app->exit();
+        }
     }
 }
 

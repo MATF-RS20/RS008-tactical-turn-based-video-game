@@ -35,7 +35,7 @@ GameController* createLevel1(ui ui)
 
 
     gController->addUnit(new Warrior(1, 3, player2));
-    gController->addUnit(new Healer (1, 1, player2));
+    gController->addUnit(new Healer (1, 4, player2));
 
 
     gController->addUnit(new Healer (1, 2, player3));

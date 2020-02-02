@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     ui ui = makeUI();
 
     GameController* gc = createLevel1(ui);
-    gc->startGame();
+    gc->startGame(&app);
 
     ui.window->show();
 

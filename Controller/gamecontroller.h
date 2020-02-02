@@ -26,7 +26,7 @@ public:
     void setGrid(Grid* g);
     bool addUnit(Unit* u);
     Unit* activeUnit() const;
-    void startGame();
+    void startGame(QApplication* app);
 
     void add_pb_Action(ActionButton* pb_action);
 
@@ -45,6 +45,7 @@ private:
     void addFieldToClosure(Field* field);
 
     bool checkWinCondition() const;
+    void endGame(std::string text) const;
 
     //Errors:
     [[ noreturn ]] void noActiveUnitError();
@@ -78,6 +79,8 @@ private:
     QPushButton* m_pb_cancel;
     QLabel* m_infoLabel;
     QGraphicsScene* m_scene;
+
+    QApplication* m_app;
 };
 
 
