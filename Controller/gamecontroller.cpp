@@ -240,6 +240,17 @@ void GameController::actionEnd()
         delete m_ActionClosure;
         m_ActionClosure = nullptr;
     }
+
+
+    if (checkWinCondition())
+    {
+        setInfo("Player " + m_active_unit->player()->name() + " has won!"); //TODO
+        //stopGame(); //TODO
+        std::cerr << "WIN!!!" << std::endl;
+        return;
+    }
+    std::cerr << "No win" << std::endl;
+
     setInfo(defaultInfo());
     changeState(init);
 }
@@ -322,6 +333,23 @@ void GameController::addFieldToClosure(Field* field)
     m_ActionClosure->addField(field);
     if (m_ActionClosure->fieldsToAdd() == 0) {
         changeState(action_ready);
+    }
+}
+
+
+bool GameController::checkWinCondition() const
+{
+    auto win = m_queue->onePlayerLeft();
+
+    if (win.first) {
+        return true;
+    }
+    if (win.second) {
+        return false;
+    }
+    else {
+        //handle error
+        return false;
     }
 }
 

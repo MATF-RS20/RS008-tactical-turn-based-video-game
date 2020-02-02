@@ -122,7 +122,7 @@ public:
             return {false, nullptr};
         }
         auto firstPlayer = firstUnit->player();
-        if (firstPlayer)
+        if (!firstPlayer)
         {
             //error - player not set.
             return {false, nullptr};

@@ -44,6 +44,8 @@ private:
     void changeState(ControllerState state);
     void addFieldToClosure(Field* field);
 
+    bool checkWinCondition() const;
+
     //Errors:
     [[ noreturn ]] void noActiveUnitError();
 
