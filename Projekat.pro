@@ -16,11 +16,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Actions/action.cpp \
     Controller/action_closure.cpp \
     Controller/gamecontroller.cpp \
     Controller/signaler.cpp \
     Levels/levels.cpp \
+    Model/Actions/action.cpp \
     Model/Units/unit.cpp \
     Model/Units/healer.cpp \
     Model/Units/warrior.cpp \
@@ -32,12 +32,12 @@ SOURCES += \
     main.cpp
 
 HEADERS += \
-    Actions/action.h \
     Controller/action_closure.h \
     Controller/gamecontroller.h \
     Controller/signaler.h \
     Controller/unitqueue.h \
     Levels/levels.h \
+    Model/Actions/action.h \
     Model/Units/unit.h \
     Model/player.h \
     Model/type_definitions.h \

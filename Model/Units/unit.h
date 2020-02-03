@@ -2,7 +2,7 @@
 #define UNIT_H
 
 #include "Model/type_definitions.h"
-#include "Actions/action.h"
+#include "Model/Actions/action.h"
 #include "Model/player.h"
 
 #include <QGraphicsItem>
