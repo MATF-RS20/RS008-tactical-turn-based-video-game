@@ -10,6 +10,9 @@
 #include <iostream>
 #include <vector>
 
+#define DEFAULT_OUTLINE_COLOR Qt::black
+#define DEFAULT_HIGHLIGHT_COLOR Qt::red
+
 
 class Unit : public QGraphicsItem
 {
@@ -42,6 +45,8 @@ public:
     void setActions(std::vector<Action*>* newActions);
     void changeColor(QColor);
     void changeColor();
+    void highlight();
+    void unHighlight();
     Player* player();
 
     unsigned id();
@@ -72,6 +77,7 @@ protected:
     static unsigned next_id;
     std::vector<Action*>* m_actions;
     QColor m_color;
+    QColor m_outline_color = DEFAULT_OUTLINE_COLOR;
     Player* m_player;
 };
 

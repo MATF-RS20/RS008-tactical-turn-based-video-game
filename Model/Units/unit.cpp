@@ -57,7 +57,7 @@ void Unit::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
     QPainterPath path;
     path.addEllipse(-(m_width/2), -(m_height/2)
                  , m_width, m_height);
-    QPen pen(Qt::black, 3);
+    QPen pen(m_outline_color, 3);
     painter->setPen(pen);
     painter->fillPath(path, m_color);
     painter->drawPath(path);
@@ -163,6 +163,18 @@ void Unit::changeColor(QColor color)
 void Unit::changeColor()
 {
     m_color = m_player->color();
+}
+
+
+void Unit::highlight()
+{
+    m_outline_color = DEFAULT_HIGHLIGHT_COLOR;
+}
+
+
+void Unit::unHighlight()
+{
+    m_outline_color = DEFAULT_OUTLINE_COLOR;
 }
 
 

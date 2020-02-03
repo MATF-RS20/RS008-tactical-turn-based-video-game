@@ -3,8 +3,6 @@
 #include <QApplication>
 #include <QMessageBox>
 
-#define ACTIVE_UNIT_COLOR Qt::yellow
-
 GameController::GameController(ui ui)
     : QObject(ui.window)
     , m_queue(new UnitQueue())
@@ -101,7 +99,7 @@ void GameController::startGame(QApplication* app)
     if (!m_active_unit) {
         noActiveUnitError();
     }
-    m_active_unit->changeColor(ACTIVE_UNIT_COLOR);
+    m_active_unit->highlight();
     setInfo(defaultInfo());
     updatePlayer();
     resetActions();
@@ -165,10 +163,10 @@ void GameController::endTurn()
         actionEnd();
     }
     m_turn++;
-    m_active_unit->changeColor();
+    m_active_unit->unHighlight();
     m_active_unit->update();
     m_active_unit = m_queue->next();
-    m_active_unit->changeColor(ACTIVE_UNIT_COLOR);
+    m_active_unit->highlight();
     m_active_unit->update();
     setInfo(defaultInfo());
     updatePlayer();
