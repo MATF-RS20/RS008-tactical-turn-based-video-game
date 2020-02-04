@@ -10,9 +10,9 @@ Healer::Healer(int HP, int AP, int AP_regen, int initiative, unsigned row, unsig
 
 Healer::Healer(unsigned row, unsigned col, Player* player)
     :Healer(
-         200, 8, 4, 1 //HP, AP, AP regen, intiative
+         150, 8, 4, 1 //HP, AP, AP regen, intiative
          , row, col, player
-         , new std::vector<Action*>({new Action("Move", ActionType::move, 0, 2), new Action("Heal", ActionType::heal, 20, 2), new Action("Weak Attack", ActionType::damage, 20, 3)})
+         , new std::vector<Action*>({new Action("Move", ActionType::move, 0, 2), new Action("Heal", ActionType::heal, 40, 2), new Action("Weak Attack", ActionType::damage, 50, 3)})
          , nullptr // player
          )
 {}

@@ -9,9 +9,9 @@ Warrior::Warrior(int HP, int AP, int AP_regen, int initiative, unsigned row, uns
 
 Warrior::Warrior(unsigned row, unsigned col, Player* player)
     :Warrior(
-         300, 8, 5, 2 //HP, AP, AP regen, intiative
+         200, 8, 5, 2 //HP, AP, AP regen, intiative
          , row, col, player
-         , new std::vector<Action*>({new Action("Move", ActionType::move, 0, 2), new Action("Attack", ActionType::damage, 40, 3)})
+         , new std::vector<Action*>({new Action("Move", ActionType::move, 0, 2), new Action("Attack", ActionType::damage, 70, 3)})
          , nullptr // player
          )
 {}

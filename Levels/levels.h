@@ -9,6 +9,8 @@
 
 
 GameController* createLevel1(ui ui);
+GameController* createLevel2(ui ui);
+GameController* createLevel3(ui ui);
 
 
 #endif // LEVELS_H
