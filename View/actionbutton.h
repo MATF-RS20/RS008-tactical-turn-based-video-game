@@ -2,7 +2,7 @@
 #define ACTIONBUTTON_H
 
 #include <QPushButton>
-#include "Actions/action.h"
+#include "Model/Actions/action.h"
 
 class ActionButton : public QPushButton
 {
