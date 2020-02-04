@@ -34,6 +34,7 @@ public:
     void updateHealth(int change);
     void updateHealth(unsigned change);
     void updateAP(int change);
+    void regenAP();
 
     unsigned getId() const;
     std::vector<Action*>* getActions();
@@ -52,13 +53,13 @@ public:
     virtual std::string unitClass() const;
 
 protected:
-    Unit(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent = nullptr);
+    Unit(int HP, int AP, int AP_regen, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent = nullptr);
     void setId();
 
     int
         m_remaining_HP, //Health points
         m_max_HP,
-        m_HP_regen,
+        //m_HP_regen,
 
         m_remaining_AP, //Action points
         m_max_AP,
@@ -83,7 +84,7 @@ std::ostream& operator<<(std::ostream& out, const Unit& value);
 class Warrior: public Unit
 {
 public:
-    Warrior(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent = nullptr);
+    Warrior(int HP, int AP, int AP_regen, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent = nullptr);
     Warrior(unsigned row, unsigned col, Player* player);
 
     ~Warrior() override;
@@ -101,7 +102,7 @@ public:
 class Healer: public Unit
 {
 public:
-    Healer(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent = nullptr);
+    Healer(int HP, int AP, int AP_regen, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent = nullptr);
     Healer(unsigned row, unsigned col, Player* player);
 
     ~Healer() override;

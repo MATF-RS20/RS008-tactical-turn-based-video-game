@@ -187,7 +187,7 @@ void ActionClosure::doAction()
     }
     else {
         if (m_type == ActionType::move) {
-            move(m_added_fields[0]);
+            move(m_added_fields[0]); //TODO: Take n-1 fields?
         }
         if (m_type == ActionType::heal) {
             heal(m_added_fields[0]);
@@ -195,7 +195,7 @@ void ActionClosure::doAction()
         if (m_type == ActionType::damage) {
             damage(m_added_fields[0]);
         }
-        m_unit->updateAP(static_cast<int>(m_cost)); //TODO
+        m_unit->updateAP(-static_cast<int>(m_cost)); //TODO: switch cost to int?
         return;
     }
 }

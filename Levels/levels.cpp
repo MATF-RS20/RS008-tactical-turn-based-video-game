@@ -29,7 +29,7 @@ GameController* createLevel1(ui ui)
     */
 
     //TODO: Get this from a vector? Get this from a txt/json file?!
-    gController->addUnit(new Warrior(300, 50, 3, 2, 3, player1, new std::vector<Action*>{new Action("Move", ActionType::move, 0, 1), new Action("Test Kill", ActionType::damage, 300, 10) }));
+    gController->addUnit(new Warrior(300, 50, 25, 3, 2, 3, player1, new std::vector<Action*>{new Action("Move", ActionType::move, 0, 1), new Action("Test Kill", ActionType::damage, 300, 10) }));
     gController->addUnit(new Warrior(3, 2, player1));
     gController->addUnit(new Healer (2, 0, player1));
 

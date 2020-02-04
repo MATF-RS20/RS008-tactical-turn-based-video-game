@@ -165,14 +165,20 @@ void GameController::endTurn()
         actionEnd();
     }
     m_turn++;
+    // Old unit cleaning up.
     m_active_unit->changeColor();
+    m_active_unit->regenAP();
     m_active_unit->update();
+
     m_active_unit = m_queue->next();
+
+    // New unit
     m_active_unit->changeColor(ACTIVE_UNIT_COLOR);
     m_active_unit->update();
-    setInfo(defaultInfo());
+
     updatePlayer();
     resetActions();
+    setInfo(defaultInfo());
     //TODO: update unit queue list in the UI.
 }
 

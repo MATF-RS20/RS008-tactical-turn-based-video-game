@@ -1,10 +1,11 @@
 #include "unit.h"
 #include <QPainter>
 
-Unit::Unit(int HP, int AP, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent)
+Unit::Unit(int HP, int AP, int AP_regen, int initiative, unsigned row, unsigned col, Player* player, std::vector<Action*>* actions, QGraphicsItem* parent)
     : QGraphicsItem(parent)
     , m_max_HP(HP)
     , m_max_AP(AP)
+    , m_AP_regen(AP_regen)
     , m_initiative(initiative)
     , m_row(row)
     , m_col(col)
@@ -118,11 +119,17 @@ void Unit::updateHealth(unsigned change)
 void Unit::updateAP(int change)
 {
     //std::cerr << "Update AP" << std::endl;
-    int new_AP = m_remaining_AP - change;
+    int new_AP = m_remaining_AP + change;
     new_AP = new_AP > m_max_AP ? m_max_AP : new_AP;
     new_AP = new_AP < 0 ? 0 : new_AP;
 
     m_remaining_AP = new_AP;
+}
+
+
+void Unit::regenAP()
+{
+    updateAP(m_AP_regen);
 }
 
 
