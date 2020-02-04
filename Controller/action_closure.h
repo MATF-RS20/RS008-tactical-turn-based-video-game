@@ -52,6 +52,7 @@ private:
     ActionType m_type;
     unsigned m_intensity;
     unsigned m_cost;
+    std::string m_name;
 
     UnitQueue* m_queue;
     Unit* m_unit;

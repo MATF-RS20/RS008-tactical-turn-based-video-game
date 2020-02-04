@@ -4,6 +4,7 @@ ActionClosure::ActionClosure(Action action, Grid* grid, UnitQueue* uq)
     : m_type(action.type())
     , m_intensity(action.intensity())
     , m_cost(action.cost())
+    , m_name(action.name())
     , m_queue(uq)
     , m_unit(uq->current())
     , m_grid(grid)
@@ -269,6 +270,16 @@ void ActionClosure::damage(position_t position)
 
 std::string ActionClosure::info() const
 {
-    //auto actionInfo =
-    return "Closure active. TODO"; //TODO: nice output
+    auto actionInfo = "Action: " + m_name;
+    auto unitInfo = "Active Unit:\n" + m_unit->info();
+    std::string fieldsSelected = "Selected fields:\n";
+    int i = 0;
+    for (auto field : m_added_fields)
+    {
+        i++;
+        fieldsSelected += "Field " + std::to_string(i) + ": " + to_string(field) + "\n";
+    }
+    return actionInfo + "\n\n"
+            + unitInfo + "\n\n"
+            + fieldsSelected;
 }
