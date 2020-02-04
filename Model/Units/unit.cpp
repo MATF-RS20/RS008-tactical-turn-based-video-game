@@ -215,6 +215,12 @@ bool Unit::operator!=(Unit& other)
 }
 
 
+bool Unit::operator<(Unit& other)
+{
+    return this->m_initiative < other.m_initiative;
+}
+
+
 std::ostream& operator<<(std::ostream& out, const Unit& u)
 {
     return out << u.info();

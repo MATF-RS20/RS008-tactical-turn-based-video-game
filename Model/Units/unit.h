@@ -54,6 +54,9 @@ public:
     bool operator==(Unit& other);
     bool operator!=(Unit& other);
 
+    //Compare by initiative
+    bool operator<(Unit& other);
+
     virtual std::string info() const;
     virtual std::string unitClass() const;
 

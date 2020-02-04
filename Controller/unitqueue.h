@@ -108,6 +108,14 @@ public:
     }
 
 
+    void sortByInitiative()
+    {
+        std::sort(m_vector.begin(), m_vector.end(), [](Unit* a, Unit* b){
+            return *b < *a;
+        });
+    }
+
+
     std::pair<bool, Player*> onePlayerLeft() const
     {
         if (m_vector.empty())

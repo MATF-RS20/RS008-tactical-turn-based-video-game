@@ -95,6 +95,7 @@ void GameController::startGame(QApplication* app)
 {
     m_app = app;
 
+    m_queue->sortByInitiative();
     m_active_unit = m_queue->current();
     if (!m_active_unit) {
         noActiveUnitError();
@@ -275,7 +276,7 @@ std::string GameController::defaultInfo() const
               : "No active unit (Error)";
 
     return "Turn: " + std::to_string(m_turn)
-            + "\n" + unitInfo;
+            + "\n\n" + unitInfo;
 }
 
 
