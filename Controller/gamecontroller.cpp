@@ -333,7 +333,7 @@ void GameController::fieldLeftClicked(position_t position)
         addFieldToClosure(field);
         setInfo(m_ActionClosure->info());
     }
-    std::cerr << *field << std::endl;
+    //std::cerr << *field << std::endl;
 }
 
 
