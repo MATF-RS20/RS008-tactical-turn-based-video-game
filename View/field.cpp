@@ -58,6 +58,7 @@ void Field::mousePressEvent(QGraphicsSceneMouseEvent * event)
     {
         //std::cerr << "Right click on field: (" << m_row << ", " << m_col << ")" << std::endl;
     }
+    event->setAccepted(false);
 }
 
 

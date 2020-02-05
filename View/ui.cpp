@@ -6,6 +6,17 @@
 
 #define MAX_NUMBER_OF_ACTION_BUTTONS 10
 
+
+void myView::mousePressEvent(QMouseEvent* event)
+{
+    if (! event->isAccepted())
+        return;
+    QGraphicsView::mousePressEvent(event);
+    std::cerr << "view clicked" << std::endl;
+    emit clicked();
+}
+
+
 ui makeUI()
 {
     QWidget* window = new QWidget();
@@ -56,7 +67,7 @@ ui makeUI()
             QGraphicsScene* scene = new QGraphicsScene(window);
             scene->setSceneRect(-200, -200, 400, 400);
 
-            QGraphicsView* view = new QGraphicsView(scene);
+            myView* view = new myView(scene);
             view->setRenderHint(QPainter::Antialiasing);
             view->setDragMode(QGraphicsView::ScrollHandDrag);
             view->resize(600, 600);
@@ -90,5 +101,5 @@ ui makeUI()
     window->setWindowTitle("The Game");
     window->resize(800, 800);
 
-    return {window, scene, showInfo, currentPlayer, actionButtons, pb_ok, pb_cancel, pb_endTurn};
+    return {window, scene, view, showInfo, currentPlayer, actionButtons, pb_ok, pb_cancel, pb_endTurn};
 }
