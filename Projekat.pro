@@ -19,6 +19,7 @@ SOURCES += \
     Controller/action_closure.cpp \
     Controller/gamecontroller.cpp \
     Controller/signaler.cpp \
+    Controller/unitqueue.cpp \
     Levels/levels.cpp \
     Model/Actions/action.cpp \
     Model/Units/unit.cpp \
